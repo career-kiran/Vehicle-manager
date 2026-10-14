@@ -137,6 +137,10 @@ function renderVehicleList() {
 </div>
 
 <div class="care-details">
+    Fuel Type: ${escapeHTML(vehicle.fuelType || "Not specified")}
+</div>
+
+<div class="care-details">
     Current KM: ${escapeHTML(vehicle.km)} km
 </div>
 
@@ -202,6 +206,7 @@ activeVehicleId = vehicleId;
     document.getElementById("vehicleName").value = vehicle.name;
     document.getElementById("registration").value = vehicle.registration;
     document.getElementById("currentKm").value = vehicle.km;
+    document.getElementById("fuelType").value = vehicle.fuelType || "";
 }
 
 // SAVE A NEW VEHICLE
@@ -211,6 +216,7 @@ function saveVehicle(event) {
     const name = document.getElementById("vehicleName").value.trim();
     const registration = document.getElementById("registration").value.trim();
     const km = document.getElementById("currentKm").value;
+const fuelType = document.getElementById("fuelType").value;
 
     if (activeVehicleId) {
         const vehicle = vehicles.find(
@@ -222,6 +228,7 @@ function saveVehicle(event) {
         vehicle.name = name;
         vehicle.registration = registration;
         vehicle.km = km;
+        vehicle.fuelType = fuelType;
 
         
     } else {
@@ -229,7 +236,8 @@ function saveVehicle(event) {
             id: String(Date.now()),
             name: name,
             registration: registration,
-            km: km
+            km: km,
+            fuelType: fuelType
         };
 
         vehicles.push(vehicle);
@@ -266,6 +274,11 @@ function showDashboard(vehicleId) {
                 <strong>Registration:</strong>
                 ${escapeHTML(vehicle.registration)}
             </p>
+
+        <p>
+            <strong>Fuel Type:</strong>
+            ${escapeHTML(vehicle.fuelType || "Not specified")}
+        </p>
 
          <p>
     <strong>Current KM:</strong>
@@ -1526,7 +1539,6 @@ function showVehicleCare() {
         { title: "Oil Change", icon: "🛢️" },
         { title: "Wheel Alignment", icon: "🛞" },
         { title: "Tyres", icon: "🛞" },
-        { title: "Wipers", icon: "🌧️" },
         { title: "Battery", icon: "🔋" }
     ];
 
