@@ -5,6 +5,7 @@
 const vehicleListPage = document.getElementById("vehicleListPage");
 const addVehiclePage = document.getElementById("addVehiclePage");
 const vehicleDashboard = document.getElementById("vehicleDashboard");
+const basicDetailsPage = document.getElementById("basicDetailsPage");
 const insurancePage = document.getElementById("insurancePage");
 const pollutionDetailsPage = document.getElementById("pollutionDetailsPage");
 
@@ -34,6 +35,7 @@ function showOnlyPage(pageToShow) {
         vehicleListPage,
         addVehiclePage,
         vehicleDashboard,
+        basicDetailsPage,
         insurancePage,
         document.getElementById("insuranceDetailsPage"),
         document.getElementById("pollutionDetailsPage"),
@@ -267,7 +269,7 @@ function showDashboard(vehicleId) {
     showOnlyPage(vehicleDashboard);
 
     vehicleSummary.innerHTML = `
-        <h2>🚗 ${escapeHTML(vehicle.name)}</h2>
+        <h2> ${escapeHTML(vehicle.name)}</h2>
 
         <div class="care-details">
             <p>
@@ -443,6 +445,176 @@ function showInsuranceDetailsPage() {
 
     showOnlyPage(insuranceDetailsPage);
 }
+
+
+
+// SHOW BASIC DETAILS PAGE
+function showBasicDetailsPage() {
+    const vehicle = vehicles.find(
+        item => item.id === activeVehicleId
+    );
+
+    if (!vehicle) return;
+
+    const content = document.getElementById("basicDetailsContent");
+    const details = vehicle.basicDetails || {};
+
+    const rows = [
+        ["Ownership", details.ownership],
+        ["Brand", details.brand],
+        ["Model", details.model],
+        ["Registration Number", vehicle.registration],
+        ["Fuel Type", vehicle.fuelType],
+        ["Year of Manufacture", details.manufactureYear],
+      ["Purchase Date", details.purchaseDate
+    ? new Date(details.purchaseDate + "T00:00:00")
+        .toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        })
+    : ""],
+        [
+            "Amount Paid",
+            details.amountPaid !== undefined &&
+            details.amountPaid !== null &&
+            details.amountPaid !== ""
+                ? "₹" + details.amountPaid
+                : ""
+        ]
+    ];
+
+    content.innerHTML = rows.some(([label, value]) => value)
+        ? rows
+            .filter(([label, value]) => value !== undefined && value !== null && value !== "")
+            .map(([label, value]) => `
+                <div class="detail-row">
+                    <span class="detail-label">${escapeHTML(label)}</span>
+                    <span class="detail-colon">:</span>
+                    <span class="detail-value">${escapeHTML(String(value))}</span>
+                </div>
+            `).join("")
+        : "<p>No basic details added yet. Tap Edit / Add Details to enter them.</p>";
+
+    showOnlyPage(basicDetailsPage);
+}
+
+
+
+
+function showBasicDetailsForm() {
+    const vehicle = vehicles.find(
+        item => item.id === activeVehicleId
+    );
+
+    if (!vehicle) return;
+
+    const details = vehicle.basicDetails || {};
+
+    document.getElementById("basicDetailsFormContainer").innerHTML = `
+        <form id="basicDetailsForm">
+
+            <label for="basicOwnership">Ownership</label>
+            <select id="basicOwnership">
+                <option value="">Select ownership</option>
+                <option value="New" ${details.ownership === "New" ? "selected" : ""}>New</option>
+                <option value="Used" ${details.ownership === "Used" ? "selected" : ""}>Used</option>
+            </select>
+
+            <label for="basicBrand">Brand</label>
+            <input type="text" id="basicBrand"
+                value="${escapeHTML(details.brand || "")}">
+
+            <label for="basicModel">Model</label>
+            <input type="text" id="basicModel"
+                value="${escapeHTML(details.model || "")}">
+
+            <label for="basicRegistration">Registration Number</label>
+            <input type="text" id="basicRegistration"
+                value="${escapeHTML(vehicle.registration || "")}">
+
+            <label for="basicFuelType">Fuel Type</label>
+            <select id="basicFuelType">
+                <option value="">Select fuel type</option>
+                <option value="Petrol" ${vehicle.fuelType === "Petrol" ? "selected" : ""}>Petrol</option>
+                <option value="Diesel" ${vehicle.fuelType === "Diesel" ? "selected" : ""}>Diesel</option>
+                <option value="Electric" ${vehicle.fuelType === "Electric" ? "selected" : ""}>Electric</option>
+                <option value="Hybrid" ${vehicle.fuelType === "Hybrid" ? "selected" : ""}>Hybrid</option>
+                <option value="Gas" ${vehicle.fuelType === "Gas" ? "selected" : ""}>Gas</option>
+            </select>
+
+            <label for="basicManufactureYear">Year of Manufacture</label>
+            <input type="number" id="basicManufactureYear"
+                min="1886" max="2100"
+                value="${escapeHTML(details.manufactureYear || "")}">
+
+            <label for="basicPurchaseDate">Purchase Date</label>
+            <input type="date" id="basicPurchaseDate"
+                value="${escapeHTML(details.purchaseDate || "")}">
+
+            <label for="basicAmountPaid">Amount Paid (₹)</label>
+            <input type="number" id="basicAmountPaid"
+                min="0" step="0.01"
+                value="${escapeHTML(details.amountPaid ?? "")}">
+
+            <div class="form-actions">
+                <button type="submit">Save Details</button>
+                <button type="button" id="cancelBasicDetails">Cancel</button>
+            </div>
+
+        </form>
+    `;
+
+    document.getElementById("basicDetailsForm")
+        .addEventListener("submit", saveBasicDetails);
+
+document.getElementById("cancelBasicDetails")
+    .addEventListener("click", () => {
+        document.getElementById("basicDetailsFormContainer").innerHTML = "";
+        showBasicDetailsPage();
+    });
+}
+
+
+
+
+
+function saveBasicDetails(event) {
+    event.preventDefault();
+
+    const vehicle = vehicles.find(
+        item => item.id === activeVehicleId
+    );
+
+    if (!vehicle) return;
+
+    vehicle.basicDetails = {
+        ...(vehicle.basicDetails || {}),
+        ownership: document.getElementById("basicOwnership").value,
+        brand: document.getElementById("basicBrand").value.trim(),
+        model: document.getElementById("basicModel").value.trim(),
+        manufactureYear: document.getElementById("basicManufactureYear").value,
+        purchaseDate: document.getElementById("basicPurchaseDate").value,
+        amountPaid: document.getElementById("basicAmountPaid").value
+    };
+
+    vehicle.registration =
+        document.getElementById("basicRegistration").value.trim();
+
+    vehicle.fuelType =
+        document.getElementById("basicFuelType").value;
+
+    saveVehicles();
+
+document.getElementById("basicDetailsFormContainer").innerHTML = "";
+
+showBasicDetailsPage();
+}
+
+
+
+
+
 
 
 
@@ -1532,6 +1704,7 @@ const pollutionHistory = vehicle.pollutionHistory;
 // SHOW VEHICLE CARE ITEMS
 function showVehicleCare() {
     const careItems = [
+        { title: "Basic Details", icon: "📋" },
         { title: "Fuel History", icon: "⛽" },
         { title: "Service", icon: "🔧" },
         { title: "Insurance", icon: "🛡️" },
@@ -1713,7 +1886,11 @@ vehicleCare.addEventListener("click", function(event) {
 
     const title = card.dataset.care;
 
-   if (title === "Fuel History") {
+ if (title === "Basic Details") {
+    showBasicDetailsPage();
+
+} else if (title === "Fuel History") {
+
     const vehicle = vehicles.find(
         item => item.id === activeVehicleId
     );
@@ -1777,6 +1954,15 @@ document.getElementById("vehicleForm")
 document.getElementById("backToVehicles")
     .addEventListener("click", renderVehicleList);
 
+document.getElementById("backFromBasicDetails")
+    .addEventListener("click", () => {
+        showDashboard(activeVehicleId);
+    });
+
+document.getElementById("editBasicDetails")
+    .addEventListener("click", () => {
+        showBasicDetailsForm();
+    });
 
 
 

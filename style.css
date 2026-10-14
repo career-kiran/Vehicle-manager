@@ -3,7 +3,7 @@
 :root {
     /* Page background */
     --page-bg: #F1F3F5;
-    --home-bg: #5F7467;
+    --home-bg: #2C4A7C;
 
     /* Cards */
     --card-bg: #FFFFFF;
@@ -185,6 +185,13 @@ button {
     border: none;
     cursor: pointer;
     margin-left: auto;
+}
+
+
+.edit-icon-btn:hover,
+.edit-icon-btn:focus,
+.edit-icon-btn:active {
+    background: transparent;
 }
 
 
@@ -1237,7 +1244,7 @@ background: transparent;
 }
 
 #vehicleCare .care-icon-pollution-certificate {
-    background: #2B8A3E;
+    background: #7A5299;
 }
 
 #vehicleCare .care-icon-service {
@@ -1258,6 +1265,22 @@ background: transparent;
 
 #vehicleCare .care-icon-battery {
     background: #16A34A;
+}
+
+
+#vehicleCare .care-icon-basic-details {
+    background: #66502B;
+}
+
+
+
+/* VEHICLE DASHBOARD BACKGROUND */
+.dashboard-background {
+    width: 100%;
+    background: #E1EEEA;
+    box-sizing: border-box;
+    padding: 16px;
+    border-radius: 16px;
 }
 
 

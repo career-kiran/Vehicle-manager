@@ -100,6 +100,8 @@
             <!-- VEHICLE DASHBOARD -->
             <section id="vehicleDashboard" class="hidden">
 
+<div class="dashboard-background">
+
                 <button
                     type="button"
                     id="backToVehicles"
@@ -109,6 +111,11 @@
                 </button>
 
               <div class="vehicle-card" id="vehicleSummary"></div>
+
+
+
+
+
 
 <!-- IMPORTANT REMINDERS -->
 <div class="vehicle-card" id="importantReminders">
@@ -121,6 +128,7 @@
 
 
                 <div id="vehicleCare"></div>
+</div>
 
             </section>
 
@@ -1050,6 +1058,36 @@
 
 
 
+<!-- BASIC DETAILS PAGE -->
+<section id="basicDetailsPage" class="hidden">
+
+    <button
+        type="button"
+        id="backFromBasicDetails"
+        class="secondary-button">
+        ← Back to Vehicle Care
+    </button>
+
+    <div class="vehicle-card care-details-page">
+
+        <div class="insurance-details-header">
+            <h2>📋 Basic Details</h2>
+
+            <button
+                type="button"
+                id="editBasicDetails"
+                class="edit-icon-btn">
+                Edit / Add Details
+            </button>
+        </div>
+
+        <div id="basicDetailsContent"></div>
+
+        <div id="basicDetailsFormContainer"></div>
+
+    </div>
+
+</section>
 
 
 
