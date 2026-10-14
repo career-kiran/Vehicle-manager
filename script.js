@@ -1533,10 +1533,10 @@ const pollutionHistory = vehicle.pollutionHistory;
 function showVehicleCare() {
     const careItems = [
         { title: "Fuel History", icon: "⛽" },
+        { title: "Service", icon: "🔧" },
         { title: "Insurance", icon: "🛡️" },
         { title: "Pollution Certificate", icon: "📜" },
-        { title: "Service", icon: "🔧" },
-        { title: "Oil Change", icon: "🛢️" },
+        { title: "Oil Change", icon: "💧" },
         { title: "Wheel Alignment", icon: "🛞" },
         { title: "Tyres", icon: "🛞" },
         { title: "Battery", icon: "🔋" }
@@ -1548,11 +1548,12 @@ function showVehicleCare() {
              role="button"
              tabindex="0">
 
-            <div class="care-card-title">
-                ${item.icon} ${escapeHTML(item.title)}
-            </div>
-
-            <div class="care-card-link">View details →</div>
+       <div class="care-card-title">
+ <span class="care-icon care-icon-${item.title.toLowerCase().replace(/\s+/g, '-')}">${item.icon}</span>
+    <span class="care-name">${escapeHTML(item.title)}</span>
+    <span class="care-arrow">›</span>
+</div>
+            <div class="care-card-link"></div>
         </div>
     `).join("");
 }

@@ -358,8 +358,12 @@ margin-right: auto;
     font-size: 20px;
     font-weight: 700;
     color: #1E3A5F;
-    margin-bottom: 16px;
+    margin-bottom: 0;
     text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
 }
 
 
@@ -1187,6 +1191,74 @@ background: transparent;
     gap: 12px;
 }
 
+
+#vehicleCare .care-clickable::after {
+    color: #9CA3AF;
+}
+
+
+/* Vehicle Care - Emoji backgrounds */
+#vehicleCare .care-card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#vehicleCare .care-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FCE7E7;
+    border-radius: 14px;
+    font-size: 24px;
+}
+
+#vehicleCare .care-name {
+    flex: 1;
+}
+
+#vehicleCare .care-arrow {
+    color: #9CA3AF;
+    font-size: 24px;
+}
+
+
+
+/* Vehicle Care - Individual emoji background colours */
+#vehicleCare .care-icon-fuel-history {
+    background: #E5484D;
+}
+
+#vehicleCare .care-icon-insurance {
+    background: #0086C9;
+}
+
+#vehicleCare .care-icon-pollution-certificate {
+    background: #2B8A3E;
+}
+
+#vehicleCare .care-icon-service {
+    background: #006ADC;
+}
+
+#vehicleCare .care-icon-oil-change {
+    background: #D97706;
+}
+
+#vehicleCare .care-icon-wheel-alignment {
+    background: #475569;
+}
+
+#vehicleCare .care-icon-tyres {
+    background: #334155;
+}
+
+#vehicleCare .care-icon-battery {
+    background: #16A34A;
+}
 
 
 
