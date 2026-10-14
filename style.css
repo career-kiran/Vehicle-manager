@@ -1,0 +1,1192 @@
+
+
+:root {
+    /* Page background */
+    --page-bg: #F1F3F5;
+    --home-bg: #5F7467;
+
+    /* Cards */
+    --card-bg: #FFFFFF;
+    --card-border: #E2E6EC;
+    --card-shadow: 0 4px 16px rgba(30, 41, 59, 0.06);
+
+    /* Text */
+    --heading-color: #263244;
+    --text-color: #475569;
+    --muted-color: #718096;
+
+    /* Buttons and accents */
+    --primary-color: #4779C4;
+    --primary-hover: #3565AD;
+    --button-text: #FFFFFF;
+}
+
+
+/* BASIC PAGE SETUP */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: var(--page-bg);
+    color: var(--text-color);
+}
+
+/* MAIN CONTAINER */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* MAIN TITLE */
+h1 {
+    text-align: center;
+    margin: 0 0 25px;
+    font-size: 28px;
+    color: var(--heading-color);
+}
+
+/* SECTION TITLES */
+h2 {
+    margin: 0 0 18px;
+    font-size: 20px;
+    color: var(--heading-color);
+}
+
+/* CARDS */
+.vehicle-card {
+    position: relative;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+    
+}
+
+/* FORM LABELS */
+label {
+    display: block;
+    margin: 15px 0 6px;
+    font-weight: bold;
+}
+
+/* FORM FIELDS */
+input,
+select {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    font-size: 16px;
+    
+}
+
+input[type="date"] {
+    height: 46px;
+    padding: 12px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+
+
+/* BUTTONS */
+button {
+    width: 30%;
+    padding: 8px;
+    margin-top: 18px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary-color);
+    color: var(--button-text);
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 18px auto;
+    button:hover {
+    background: var(--primary-hover);
+}
+}
+
+/* VEHICLE CARE ITEMS */
+.care-item {
+    background: #fff;
+    padding: 16px;
+    position: relative;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.care-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.care-details {
+    margin-top: 12px;
+    line-height: 1.8;
+}
+
+/* HIDDEN ELEMENTS */
+.hidden {
+    display: none;
+}
+
+
+
+
+/* Vehicle card layout */
+.vehicle-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.vehicle-card-header > div:first-child {
+    flex: 1;
+    min-width: 0;
+}
+
+.edit-vehicle-btn {
+    width: auto;
+    flex-shrink: 0;
+    margin-top: 0;
+    padding: 8px 14px;
+    font-size: 14px;
+}
+
+.vehicle-card-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+
+.edit-icon-btn {
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    color: #2563eb;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+
+.delete-tyre-record {
+color: #dc2626;
+}
+
+.delete-alignment-record {
+    color: #dc2626;
+}
+
+.delete-insurance-record {
+    color: #dc2626;
+}
+
+.alignment-history-record .insurance-details-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.alignment-history-record .insurance-details-header h3 {
+    margin-right: auto;
+}
+
+.tyre-history-record .insurance-details-header {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.tyre-history-record .insurance-details-header h3 {
+margin-right: auto;
+}
+
+
+.vehicle-summary-header {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    margin: 0;
+}
+
+.vehicle-summary-header h2 {
+    margin: 0;
+}
+
+
+
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+.form-actions button {
+    width: 100px;
+    max-width: 100%;
+    margin-top: 14px;
+}
+
+.form-actions button[type="submit"] {
+    margin-top: 25px;
+}
+
+.form-actions button#cancelAdd {
+    margin-top: 3px;
+}
+
+
+.add-details {
+    color: #2563eb;
+    cursor: pointer;
+}
+
+.add-details {
+    color: var(--primary-color);
+    cursor: pointer;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+}
+
+/* REMINDER LIST — DESIGN 5 */
+.reminder-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.reminder-row {
+    padding: 14px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.reminder-row-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.reminder-row-top strong {
+    font-size: 15px;
+    color: #263238;
+}
+
+.reminder-row-top span {
+    font-size: 13px;
+    font-weight: 600;
+    color: #b45309;
+    text-align: right;
+}
+
+.reminder-progress {
+    width: 100%;
+    height: 7px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.reminder-progress-fill {
+    height: 100%;
+    background: #22a06b;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+@media (max-width: 480px) {
+    .reminder-row-top {
+        align-items: flex-start;
+    }
+}
+
+
+/* Neat alignment for vehicle details */
+.detail-row {
+    display: grid;
+    grid-template-columns: 120px 12px minmax(0, 1fr);
+    gap: 4px;
+    align-items: start;
+    margin-bottom: 14px;
+}
+
+.detail-label {
+    font-weight: 600;
+}
+
+.detail-colon {
+    text-align: center;
+}
+
+.detail-value {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.detail-row:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Reusable vehicle-care card title */
+.care-card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1E3A5F;
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+
+/* HOME PAGE ONLY */
+.home-page {
+    background: var(--home-bg);
+    border-radius: 16px;
+    padding: 12px;
+}
+
+/* HOME PAGE - CARD IMPROVEMENTS */
+.home-page h2 {
+    font-size: 23px;
+    font-weight: 700;
+    margin-bottom: 22px;
+    color: var(--heading-color);
+}
+
+.home-page #vehicleList .vehicle-card {
+    border: 1px solid #D9E2EC;
+    box-shadow: 0 4px 12px rgba(30, 50, 70, 0.10);
+    transition: box-shadow 0.2s ease;
+}
+
+
+.home-subtitle {
+    color: #263B50;
+    font-size: 16px;
+    text-align: center;
+    margin: 10px 0 24px;
+    font-weight: 500;
+}
+
+
+/* VEHICLE CARE CARD LAYOUT */
+#vehicleCare {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+#vehicleCare .care-item {
+    min-width: 0;
+    margin-bottom: 0;
+    padding: 16px 12px;
+    border: 1px solid #E2E6EC;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+#vehicleCare .care-card-title {
+    font-size: 17px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+}
+
+#vehicleCare .care-description {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #718096;
+    margin: 0;
+    padding-bottom: 28px;
+}
+
+#vehicleCare .add-details {
+    top: auto;
+    right: 12px;
+    bottom: 12px;
+    font-size: 13px;
+}
+
+/* Use one column on very narrow screens */
+@media (max-width: 340px) {
+    #vehicleCare {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+.insurance-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.insurance-details-header h2 {
+    margin: 0;
+}
+
+.insurance-details-header .edit-icon-btn {
+    width: auto;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+
+.insurance-details-card {
+    padding: 28px;
+}
+
+.insurance-details-card .detail-row {
+    margin-bottom: 20px;
+    grid-template-columns: 140px 12px minmax(0, 1fr);
+}
+
+.insurance-details-card .detail-row:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Common layout for vehicle-care detail pages */
+.care-details-page {
+    padding: 28px;
+    border-radius: 16px;
+    margin-top: 20px;
+    margin-bottom: 24px;
+}
+
+.care-details-page .detail-row {
+    margin-bottom: 18px;
+    line-height: 1.6;
+}
+
+
+/* Monthly Usage spacing */
+#monthlyFuelHistoryContent .tyre-history-record {
+    padding: 20px;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+#monthlyFuelHistoryContent .tyre-history-record h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#monthlyFuelHistoryContent .tyre-history-record p {
+    margin: 0 0 16px;
+}
+
+#monthlyFuelHistoryContent .tyre-history-record p:last-child {
+    margin-bottom: 0;
+}
+
+#monthlyFuelHistoryContent hr {
+    margin: 24px 0;
+}
+
+
+
+/* Monthly Usage detail rows */
+#monthlyFuelHistoryContent .detail-row {
+    display: grid;
+    grid-template-columns: 140px 12px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    margin-bottom: 18px;
+    line-height: 1.6;
+}
+
+#monthlyFuelHistoryContent .detail-row strong {
+    font-weight: 600;
+}
+
+#monthlyFuelHistoryContent .detail-row:last-child {
+    margin-bottom: 0;
+}
+
+
+
+
+/* Monthly Usage separate cards */
+#monthlyFuelHistoryContent .tyre-history-record {
+    background: #ffffff;
+    padding: 24px;
+    margin: 20px 0;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #d1d9e2;
+box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Remove the old divider lines between cards */
+#monthlyFuelHistoryContent hr {
+    display: none;
+}
+
+/* Fuel entry headings */
+#monthlyFuelHistoryContent .tyre-history-record h3 {
+    color: #24549a;
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+/* Summary heading */
+#monthlyFuelHistoryContent .tyre-history-record:first-child h3 {
+    color: #1f2937;
+}
+
+
+
+
+
+/* Compact Current Fuel Price box */
+.compact-fuel-price {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+    padding: 16px 20px;
+    margin: 12px 0 20px;
+    border: 1px solid #d1d9e2;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.compact-fuel-price h3 {
+    margin: 0 0 8px;
+}
+
+.compact-fuel-price p {
+    margin: 0 0 12px;
+}
+
+.compact-fuel-price button {
+    width: auto;
+}
+
+
+
+/* Fuel price box and button in one row */
+.fuel-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+
+.fuel-price-row .compact-fuel-price {
+    flex: 0 0 220px;
+    text-align: center;
+}
+
+.fuel-price-row button {
+    width: auto;
+}
+
+
+/* FUEL HISTORY EDIT AND DELETE BUTTONS */
+.edit-fuel-record {
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    color: #2563eb;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-fuel-record {
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    color: #dc2626;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+#savedFuelHistoryContent .record-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#savedFuelHistoryContent .record-header h3 {
+    margin-right: auto;
+}
+
+#savedFuelHistoryContent .record-header > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+
+
+/* Saved Fuel History - matching Monthly Usage boxes */
+#savedFuelHistoryContent .tyre-history-record {
+    background: #ffffff;
+    padding: 24px;
+    margin: 20px 0;
+    border-radius: 16px;
+    border: 1px solid #d1d9e2;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    line-height: 1.8;
+}
+
+#savedFuelHistoryContent hr {
+    display: none;
+}
+
+
+/* Saved Fuel History detail rows */
+#savedFuelHistoryContent .detail-row {
+    display: grid;
+    grid-template-columns: 140px 12px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    margin-bottom: 18px;
+    line-height: 1.6;
+}
+
+#savedFuelHistoryContent .detail-row strong {
+    font-weight: 600;
+}
+
+#savedFuelHistoryContent .detail-row:last-child {
+    margin-bottom: 0;
+}
+
+
+
+
+.fuel-history-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+
+.delete-vehicle-btn {
+    width: auto;
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+}
+
+
+/* Make only the Update KM button smaller */
+#updateKmBtn {
+    width: auto;
+    min-width: 0;
+    padding: 6px 16px;
+    font-size: 14px;
+    display: block;
+    margin: 0 auto;
+}
+
+
+
+
+
+/* BUTTONS */
+button {
+    width: 30%;
+    padding: 8px;
+    margin: 18px auto;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary-color);
+    color: var(--button-text);
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+}
+
+button:hover {
+    background: var(--primary-hover);
+}
+
+
+
+/* Only the Dashboard's My Vehicles button */
+#backToVehicles {
+    width: 120px;
+    max-width: 100%;
+    padding: 8px 6px;
+}
+
+
+
+
+/* Keep Insurance Delete link transparent after cancelling */
+.delete-insurance-record:hover,
+.delete-insurance-record:focus,
+.delete-insurance-record:active {
+    background: transparent;
+}
+
+
+/* Keep Fuel Delete link transparent after cancelling */
+.delete-fuel-record:hover,
+.delete-fuel-record:focus,
+.delete-fuel-record:active {
+    background: transparent;
+}
+
+
+
+/* INSURANCE HISTORY - MATCH FUEL HISTORY BOX DESIGN */
+
+#insuranceDetailsContent .alignment-history-record {
+    background: #ffffff;
+    padding: 24px;
+    margin: 20px 0;
+    border-radius: 16px;
+    border: 1px solid #d1d9e2;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    line-height: 1.8;
+}
+
+/* Keep Insurance Edit and Delete side by side */
+#insuranceDetailsContent .insurance-details-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+#insuranceDetailsContent .insurance-details-header h3 {
+    margin-right: auto;
+}
+
+/* Match Fuel History detail spacing */
+#insuranceDetailsContent .detail-row {
+    display: grid;
+    grid-template-columns: 140px 12px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    margin-bottom: 18px;
+    line-height: 1.6;
+}
+
+#insuranceDetailsContent .detail-row:last-child {
+    margin-bottom: 0;
+}
+
+/* Keep Insurance buttons compact */
+#insuranceDetailsContent .edit-icon-btn {
+    width: auto;
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+}
+
+/* Hide separators between Insurance records */
+#insuranceDetailsContent hr {
+    display: none;
+}
+
+
+
+
+
+/* OIL CHANGE HISTORY - MATCH INSURANCE HISTORY */
+
+#oilChangeDetailsContent .alignment-history-record {
+    background: #ffffff;
+    padding: 24px;
+    margin: 20px 0;
+    border-radius: 16px;
+    border: 1px solid #d1d9e2;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    line-height: 1.8;
+}
+
+/* Keep Oil Change Edit and Delete side by side */
+#oilChangeDetailsContent .insurance-details-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+#oilChangeDetailsContent .insurance-details-header h3 {
+    margin-right: auto;
+}
+
+/* Match Insurance detail spacing */
+#oilChangeDetailsContent .detail-row {
+    display: grid;
+    grid-template-columns: 140px 12px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    margin-bottom: 18px;
+    line-height: 1.6;
+}
+
+#oilChangeDetailsContent .detail-row:last-child {
+    margin-bottom: 0;
+}
+
+/* Keep Oil Change buttons compact */
+#oilChangeDetailsContent .edit-icon-btn {
+    width: auto;
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+}
+
+/* Make Delete red */
+#oilChangeDetailsContent .delete-oil-change-record {
+    color: #dc2626;
+    border-color: #dc2626;
+    background: transparent;
+}
+
+#oilChangeDetailsContent .delete-oil-change-record:hover,
+#oilChangeDetailsContent .delete-oil-change-record:focus,
+#oilChangeDetailsContent .delete-oil-change-record:active {
+    color: #dc2626;
+    border-color: #dc2626;
+    background: transparent;
+}
+
+
+#oilChangeDetailsContent .insurance-details-header > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+}
+
+
+/* Box design for Add Insurance button */
+#editInsuranceDetails {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: 1px solid #2563eb;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+}
+
+#editInsuranceDetails:hover {
+    background-color: #1d4ed8;
+}
+
+
+
+
+
+/* Blue box design for Add Service button */
+#editServiceDetails.add-service-btn {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: 1px solid #2563eb;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+}
+
+#editServiceDetails.add-service-btn:hover {
+    background-color: #1d4ed8;
+}
+
+
+
+
+
+/* Blue box design for Add Oil Change button */
+#editOilChangeDetails.add-oil-change-btn {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: 1px solid #2563eb;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+}
+
+#editOilChangeDetails.add-oil-change-btn:hover {
+    background-color: #1d4ed8;
+}
+
+
+
+
+
+/* Blue box design for Add Pollution button */
+#editPollutionDetails.add-pollution-btn {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: 1px solid #2563eb;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+}
+
+#editPollutionDetails.add-pollution-btn:hover {
+    background-color: #1d4ed8;
+}
+
+
+
+
+
+/* Blue box design for Add Tyre Replacement */
+#addTyreReplacement.add-tyre-btn {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: 1px solid #2563eb;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+}
+
+#addTyreReplacement.add-tyre-btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* Keep Add Tyre Replacement close to the right edge */
+#tyreHistoryPage .insurance-details-header {
+    justify-content: space-between;
+    gap: 8px;
+}
+
+#tyreHistoryPage .add-tyre-btn {
+    margin-right: 0;
+    flex-shrink: 0;
+}
+
+
+
+
+
+/* Blue box design for Add Wheel Alignment */
+#addAlignment.add-tyre-btn {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: 1px solid #2563eb;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+}
+
+#addAlignment.add-tyre-btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* Keep Add Wheel Alignment close to the right edge */
+#alignmentDetailsPage .insurance-details-header {
+    justify-content: space-between;
+    gap: 8px;
+}
+
+#alignmentDetailsPage #addAlignment {
+    margin-right: 0;
+    flex-shrink: 0;
+}
+
+
+
+
+
+
+/* Pollution Certificate history button spacing */
+#pollutionDetailsContent .insurance-details-header {
+display: flex;
+justify-content: flex-start;
+align-items: center;
+gap: 16px;
+}
+
+#pollutionDetailsContent .insurance-details-header h3 {
+margin-right: auto;
+}
+
+#pollutionDetailsContent .edit-icon-btn {
+width: auto;
+flex-shrink: 0;
+padding: 0;
+margin: 0;
+background: transparent;
+}
+
+#pollutionDetailsContent .delete-pollution-record {
+color: #dc2626;
+border-color: #dc2626;
+background: transparent;
+}
+
+
+
+
+
+/* Pollution Certificate History - Match Insurance Box Design */
+#pollutionDetailsContent .pollution-history-record {
+    background: #ffffff;
+    padding: 24px;
+    margin: 20px 0;
+    border-radius: 16px;
+    border: 1px solid #d1d9e2;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    line-height: 1.8;
+}
+
+/* Keep Pollution Edit and Delete buttons close together */
+#pollutionDetailsContent .insurance-details-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+#pollutionDetailsContent .insurance-details-header h3 {
+    margin-right: auto;
+}
+
+/* Keep Delete button red */
+#pollutionDetailsContent .delete-pollution-record {
+    color: #dc2626;
+    background: transparent;
+    border: none;
+}
+
+
+/* SERVICE HISTORY - MATCH INSURANCE HISTORY BOX DESIGN */
+
+#serviceDetailsContent .alignment-history-record {
+    background: #ffffff;
+    padding: 24px;
+    margin: 20px 0;
+    border-radius: 16px;
+    border: 1px solid #d1d9e2;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    line-height: 1.8;
+}
+
+/* Service heading and action buttons */
+#serviceDetailsContent .insurance-details-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+#serviceDetailsContent .insurance-details-header h3 {
+    margin-right: auto;
+}
+
+/* Keep Edit and Delete side by side */
+#serviceDetailsContent .edit-service-record,
+#serviceDetailsContent .delete-service-record {
+    display: inline-block;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* Edit in blue */
+#serviceDetailsContent .edit-service-record {
+    color: #2563eb;
+}
+
+/* Delete in red */
+#serviceDetailsContent .delete-service-record {
+    color: #dc2626;
+}
+
+/* Keep Delete red when tapped or hovered */
+#serviceDetailsContent .delete-service-record:hover,
+#serviceDetailsContent .delete-service-record:focus,
+#serviceDetailsContent .delete-service-record:active {
+    color: #dc2626;
+    background: transparent;
+}
+
+#serviceDetailsContent .insurance-details-header > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+}
+
+
+
+

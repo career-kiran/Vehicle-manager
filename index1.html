@@ -1,0 +1,1048 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Vehicle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+
+       <header>
+    <h1>🚘 My Vehicle</h1>
+   
+</header>
+
+        <main id="app">
+
+            <!-- VEHICLE LIST PAGE -->
+        
+<section id="vehicleListPage" class="home-page">
+
+                <h2>My Vehicles</h2>
+ <p class="home-subtitle">Your vehicle. Your records. All in one place.</p>
+
+                <div id="vehicleList"></div>
+
+                <button type="button" id="addVehicleBtn">
+                    + Add Vehicle
+                </button>
+            </section>
+
+            <!-- ADD VEHICLE PAGE -->
+            <section id="addVehiclePage" class="hidden">
+                <div class="vehicle-card">
+                    <h2>Add Your Vehicle</h2>
+
+                    <form id="vehicleForm">
+
+                        <label for="vehicleName">
+                            Vehicle name / model
+                        </label>
+                        <input
+                            id="vehicleName"
+                            type="text"
+                            placeholder="Example: Honda City"
+                            required
+                        >
+
+                        <label for="registration">
+                            Registration number
+                        </label>
+                        <input
+                            id="registration"
+                            type="text"
+                            placeholder="Example: KL 07 AB 1234"
+                            required
+                        >
+
+                        <label for="currentKm">
+                            Current kilometres
+                        </label>
+                        <input
+                            id="currentKm"
+                            type="number"
+                            min="0"
+                            placeholder="Example: 62400"
+                            required
+                        >
+
+                      <div class="form-actions">
+    <button type="submit">Save </button>
+    <button type="button" id="cancelAdd">Cancel</button>
+</div>
+
+                    </form>
+                </div>
+            </section>
+
+            <!-- VEHICLE DASHBOARD -->
+            <section id="vehicleDashboard" class="hidden">
+
+                <button
+                    type="button"
+                    id="backToVehicles"
+                    class="secondary-button"
+                >
+                    ← My Vehicles
+                </button>
+
+              <div class="vehicle-card" id="vehicleSummary"></div>
+
+<!-- IMPORTANT REMINDERS -->
+<div class="vehicle-card" id="importantReminders">
+    <h2>🔔 Important Reminders</h2>
+    <p>No upcoming reminders.</p>
+</div>
+
+<h2>Vehicle Care</h2>
+
+
+
+                <div id="vehicleCare"></div>
+
+            </section>
+
+
+
+
+<!-- INSURANCE DETAILS VIEW -->
+<section id="insuranceDetailsPage" class="hidden">
+
+    <button type="button" id="backToVehicleCare"
+        class="secondary-button">
+        ← Back to Vehicle Care
+    </button>
+
+<div class="vehicle-card insurance-details-card care-details-page">
+
+    <div class="insurance-details-header">
+        <h2>🛡️ Insurance Details</h2>
+
+        <button type="button" id="editInsuranceDetails"
+            class="edit-icon-btn">
+            Edit
+        </button>
+    </div>
+
+    <div id="insuranceDetailsContent"></div>
+
+</div>
+</section>
+
+
+
+
+
+<!-- FUEL HISTORY PAGE -->
+<section id="fuelHistoryPage" class="hidden">
+
+    <button type="button" id="backFromFuelHistory"
+        class="secondary-button">
+        ← Back to Vehicle Care
+    </button>
+
+    <div class="vehicle-card care-details-page">
+
+        <div class="insurance-details-header">
+            <h2>⛽ Fuel History</h2>
+        </div>
+
+        <!-- CURRENT FUEL PRICE -->
+      <div class="fuel-price-row">
+    <div class="fuel-price-card compact-fuel-price">
+       
+        <p id="currentFuelPrice">Not set</p>
+    </div>
+
+    <button type="button" id="updateFuelPrice"
+        class="primary-button">
+        Update Fuel Price
+    </button>
+</div>
+
+        <!-- ADD FUEL RECORD -->
+        <h3 id="fuelFormHeading">Add Fuel Entry</h3>
+
+        <form id="fuelForm">
+
+            <label for="fuelDate">Date</label>
+            <input type="date" id="fuelDate" required>
+
+            <label for="fuelAmount">Amount Paid (₹)</label>
+            <input type="number" id="fuelAmount"
+                min="0.01" step="0.01" required>
+
+            <p>
+                <strong>Fuel Price:</strong>
+                <span id="fuelEntryPrice">Not set</span>
+            </p>
+
+            <p>
+                <strong>Litres:</strong>
+                <span id="fuelLitresPreview">0.000</span>
+            </p>
+
+            <div class="form-actions">
+                <button type="submit" id="saveFuelEntry">
+                    Save
+                </button>
+
+                <button type="button" id="cancelFuelEdit"
+                    class="secondary-button" hidden>
+                    Cancel 
+                </button>
+            </div>
+
+        </form>
+
+        <hr>
+
+        
+
+        <hr>
+
+        <!-- SAVED FUEL HISTORY BUTTON -->
+<div class="fuel-history-actions">
+<button type="button" id="openSavedFuelHistory"
+    class="secondary-button">
+    📋 Show Saved Fuel History
+</button>
+
+      
+
+<button type="button" id="openFuelMonthlyUsage"
+    class="secondary-button">
+    Fuel Report
+</button>
+</div>
+
+    </div>
+
+</section>
+
+
+
+<!-- SAVED FUEL HISTORY PAGE -->
+<section id="savedFuelHistoryPage" class="hidden">
+
+    <button type="button" id="backFromSavedFuelHistory"
+        class="secondary-button">
+        ← Back to Fuel History
+    </button>
+
+    <div class="vehicle-card care-details-page">
+        <h2>⛽ Saved Fuel History</h2>
+      
+        <div id="savedFuelHistoryContent"></div>
+    </div>
+
+</section>
+
+
+
+
+<!-- MONTHLY USAGE PAGE -->
+<section id="fuelMonthlyUsagePage" class="hidden">
+
+    <button type="button" id="backFromFuelMonthlyUsage"
+        class="secondary-button">
+        ← Back to Fuel History
+    </button>
+
+    <div class="vehicle-card care-details-page">
+        <h2> ⛽ Fuel Report</h2>
+
+<label for="monthlyFuelFromDate">From date</label>
+<input type="date" id="monthlyFuelFromDate">
+
+<label for="monthlyFuelToDate">To date</label>
+<input type="date" id="monthlyFuelToDate">
+
+<button type="button" id="showMonthlyFuelHistory"
+    class="primary-button">
+    Show Fuel History
+</button>
+
+<div id="monthlyFuelHistoryContent"></div>
+
+    </div>
+
+</section>
+
+
+
+
+<!-- POLLUTION CERTIFICATE DETAILS PAGE -->
+<section id="pollutionDetailsPage" class="hidden">
+
+    <button type="button" id="backFromPollution"
+        class="secondary-button">
+        ← Back to Vehicle Care
+    </button>
+
+    <div class="vehicle-card care-details-page">
+
+        <div class="insurance-details-header">
+            <h2>🌿 Pollution Certificate Details</h2>
+
+            <button type="button" id="editPollutionDetails"
+                class="edit-icon-btn">
+                Edit
+            </button>
+        </div>
+
+        <div id="pollutionDetailsContent"></div>
+
+    </div>
+
+</section>
+
+
+
+
+<!-- SERVICE DETAILS PAGE -->
+<section id="serviceDetailsPage" class="hidden">
+
+    <button type="button" id="backFromServiceDetails"
+        class="secondary-button">
+        ← Back to Vehicle Care
+    </button>
+
+    <div class="vehicle-card insurance-details-card care-details-page">
+
+        <div class="insurance-details-header">
+            <h2>🔧 Service Details</h2>
+
+            <button type="button" id="editServiceDetails"
+                class="edit-icon-btn">
+                Edit
+            </button>
+        </div>
+
+        <div id="serviceDetailsContent"></div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+<!-- OIL CHANGE DETAILS PAGE -->
+<section id="oilChangeDetailsPage" class="hidden">
+
+    <button type="button" id="backFromOilChangeDetails" class="secondary-button">
+        ← Back to Vehicle Care
+    </button>
+
+    <div class="vehicle-card insurance-details-card care-details-page">
+
+        <div class="insurance-details-header">
+            <h2>🛢️ Oil Change Details</h2>
+            <button type="button" id="editOilChangeDetails" class="edit-icon-btn">
+                Edit
+            </button>
+        </div>
+
+        <div id="oilChangeDetailsContent"></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- WHEEL ALIGNMENT HISTORY PAGE -->
+<section id="alignmentDetailsPage" class="hidden">
+
+    <button type="button" id="backFromAlignmentDetails" class="secondary-button">
+        ← Back to Vehicle Care
+    </button>
+
+    <div class="vehicle-card insurance-details-card care-details-page">
+
+        <div class="insurance-details-header">
+            <h2>🛞 Wheel Alignment History</h2>
+        </div>
+
+        <div id="alignmentDetailsContent"></div>
+
+        <button type="button" id="addAlignment" class="primary-button">
+            + Add Wheel Alignment
+        </button>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+<!-- TYRE REPLACEMENT HISTORY PAGE -->
+<section id="tyreHistoryPage" class="hidden">
+
+    <button type="button" id="backFromTyreHistory" class="secondary-button">
+        ← Back to Vehicle Care
+    </button>
+
+    <div class="vehicle-card insurance-details-card care-details-page">
+
+        <div class="insurance-details-header">
+            <h2>🛞 Tyre Replacement History</h2>
+        </div>
+
+        <div id="tyreHistoryContent"></div>
+
+        <button type="button" id="addTyreReplacement" class="primary-button">
+            + Add Tyre Replacement
+        </button>
+
+    </div>
+
+</section>
+
+
+
+
+<!-- TYRE REPLACEMENT FORM -->
+<section id="tyreFormPage" class="hidden">
+    <div class="vehicle-card">
+        <h2>🛞 Tyre Replacement Details</h2>
+
+        <form id="tyreForm">
+
+            <label for="tyreReplacementDate">Replacement Date</label>
+            <input type="date" id="tyreReplacementDate" required>
+
+            <label for="tyreReplacementKm">Current Kilometres</label>
+            <input type="number" id="tyreReplacementKm" min="0" required>
+
+
+
+            <label for="tyreBrand">Tyre Brand</label>
+            <input type="text" id="tyreBrand" placeholder="e.g. MRF, CEAT">
+
+            <label for="tyreCount">Number of Tyres Replaced</label>
+            <select id="tyreCount" required>
+                <option value="">Select number</option>
+                <option value="1">1 tyre</option>
+                <option value="2">2 tyres</option>
+                <option value="3">3 tyres</option>
+                <option value="4">4 tyres</option>
+                <option value="5">5 tyres</option>
+            </select>
+
+            <label>Which Tyres Were Replaced?</label>
+            <div id="tyrePositions">
+                <label><input type="checkbox" name="tyrePosition" value="Front Left"> Front Left</label>
+                <label><input type="checkbox" name="tyrePosition" value="Front Right"> Front Right</label>
+                <label><input type="checkbox" name="tyrePosition" value="Rear Left"> Rear Left</label>
+                <label><input type="checkbox" name="tyrePosition" value="Rear Right"> Rear Right</label>
+            </div>
+
+            <label for="tyreAmount">Total Amount (₹)</label>
+            <input type="number" id="tyreAmount" min="0" step="0.01" placeholder="Total cost">
+
+<label for="tyreTargetKm">Next Tyre Check Reminder (KM)</label>
+<input
+    type="number"
+    id="tyreTargetKm"
+    min="0"
+    placeholder="e.g. 70000">
+
+
+<label>Remind me before next tyre check</label>
+
+<div class="reminder-options">
+    <label>
+        <input type="checkbox" name="tyreReminderKm" value="5000" checked>
+        5,000 km before
+    </label>
+
+    <label>
+        <input type="checkbox" name="tyreReminderKm" value="3000" checked>
+        3,000 km before
+    </label>
+
+    <label>
+        <input type="checkbox" name="tyreReminderKm" value="1000" checked>
+        1,000 km before
+    </label>
+
+    <label>
+        <input type="checkbox" name="tyreReminderKm" value="0" checked>
+        At target KM
+    </label>
+</div>
+
+
+
+            <h3>🛞 Stepney (Spare Tyre)</h3>
+
+            <label for="stepneyBrand">Stepney Brand</label>
+            <input type="text" id="stepneyBrand" placeholder="Enter brand">
+
+            <label for="stepneyCondition">Stepney Condition</label>
+            <select id="stepneyCondition">
+                <option value="">Select condition</option>
+                <option value="Good">Good</option>
+                <option value="Not Good">Not Good</option>
+            </select>
+
+            <div class="form-buttons">
+                <button type="submit" class="primary-button">Save</button>
+                <button type="button" id="cancelTyreForm" class="secondary-button">Cancel</button>
+            </div>
+
+        </form>
+    </div>
+</section>
+
+
+
+
+<!-- POLLUTION CERTIFICATE FORM -->
+<section id="pollutionPage" class="hidden">
+
+ 
+
+    <div class="vehicle-card">
+        <h2>🌿 Pollution Certificate Details</h2>
+
+        <form id="pollutionForm">
+
+            <label for="pollutionNumber">
+                Certificate number
+            </label>
+            <input
+                id="pollutionNumber"
+                type="text"
+                placeholder="Enter certificate number"
+            >
+
+            <label for="pollutionStartDate">
+                Issue date
+            </label>
+            <input
+                id="pollutionStartDate"
+                type="date"
+            >
+
+            <label for="pollutionExpiryDate">
+                Expiry date
+            </label>
+            <input
+                id="pollutionExpiryDate"
+                type="date"
+                required
+            >
+
+<label>Remind me before expiry</label>
+
+<div class="reminder-options">
+    <label>
+        <input type="checkbox" name="pollutionReminder" value="30" checked>
+        30 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="pollutionReminder" value="15" checked>
+        15 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="pollutionReminder" value="7" checked>
+        7 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="pollutionReminder" value="2">
+        2 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="pollutionReminder" value="0" checked>
+        On expiry date
+    </label>
+</div>
+
+            <div class="form-actions">
+                <button type="submit">Save</button>
+                <button type="button" id="cancelPollution">
+                    Cancel
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</section>
+
+
+
+<!-- SERVICE PAGE -->
+<section id="servicePage" class="hidden">
+
+    <button
+        type="button"
+        id="backFromService"
+        class="secondary-button"
+    >
+        ← Back to Vehicle Care
+    </button>
+
+    <div class="vehicle-card">
+        <h2>🔧 Service Details</h2>
+
+        <form id="serviceForm">
+
+            <label for="lastServiceDate">
+                Last service date
+            </label>
+            <input
+                id="lastServiceDate"
+                type="date"
+            >
+
+            <label for="lastServiceKm">
+                Kilometres at last service
+            </label>
+            <input
+                id="lastServiceKm"
+                type="number"
+                min="0"
+                placeholder="Example: 60000"
+            >
+
+            <label for="nextServiceDate">
+                Next service date
+            </label>
+            <input
+                id="nextServiceDate"
+                type="date"
+            >
+
+            <label for="nextServiceKm">
+                Next service kilometres
+            </label>
+            <input
+                id="nextServiceKm"
+                type="number"
+                min="0"
+                placeholder="Example: 65000"
+            >
+
+            <label for="serviceCentre">
+                Service centre (optional)
+            </label>
+            <input
+                id="serviceCentre"
+                type="text"
+                placeholder="Enter service centre name"
+            >
+
+            <label for="serviceNotes">
+                Service notes (optional)
+            </label>
+            <textarea
+                id="serviceNotes"
+                rows="3"
+                placeholder="Enter service details"
+            ></textarea>
+
+<label>Remind me before next service</label>
+
+<div class="reminder-options">
+    <label>
+        <input type="checkbox" name="serviceReminder" value="30" checked>
+        30 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="serviceReminder" value="15" checked>
+        15 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="serviceReminder" value="7" checked>
+        7 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="serviceReminder" value="2">
+        2 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="serviceReminder" value="0" checked>
+        On service date
+    </label>
+</div>
+
+            <div class="form-actions">
+                <button type="submit">Save</button>
+                <button type="button" id="cancelService">
+                    Cancel
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</section>
+
+
+
+
+<!-- WHEEL ALIGNMENT FORM -->
+<section id="alignmentPage" class="hidden">
+
+    <div class="vehicle-card">
+        <h2>🛞 Wheel Alignment Details</h2>
+
+        <form id="alignmentForm">
+
+            <label for="lastAlignmentDate">
+                Last alignment date
+            </label>
+            <input
+                id="lastAlignmentDate"
+                type="date"
+            >
+
+            <label for="lastAlignmentKm">
+                Kilometres at last alignment
+            </label>
+            <input
+                id="lastAlignmentKm"
+                type="number"
+                min="0"
+                placeholder="Example: 60000"
+            >
+
+            <label for="alignmentAmount">
+                Amount paid (₹) — optional
+            </label>
+            <input
+                id="alignmentAmount"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="Enter amount"
+            >
+
+            <label for="nextAlignmentDate">
+                Next alignment date
+            </label>
+            <input
+                id="nextAlignmentDate"
+                type="date"
+            >
+
+            <label for="nextAlignmentKm">
+                Next alignment kilometres
+            </label>
+            <input
+                id="nextAlignmentKm"
+                type="number"
+                min="0"
+                placeholder="Example: 65000"
+            >
+
+            <label>Remind me before next alignment</label>
+
+            <div class="reminder-options">
+                <label>
+                    <input type="checkbox" name="alignmentReminder" value="30" checked>
+                    30 days before
+                </label>
+
+                <label>
+                    <input type="checkbox" name="alignmentReminder" value="15" checked>
+                    15 days before
+                </label>
+
+                <label>
+                    <input type="checkbox" name="alignmentReminder" value="7" checked>
+                    7 days before
+                </label>
+
+                <label>
+                    <input type="checkbox" name="alignmentReminder" value="2">
+                    2 days before
+                </label>
+
+                <label>
+                    <input type="checkbox" name="alignmentReminder" value="0" checked>
+                    On alignment date
+                </label>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit">Save</button>
+                <button type="button" id="cancelAlignment">Cancel</button>
+            </div>
+
+        </form>
+    </div>
+
+</section>
+
+
+
+
+
+
+<!-- OIL CHANGE FORM -->
+<section id="oilChangePage" class="hidden">
+
+    <div class="vehicle-card">
+        <h2>🛢️ Oil Change Details</h2>
+
+        <form id="oilChangeForm">
+
+            <label for="lastOilChangeDate">Last oil change date</label>
+            <input
+                id="lastOilChangeDate"
+                type="date"
+            >
+
+            <label for="lastOilChangeKm">Kilometres at last oil change</label>
+            <input
+                id="lastOilChangeKm"
+                type="number"
+                min="0"
+                placeholder="Example: 60000"
+            >
+
+            <label for="nextOilChangeDate">Next oil change date</label>
+            <input
+                id="nextOilChangeDate"
+                type="date"
+            >
+
+            <label for="nextOilChangeKm">Next oil change kilometres</label>
+            <input
+                id="nextOilChangeKm"
+                type="number"
+                min="0"
+                placeholder="Example: 65000"
+            >
+
+<label>Remind me before next oil change</label>
+
+<div class="reminder-options">
+    <label>
+        <input type="checkbox" name="oilChangeReminder" value="30" checked>
+        30 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="oilChangeReminder" value="15" checked>
+        15 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="oilChangeReminder" value="7" checked>
+        7 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="oilChangeReminder" value="2">
+        2 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="oilChangeReminder" value="0" checked>
+        On oil change date
+    </label>
+</div>
+
+            <div class="form-actions">
+                <button type="submit">Save</button>
+                <button type="button" id="cancelOilChange">Cancel</button>
+            </div>
+
+        </form>
+    </div>
+
+</section>
+
+
+<!-- INSURANCE PAGE -->
+            <section id="insurancePage" class="hidden">
+
+                <button
+                    type="button"
+                    id="backFromInsurance"
+                    class="secondary-button"
+                >
+                    ← Back to Vehicle
+                </button>
+
+                <div class="vehicle-card">
+                    <h2>Insurance Details</h2>
+
+                    <form id="insuranceForm">
+
+                        <label for="insuranceType">
+                            Insurance type
+                        </label>
+                        <select id="insuranceType" required>
+                            <option value="">Choose insurance type</option>
+                            <option value="comprehensive">
+                                Comprehensive (Full coverage)
+                            </option>
+                            <option value="third-party">
+                                Third-party only
+                            </option>
+                        </select>
+
+                        <label for="insuranceCompany">
+                            Insurance company
+                        </label>
+                        <input
+                            id="insuranceCompany"
+                            type="text"
+                            placeholder="Example: ICICI Lombard"
+                            
+                        >
+
+                        <label for="policyNumber">
+                            Policy number
+                        </label>
+                        <input
+                            id="policyNumber"
+                            type="text"
+                            placeholder="Enter policy number"
+                            
+                        >
+
+                        <label for="insuranceStartDate">
+                            Policy start date
+                        </label>
+                        <input
+                            id="insuranceStartDate"
+                            type="date"
+                            
+                        >
+
+                        <label for="insuranceExpiryDate">
+                            Policy expiry date
+                        </label>
+                        <input
+                            id="insuranceExpiryDate"
+                            type="date"
+                            
+                        >
+
+  <label for="insurancePremium">
+                            Premium amount (₹)
+                        </label>
+                        <input
+                            id="insurancePremium"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="Example: 8500"
+                            
+                        >
+
+
+<label>Remind me before expiry</label>
+
+<div class="reminder-options">
+    <label>
+        <input type="checkbox" name="insuranceReminder" value="30" checked>
+        30 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="insuranceReminder" value="15" checked>
+        15 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="insuranceReminder" value="7" checked>
+        7 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="insuranceReminder" value="2">
+        2 days before
+    </label>
+
+    <label>
+        <input type="checkbox" name="insuranceReminder" value="0" checked>
+        On expiry date
+    </label>
+</div>
+
+                      
+                        <div class="form-actions">
+                            <button type="submit">Save</button>
+                            <button type="button" id="cancelInsurance">
+                                Cancel
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </section>
+
+
+
+<!-- POLLUTION CERTIFICATE DETAILS PAGE -->
+<section id="pollutionDetailsPage" class="hidden">
+
+    <button type="button" id="backFromPollutionDetails"
+        class="secondary-button">
+        ← Back to Vehicle Care
+    </button>
+
+    <div class="vehicle-card insurance-details-card care-details-page">
+
+        <div class="insurance-details-header">
+            <h2>🌿 Pollution Certificate Details</h2>
+
+            <button type="button" id="editPollutionDetails"
+                class="edit-icon-btn">
+                Edit
+            </button>
+        </div>
+
+        <div id="pollutionDetailsContent"></div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
