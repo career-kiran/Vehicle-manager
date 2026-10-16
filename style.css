@@ -128,8 +128,9 @@ button {
 }
 
 .care-title {
-    font-size: 16px;
+    font-size: 24px;
     font-weight: bold;
+    color: #7B3445;
 }
 
 .care-details {
@@ -215,6 +216,7 @@ color: #dc2626;
 
 .alignment-history-record .insurance-details-header h3 {
     margin-right: auto;
+    color: #2563eb;
 }
 
 .tyre-history-record .insurance-details-header {
@@ -225,6 +227,7 @@ gap: 12px;
 
 .tyre-history-record .insurance-details-header h3 {
 margin-right: auto;
+color: #2563eb;
 }
 
 
@@ -398,6 +401,7 @@ margin-right: auto;
 
 .home-subtitle {
     color: #263B50;
+    color: #FFFFFF;
     font-size: 16px;
     text-align: center;
     margin: 10px 0 24px;
@@ -810,6 +814,7 @@ button:hover {
 
 #insuranceDetailsContent .insurance-details-header h3 {
     margin-right: auto;
+    color: #2563eb;
 }
 
 /* Match Fuel History detail spacing */
@@ -867,6 +872,7 @@ button:hover {
 
 #oilChangeDetailsContent .insurance-details-header h3 {
     margin-right: auto;
+    color: #2563eb;
 }
 
 /* Match Insurance detail spacing */
@@ -1081,6 +1087,7 @@ gap: 16px;
 
 #pollutionDetailsContent .insurance-details-header h3 {
 margin-right: auto;
+color: #2563eb;
 }
 
 #pollutionDetailsContent .edit-icon-btn {
@@ -1156,6 +1163,7 @@ background: transparent;
 
 #serviceDetailsContent .insurance-details-header h3 {
     margin-right: auto;
+    color: #2563eb;
 }
 
 /* Keep Edit and Delete side by side */
@@ -1282,6 +1290,95 @@ background: transparent;
     padding: 16px;
     border-radius: 16px;
 }
+
+
+/* IMPORTANT DATES - Separate Records */
+#importantDatesPage .alignment-history-record {
+    border-bottom: 1px solid #D9DDE3;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+
+
+/* SAVED FUEL HISTORY - ADD DETAILS BUTTON */
+#savedFuelHistoryPage #addFuelDetails {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+
+
+
+
+/* Add Vehicle button - green */
+#addVehicleBtn {
+    background-color: #2E8B57;
+    border-color: #2E8B57;
+}
+
+
+
+/* Home page Delete button only */
+#vehicleList .delete-vehicle-btn {
+    background-color: #DC2626;
+}
+
+#vehicleList .delete-vehicle-btn:hover {
+    background-color: #B91C1C;
+}
+
+
+
+
+
+
+/* Home page vehicle detail alignment */
+#vehicleList .home-detail-row {
+    display: grid;
+    grid-template-columns: 140px 12px minmax(0, 1fr);
+    gap: 4px;
+    align-items: start;
+    margin-bottom: 14px;
+}
+
+
+#vehicleList .home-detail-row span:first-child {
+    font-weight: 700;
+}
+
+
+#vehicleSummary h2 {
+    color: #7B3445;
+}
+
+
+
+#updateKmBtn {
+    background-color: #2E8B57;
+    border-color: #2E8B57;
+}
+
+
+
+#updateFuelPrice {
+    background-color: #2E8B57;
+    border-color: #2E8B57;
+}
+
+
+
+#openFuelMonthlyUsage {
+    background-color: #2E8B57;
+    border-color: #2E8B57;
+}
+
 
 
 
