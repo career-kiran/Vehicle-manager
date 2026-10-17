@@ -1382,3 +1382,104 @@ background: transparent;
 
 
 
+
+/* TOTAL VEHICLE EXPENSE CARD */
+.total-expense-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 20px;
+    margin: 0 0 20px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.total-expense-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+}
+
+.total-expense-text strong {
+    font-size: 20px;
+    color: var(--heading-color);
+}
+
+.total-expense-text small {
+    font-size: 14px;
+    color: var(--muted-color);
+}
+
+#totalVehicleExpenseAmount {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--heading-color);
+}
+
+.total-expense-arrow {
+    flex-shrink: 0;
+    font-size: 28px;
+    color: #9CA3AF;
+}
+
+
+
+
+
+.expense-validation-message {
+    color: red;
+}
+
+
+
+
+#expenseCategoryBreakdown .vehicle-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#expenseCategoryBreakdown .vehicle-card strong {
+    display: inline-block;
+    width: 240px;
+    flex-shrink: 0;
+}
+
+#expenseCategoryBreakdown .vehicle-card span {
+    flex: 1;
+}
+
+#totalVehicleExpensePage .expense-filters h3,
+#totalVehicleExpensePage #expenseCategoryBreakdown h3 {
+    color: #2E8B57;
+}
+
+
+
+
+
+/* TOTAL VEHICLE EXPENSE CARD */
+.total-expense-panel {
+    background: #E5EFFB;
+}
+
+
+
+
+
+#expensePageGrandTotal {
+    display: inline-block;
+    padding: 10px 16px;
+    margin: 8px 0 16px;
+    background: #EAF3FF;
+    border: 1px solid #B8D4F5;
+    border-radius: 10px;
+    color: #1E3A5F;
+    font-size: 24px;
+    font-weight: 700;
+}

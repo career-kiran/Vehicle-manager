@@ -133,6 +133,29 @@
 
 </div>
 
+
+
+
+
+<!-- TOTAL VEHICLE EXPENSE -->
+
+<div class="vehicle-card total-expense-panel" id="totalVehicleExpenseBtn">
+
+    <div class="total-expense-text">
+
+        <strong>Total Vehicle Expense</strong>
+
+        <small>Running and maintenance expenses</small>
+
+        <span id="totalVehicleExpenseAmount">₹—</span>
+
+    </div>
+
+    <span class="total-expense-arrow" aria-hidden="true">&gt;</span>
+
+</div>
+
+
 <h2>Vehicle Care</h2>
 
 
@@ -141,6 +164,77 @@
 </div>
 
             </section>
+
+
+
+
+
+<!-- TOTAL VEHICLE EXPENSE DETAILS PAGE -->
+
+<section id="totalVehicleExpensePage" class="hidden">
+
+    <div class="vehicle-card">
+
+        <button type="button" id="backFromTotalExpense">
+
+            ← Back to Dashboard
+
+        </button>
+
+        <h2>Total Vehicle Expense</h2>
+
+        <h3 id="expensePageGrandTotal">₹0</h3>
+
+     
+
+<div class="expense-filters">
+
+    <h3>Filter Expenses</h3>
+
+    <label for="expensePeriod">Select Period</label>
+
+    <select id="expensePeriod">
+
+        <option value="all">All Time</option>
+
+        <option value="1">1 Month</option>
+
+        <option value="3">3 Months</option>
+
+        <option value="6">6 Months</option>
+
+        <option value="12">1 Year</option>
+
+        <option value="custom">Custom Dates</option>
+
+    </select>
+
+    <div id="customExpenseDates" class="hidden">
+
+        <label for="expenseFromDate">From Date</label>
+
+        <input type="date" id="expenseFromDate">
+
+        <label for="expenseToDate">To Date</label>
+
+        <input type="date" id="expenseToDate">
+
+    </div>
+
+</div>
+
+<div id="expenseCategoryBreakdown">
+
+    <h3>Expense Breakdown</h3>
+
+</div>
+
+    </div>
+
+</section>
+
+
+
 
 
 
@@ -597,6 +691,26 @@
                 required
             >
 
+       <label for="pollutionAmount">
+
+                Amount Paid (₹)
+
+            </label>
+
+            <input
+
+                id="pollutionAmount"
+
+                type="number"
+
+                min="0"
+
+                step="0.01"
+
+                placeholder="Enter amount paid"
+
+            >
+
 <label>Remind me before expiry</label>
 
 <div class="reminder-options">
@@ -909,6 +1023,27 @@
                 type="number"
                 min="0"
                 placeholder="Example: 65000"
+            >
+
+
+        <label for="oilChangeAmount">
+
+                Amount Paid (₹)
+
+            </label>
+
+            <input
+
+                id="oilChangeAmount"
+
+                type="number"
+
+                min="0"
+
+                step="0.01"
+
+                placeholder="Enter amount paid"
+
             >
 
 <label>Remind me before next oil change</label>

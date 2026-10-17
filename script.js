@@ -9,6 +9,11 @@ const basicDetailsPage = document.getElementById("basicDetailsPage");
 const insurancePage = document.getElementById("insurancePage");
 const pollutionDetailsPage = document.getElementById("pollutionDetailsPage");
 
+const totalVehicleExpensePage =
+    document.getElementById("totalVehicleExpensePage");
+
+const backFromTotalExpense = document.getElementById("backFromTotalExpense");
+
 const fuelHistoryPage = document.getElementById("fuelHistoryPage");
 
 const servicePage = document.getElementById("servicePage");
@@ -54,6 +59,7 @@ document.getElementById("tyreFormPage"),
 document.getElementById("fuelMonthlyUsagePage"),
 document.getElementById("savedFuelHistoryPage"),
 document.getElementById("importantDatesPage"),
+document.getElementById("totalVehicleExpensePage"),
 
     ].forEach(page => page.classList.add("hidden"));
 
@@ -264,6 +270,371 @@ if (activeVehicleId) {
 
 }
 
+
+
+
+
+function updateTotalVehicleExpense() {
+    const vehicle = vehicles.find(
+        item => item.id === activeVehicleId
+    );
+
+    const amountDisplay = document.getElementById(
+        "totalVehicleExpenseAmount"
+    );
+
+    if (!amountDisplay) return;
+
+    if (!vehicle) {
+        amountDisplay.textContent = "₹0";
+        return;
+    }
+
+    let total = 0;
+
+    function addExpenses(history, fallbackRecord, amountField) {
+        const records =
+            Array.isArray(history) && history.length > 0
+                ? history
+                : fallbackRecord
+                    ? [fallbackRecord]
+                    : [];
+
+        records.forEach(record => {
+            if (!record) return;
+
+            const amount = Number(record[amountField]);
+
+            if (Number.isFinite(amount) && amount > 0) {
+                total += amount;
+            }
+        });
+    }
+
+    addExpenses(vehicle.fuelHistory, null, "amount");
+
+    addExpenses(
+        vehicle.insuranceHistory,
+        vehicle.insurance,
+        "premium"
+    );
+
+    addExpenses(
+        vehicle.pollutionHistory,
+        vehicle.pollutionCertificate,
+        "amount"
+    );
+
+    addExpenses(
+        vehicle.serviceHistory,
+        vehicle.service,
+        "serviceAmount"
+    );
+
+    addExpenses(
+        vehicle.oilChangeHistory,
+        vehicle.oilChange,
+        "amount"
+    );
+
+    addExpenses(vehicle.tyreHistory, null, "amount");
+
+    addExpenses(
+        vehicle.alignmentHistory,
+        vehicle.alignment,
+        "amount"
+    );
+
+    amountDisplay.textContent = new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: 2
+    }).format(total);
+}
+
+
+
+
+
+
+
+function updateTotalVehicleExpensePage() {
+    updateTotalVehicleExpense();
+
+    const vehicle = vehicles.find(
+        item => item.id === activeVehicleId
+    );
+
+    const dashboardTotal = document.getElementById(
+        "totalVehicleExpenseAmount"
+    );
+
+    const pageTotal = document.getElementById(
+        "expensePageGrandTotal"
+    );
+
+    const breakdown = document.getElementById(
+        "expenseCategoryBreakdown"
+    );
+
+
+
+    const expensePeriod = document.getElementById("expensePeriod");
+    const expenseFromDate = document.getElementById("expenseFromDate");
+    const expenseToDate = document.getElementById("expenseToDate");
+
+    const selectedPeriod = expensePeriod ? expensePeriod.value : "all";
+
+    let filterFromDate = null;
+    let filterToDate = null;
+
+    if (selectedPeriod === "custom") {
+        filterFromDate = expenseFromDate?.value || null;
+        filterToDate = expenseToDate?.value || null;
+    
+    } else if (selectedPeriod !== "all") {
+        const months = Number(selectedPeriod);
+const today = new Date();
+
+filterToDate =
+    today.getFullYear() + "-" +
+    String(today.getMonth() + 1).padStart(2, "0") + "-" +
+    String(today.getDate()).padStart(2, "0");
+
+const fromDate = new Date(
+    today.getFullYear(),
+    today.getMonth() - months,
+    today.getDate()
+);
+
+// Correct dates that overflow at the end of a month
+if (fromDate.getDate() !== today.getDate()) {
+    fromDate.setDate(0);
+}
+
+filterFromDate =
+    fromDate.getFullYear() + "-" +
+    String(fromDate.getMonth() + 1).padStart(2, "0") + "-" +
+    String(fromDate.getDate()).padStart(2, "0");
+    }
+
+
+
+    if (!vehicle || !dashboardTotal || !pageTotal || !breakdown) {
+        return;
+    }
+
+
+if (
+    selectedPeriod === "custom" &&
+    filterFromDate &&
+    filterToDate &&
+    filterFromDate > filterToDate
+) {
+    breakdown.innerHTML =
+    '<p class="expense-validation-message">Please select a valid date range.</p>';
+
+    pageTotal.textContent = "";
+
+    return;
+}
+
+    const categories = [
+        {
+            name: "Fuel",
+            history: vehicle.fuelHistory,
+            fallback: null,
+            field: "amount",
+            dateField: "date"
+        },
+        {
+            name: "Insurance",
+            history: vehicle.insuranceHistory,
+            fallback: vehicle.insurance,
+            field: "premium",
+            dateField: "startDate"
+        },
+        {
+            name: "Pollution Certificate",
+            history: vehicle.pollutionHistory,
+            fallback: vehicle.pollutionCertificate,
+            field: "amount",
+            dateField: "startDate"
+        },
+        {
+            name: "Service",
+            history: vehicle.serviceHistory,
+            fallback: vehicle.service,
+            field: "serviceAmount",
+            dateField: "lastServiceDate"
+        },
+        {
+            name: "Oil Change",
+            history: vehicle.oilChangeHistory,
+            fallback: vehicle.oilChange,
+            field: "amount",
+            dateField: "lastOilChangeDate"
+        },
+        {
+            name: "Tyre Replacement",
+            history: vehicle.tyreHistory,
+            fallback: null,
+            field: "amount",
+            dateField: "date"
+        },
+        {
+            name: "Wheel Alignment",
+            history: vehicle.alignmentHistory,
+            fallback: vehicle.alignment,
+            field: "amount",
+            dateField: "lastAlignmentDate"
+        }
+    ];
+
+    const formatExpense = amount =>
+        new Intl.NumberFormat("en-IN", {
+            style: "currency",
+            currency: "INR",
+            maximumFractionDigits: 2
+        }).format(amount);
+
+    
+
+    breakdown.innerHTML = "<h3>Expense Breakdown</h3>";
+
+    categories.forEach(category => {
+        const records =
+            Array.isArray(category.history) &&
+            category.history.length > 0
+                ? category.history
+                : category.fallback
+                    ? [category.fallback]
+                    : [];
+
+        const filteredRecords = records.filter(record => {
+    if (!record) return false;
+
+    const recordDate = record[category.dateField];
+
+
+
+    if (selectedPeriod === "all") return true;
+    if (!recordDate) return false;
+
+    if (filterFromDate && recordDate < filterFromDate) {
+        return false;
+    }
+
+    if (filterToDate && recordDate > filterToDate) {
+        return false;
+    }
+
+    return true;
+});
+
+const total = filteredRecords.reduce((sum, record) => {
+    const amount = Number(record[category.field]);
+
+    return Number.isFinite(amount) && amount > 0
+        ? sum + amount
+        : sum;
+}, 0);
+
+        const row = document.createElement("div");
+        row.className = "vehicle-card";
+        row.innerHTML = `
+            <strong>${category.name}</strong>
+            <span>${formatExpense(total)}</span>
+        `;
+
+        breakdown.appendChild(row);
+    });
+
+        
+    const filteredGrandTotal = categories.reduce((sum, category) => {
+        const records =
+            Array.isArray(category.history) &&
+            category.history.length > 0
+                ? category.history
+                : category.fallback
+                    ? [category.fallback]
+                    : [];
+
+        const filteredRecords = records.filter(record => {
+            if (!record) return false;
+
+            const recordDate = record[category.dateField];
+
+console.log(
+    category.name,
+    recordDate,
+    filterFromDate,
+    filterToDate
+);
+
+
+            if (selectedPeriod === "all") return true;
+            if (!recordDate) return false;
+
+            if (filterFromDate && recordDate < filterFromDate) {
+                return false;
+            }
+
+            if (filterToDate && recordDate > filterToDate) {
+                return false;
+            }
+
+            return true;
+        });
+
+        return sum + filteredRecords.reduce((categorySum, record) => {
+            const amount = Number(record[category.field]);
+
+            return Number.isFinite(amount) && amount > 0
+                ? categorySum + amount
+                : categorySum;
+        }, 0);
+    }, 0);
+
+    pageTotal.textContent = formatExpense(filteredGrandTotal);
+}
+
+
+
+
+
+const expensePeriodFilter = document.getElementById("expensePeriod");
+const expenseFromDateFilter = document.getElementById("expenseFromDate");
+const expenseToDateFilter = document.getElementById("expenseToDate");
+
+if (expensePeriodFilter) {
+    expensePeriodFilter.addEventListener("change", () => {
+        const customDates = document.getElementById("customExpenseDates");
+
+        if (customDates) {
+            customDates.style.display =
+                expensePeriodFilter.value === "custom" ? "block" : "none";
+        }
+
+        updateTotalVehicleExpensePage();
+    });
+}
+
+if (expenseFromDateFilter) {
+    expenseFromDateFilter.addEventListener("change", updateTotalVehicleExpensePage);
+}
+
+if (expenseToDateFilter) {
+    expenseToDateFilter.addEventListener("change", updateTotalVehicleExpensePage);
+}
+
+
+
+
+
+
+
+
 // SHOW A VEHICLE DASHBOARD
 function showDashboard(vehicleId) {
     const vehicle = vehicles.find(item => item.id === vehicleId);
@@ -315,6 +686,7 @@ function showDashboard(vehicleId) {
 
     showVehicleCare();
 showImportantReminders();
+updateTotalVehicleExpense();
 
 document.getElementById("editVehicleBtn")
     .addEventListener("click", () => {
@@ -343,7 +715,27 @@ document.getElementById("updateKmBtn")
         showDashboard(vehicleId);
     });
 
+
+if (backFromTotalExpense) {
+    backFromTotalExpense.onclick = () => {
+        showDashboard(activeVehicleId);
+    };
 }
+
+
+
+}
+
+document.getElementById("totalVehicleExpenseBtn")
+    .addEventListener("click", () => {
+        showOnlyPage(totalVehicleExpensePage);
+        updateTotalVehicleExpensePage();
+    });
+
+
+
+
+
 
 
 
@@ -893,6 +1285,8 @@ function showPollutionPage() {
 
     document.getElementById("pollutionExpiryDate").value =
         pollution.expiryDate || "";
+   document.getElementById("pollutionAmount").value =
+    pollution.amount || "";
 
     document.querySelectorAll(
         'input[name="pollutionReminder"]'
@@ -1003,6 +1397,8 @@ function showOilChangePage() {
 
     document.getElementById("nextOilChangeKm").value =
         oilChange.nextOilChangeKm || "";
+document.getElementById("oilChangeAmount").value =
+    oilChange.amount || "";
 
     const savedOilChangeReminderDays =
         oilChange.reminderDays || [30, 15, 7, 0];
@@ -1165,7 +1561,9 @@ function saveOilChange(event) {
 
         nextOilChangeKm:
             document.getElementById("nextOilChangeKm").value,
-
+        amount:
+            document.getElementById("oilChangeAmount").value,
+             
         reminderDays: Array.from(
             document.querySelectorAll(
                 'input[name="oilChangeReminder"]:checked'
@@ -1448,7 +1846,7 @@ function showOilChangeDetailsPage() {
     const history = [...vehicle.oilChangeHistory].reverse();
 
     content.innerHTML = history.map((record, displayIndex) => {
-        const dateRows = [
+                const dateRows = [
             ["Last oil change date", formatDate(record.lastOilChangeDate)],
             [
                 "Last oil change kilometres",
@@ -1465,6 +1863,14 @@ function showOilChangeDetailsPage() {
                 record.nextOilChangeKm !== null &&
                 record.nextOilChangeKm !== ""
                     ? record.nextOilChangeKm + " km"
+                    : ""
+            ],
+            [
+                "Amount Paid",
+                record.amount !== undefined &&
+                record.amount !== null &&
+                record.amount !== ""
+                    ? "₹" + record.amount
                     : ""
             ]
         ];
@@ -1834,6 +2240,8 @@ function savePollution(event) {
 
         expiryDate:
             document.getElementById("pollutionExpiryDate").value,
+                amount:
+            document.getElementById("pollutionAmount").value,
 
         reminderDays: Array.from(
             document.querySelectorAll(
@@ -1893,10 +2301,13 @@ const pollutionHistory = vehicle.pollutionHistory;
         .reverse()
         .map((pollution, index) => {
             const rows = [
-                ["Certificate number", pollution.certificateNumber],
-                ["Issue date", formatDate(pollution.startDate)],
-                ["Expiry date", formatDate(pollution.expiryDate)]
-            ];
+    ["Certificate number", pollution.certificateNumber],
+    ["Issue date", formatDate(pollution.startDate)],
+    ["Expiry date", formatDate(pollution.expiryDate)],
+    ["Amount Paid", pollution.amount !== undefined && pollution.amount !== ""
+        ? "₹" + pollution.amount
+        : ""]
+];
 
             return `
                 <div class="pollution-history-record">
