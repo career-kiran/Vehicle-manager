@@ -1592,3 +1592,116 @@ background: transparent;
 }
 
 
+
+
+
+
+
+/* ==============================
+   CAR WASH - PAGE AND HISTORY
+============================== */
+
+/* Add Car Wash button */
+#addCarWashDetails {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: 1px solid #2563eb;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+#addCarWashDetails:hover {
+    background-color: #1d4ed8;
+}
+
+/* Car Wash history record boxes */
+#carWashDetailsContent .alignment-history-record {
+    background: #ffffff;
+    padding: 24px;
+    margin: 20px 0;
+    border-radius: 16px;
+    border: 1px solid #d1d9e2;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    line-height: 1.8;
+}
+
+/* Record heading and Edit/Delete row */
+#carWashDetailsContent .insurance-details-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+#carWashDetailsContent .insurance-details-header h3 {
+    margin-right: auto;
+    color: #2563eb;
+}
+
+/* Keep Edit and Delete side by side */
+#carWashDetailsContent .insurance-details-header > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+/* Edit and Delete buttons */
+#carWashDetailsContent .edit-car-wash-record,
+#carWashDetailsContent .delete-car-wash-record {
+    display: inline-block;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+#carWashDetailsContent .edit-car-wash-record {
+    color: #2563eb;
+}
+
+#carWashDetailsContent .delete-car-wash-record {
+    color: #dc2626;
+}
+
+/* Keep Delete red when tapped or hovered */
+#carWashDetailsContent .delete-car-wash-record:hover,
+#carWashDetailsContent .delete-car-wash-record:focus,
+#carWashDetailsContent .delete-car-wash-record:active {
+    color: #dc2626;
+    background: transparent;
+}
+
+/* Car Wash form action buttons */
+#carWashForm .form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+#carWashForm .form-actions button {
+    width: 100px;
+    max-width: 100%;
+    margin: 14px auto 0;
+}
+
+#carWashForm .form-actions button[type="submit"] {
+    margin-top: 25px;
+}
+
+

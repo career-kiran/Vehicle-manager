@@ -35,6 +35,7 @@ let editingOilChangeIndex = null;
 let editingServiceIndex = null;
 let editingPollutionIndex = null;
 let editingBatteryIndex = null;
+let editingCarWashIndex = null;
 
 function showOnlyPage(pageToShow) {
     [
@@ -63,6 +64,8 @@ document.getElementById("importantDatesPage"),
 document.getElementById("totalVehicleExpensePage"),
 document.getElementById("batteryDetailsPage"),
 document.getElementById("batteryFormPage"),
+document.getElementById("carWashDetailsPage"),
+document.getElementById("carWashFormPage"),
 
     ].forEach(page => page.classList.add("hidden"));
 
@@ -354,6 +357,12 @@ addExpenses(
     "amount"
 );
 
+addExpenses(
+    vehicle.carWashHistory,
+    null,
+    "amount"
+);
+
     amountDisplay.textContent = new Intl.NumberFormat("en-IN", {
         style: "currency",
         currency: "INR",
@@ -501,6 +510,14 @@ if (
 {
     name: "Battery",
     history: vehicle.batteryHistory,
+    fallback: null,
+    field: "amount",
+    dateField: "date"
+},
+
+{
+    name: "Car Wash",
+    history: vehicle.carWashHistory,
     fallback: null,
     field: "amount",
     dateField: "date"
@@ -1709,6 +1726,55 @@ function saveBattery(event) {
 
 
 
+function saveCarWash(event) {
+    event.preventDefault();
+
+    const vehicle = vehicles.find(
+        item => item.id === activeVehicleId
+    );
+
+    if (!vehicle) return;
+
+    if (!Array.isArray(vehicle.carWashHistory)) {
+        vehicle.carWashHistory = [];
+    }
+
+    const date = document.getElementById("carWashDate").value;
+    const amount = document.getElementById("carWashAmount").value;
+    const type = document.getElementById("carWashType").value;
+
+    const carWashRecord = {
+        date: date,
+        amount: amount,
+        type: type
+    };
+
+    if (editingCarWashIndex !== null) {
+        if (!vehicle.carWashHistory[editingCarWashIndex]) {
+            alert("This car wash record could not be found.");
+            editingCarWashIndex = null;
+            return;
+        }
+
+        vehicle.carWashHistory[editingCarWashIndex] = carWashRecord;
+        editingCarWashIndex = null;
+    } else {
+        vehicle.carWashHistory.push(carWashRecord);
+    }
+
+    saveVehicles();
+
+    document.getElementById("carWashForm").reset();
+
+    showCarWashDetailsPage();
+
+    updateTotalVehicleExpensePage();
+}
+
+
+
+
+
 
 
 
@@ -1871,19 +1937,16 @@ function saveTyreReplacement(event) {
         )
     ).map(input => input.value);
 
-    const tyreCount = Number(
-        document.getElementById("tyreCount").value
-    );
+    const tyreCountValue =
+    document.getElementById("tyreCount").value;
 
-    if (positions.length !== tyreCount) {
-        alert("Please select exactly the same number of tyre positions as tyres replaced.");
-        return;
-    }
+const tyreCount = tyreCountValue === ""
+    ? ""
+    : Number(tyreCountValue);
 
-    if (positions.length === 0) {
-        alert("Please select the tyre positions.");
-        return;
-    }
+    
+
+    
 
     if (!vehicle.tyreHistory) {
         vehicle.tyreHistory = [];
@@ -2155,6 +2218,114 @@ document.getElementById("oilChangeDetailsContent").addEventListener("click", fun
         showOilChangeDetailsPage();
     }
 });
+
+
+
+
+
+
+
+
+
+function showCarWashDetailsPage() {
+    const vehicle = vehicles.find(
+        item => item.id === activeVehicleId
+    );
+
+    if (!vehicle) return;
+
+    if (!Array.isArray(vehicle.carWashHistory)) {
+        vehicle.carWashHistory = [];
+    }
+
+    const content = document.getElementById(
+        "carWashDetailsContent"
+    );
+
+    if (!content) return;
+
+    if (vehicle.carWashHistory.length === 0) {
+        content.innerHTML =
+            "<p>No car wash records added yet.</p>";
+
+        showOnlyPage(
+            document.getElementById("carWashDetailsPage")
+        );
+
+        return;
+    }
+
+    const history = [...vehicle.carWashHistory].reverse();
+
+    content.innerHTML = history.map((record, displayIndex) => {
+        const rows = [
+            [
+                "Date of Wash",
+                record.date ? formatDate(record.date) : ""
+            ],
+            [
+                "Amount Paid",
+                record.amount !== undefined &&
+                record.amount !== null &&
+                record.amount !== ""
+                    ? "₹" + record.amount
+                    : ""
+            ],
+            [
+                "Type of Wash",
+                record.type || ""
+            ]
+        ];
+
+        const filledRows = rows.filter(
+            ([label, value]) => value !== ""
+        );
+
+        return `
+            <div class="alignment-history-record">
+
+                <div class="insurance-details-header">
+                    <h3>Wash Record ${displayIndex + 1}</h3>
+
+                    <div>
+                        <button
+                            type="button"
+                            class="edit-icon-btn edit-car-wash-record"
+                            data-index="${displayIndex}">
+                            Edit
+                        </button>
+
+                        <button
+                            type="button"
+                            class="edit-icon-btn delete-car-wash-record"
+                            data-index="${displayIndex}">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+
+                ${
+                    filledRows.length
+                        ? filledRows.map(([label, value]) => `
+                            <div class="detail-row">
+                                <span class="detail-label">${label}</span>
+                                <span class="detail-colon">:</span>
+                                <span class="detail-value">${value}</span>
+                            </div>
+                        `).join("")
+                        : "<p>No details available for this record.</p>"
+                }
+
+            </div>
+        `;
+    }).join("");
+
+    showOnlyPage(
+        document.getElementById("carWashDetailsPage")
+    );
+}
+
+
 
 
 
@@ -2807,7 +2978,8 @@ function showVehicleCare() {
         { title: "Oil Change", icon: "💧" },
         { title: "Wheel Alignment", icon: "🛞" },
         { title: "Tyres", icon: "🛞" },
-        { title: "Battery", icon: "🔋" }
+        { title: "Battery", icon: "🔋" },
+       { title: "Car Wash", displayTitle: "Wash", icon: "🚿" }
     ];
 
     vehicleCare.innerHTML = careItems.map(item => `
@@ -2818,7 +2990,7 @@ function showVehicleCare() {
 
        <div class="care-card-title">
  <span class="care-icon care-icon-${item.title.toLowerCase().replace(/\s+/g, '-')}">${item.icon}</span>
-    <span class="care-name">${escapeHTML(item.title)}</span>
+  <span class="care-name">${escapeHTML(item.displayTitle || item.title)}</span>
     <span class="care-arrow">›</span>
 </div>
             <div class="care-card-link"></div>
@@ -3008,6 +3180,8 @@ vehicleCare.addEventListener("click", function(event) {
     showOilChangeDetailsPage();
 } else if (title === "Wheel Alignment") {
     showAlignmentDetailsPage();
+} else if (title === "Car Wash") {
+    showCarWashDetailsPage();
 
 } else if (title === "Tyres") {
     showTyreHistoryPage();
@@ -3416,6 +3590,120 @@ batteryForm.addEventListener("keydown", function (event) {
 });
 
 batteryForm.addEventListener("submit", saveBattery);
+
+
+
+
+
+
+
+// ==============================
+// CAR WASH BUTTONS AND FORM
+// ==============================
+
+// SAVE CAR WASH FORM
+document.getElementById("carWashForm")
+    .addEventListener("submit", saveCarWash);
+
+// ADD CAR WASH BUTTON
+document.getElementById("addCarWashDetails")
+    .addEventListener("click", function () {
+        editingCarWashIndex = null;
+        document.getElementById("carWashForm").reset();
+
+        showOnlyPage(
+            document.getElementById("carWashFormPage")
+        );
+    });
+
+// CANCEL CAR WASH FORM
+document.getElementById("cancelCarWash")
+    .addEventListener("click", function () {
+        editingCarWashIndex = null;
+        document.getElementById("carWashForm").reset();
+
+        showCarWashDetailsPage();
+    });
+
+
+
+
+ // EDIT AND DELETE CAR WASH RECORDS
+document.getElementById("carWashDetailsContent")
+    .addEventListener("click", function (event) {
+
+        const editButton = event.target.closest(
+            ".edit-car-wash-record"
+        );
+
+        const deleteButton = event.target.closest(
+            ".delete-car-wash-record"
+        );
+
+        if (!editButton && !deleteButton) return;
+
+        const vehicle = vehicles.find(
+            item => item.id === activeVehicleId
+        );
+
+        if (!vehicle || !Array.isArray(vehicle.carWashHistory)) {
+            return;
+        }
+
+        const displayIndex = Number(
+            (editButton || deleteButton).dataset.index
+        );
+
+        // History is displayed newest first
+        const index =
+            vehicle.carWashHistory.length - 1 - displayIndex;
+
+        if (!vehicle.carWashHistory[index]) return;
+
+        if (editButton) {
+            editingCarWashIndex = index;
+
+            const record = vehicle.carWashHistory[index];
+
+            document.getElementById("carWashDate").value =
+                record.date || "";
+
+            document.getElementById("carWashAmount").value =
+                record.amount ?? "";
+
+            document.getElementById("carWashType").value =
+                record.type || "";
+
+            showOnlyPage(
+                document.getElementById("carWashFormPage")
+            );
+
+            return;
+        }
+
+        if (deleteButton) {
+            if (!confirm(
+                "Are you sure you want to delete this car wash record?"
+            )) {
+                return;
+            }
+
+            vehicle.carWashHistory.splice(index, 1);
+
+            saveVehicles();
+            showCarWashDetailsPage();
+            updateTotalVehicleExpensePage();
+        }
+    });
+
+// BACK TO VEHICLE CARE
+document.getElementById("backFromCarWash")
+    .addEventListener("click", function () {
+        showVehicleCare();
+        showOnlyPage(vehicleDashboard);
+    });
+
+
 
 
 
