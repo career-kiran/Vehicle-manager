@@ -457,71 +457,82 @@ if (
     return;
 }
 
-    const categories = [
-        {
-            name: "Fuel",
-            history: vehicle.fuelHistory,
-            fallback: null,
-            field: "amount",
-            dateField: "date"
-        },
-        {
-            name: "Insurance",
-            history: vehicle.insuranceHistory,
-            fallback: vehicle.insurance,
-            field: "premium",
-            dateField: "startDate"
-        },
-        {
-            name: "Pollution Certificate",
-            history: vehicle.pollutionHistory,
-            fallback: vehicle.pollutionCertificate,
-            field: "amount",
-            dateField: "startDate"
-        },
-        {
-            name: "Service",
-            history: vehicle.serviceHistory,
-            fallback: vehicle.service,
-            field: "serviceAmount",
-            dateField: "lastServiceDate"
-        },
-        {
-            name: "Oil Change",
-            history: vehicle.oilChangeHistory,
-            fallback: vehicle.oilChange,
-            field: "amount",
-            dateField: "lastOilChangeDate"
-        },
-        {
-            name: "Tyre Replacement",
-            history: vehicle.tyreHistory,
-            fallback: null,
-            field: "amount",
-            dateField: "date"
-        },
-        {
-    name: "Wheel Alignment",
-    history: vehicle.alignmentHistory,
-    fallback: vehicle.alignment,
-    field: "amount",
-    dateField: "lastAlignmentDate"
-},
-{
-    name: "Battery",
-    history: vehicle.batteryHistory,
-    fallback: null,
-    field: "amount",
-    dateField: "date"
-},
+    
+const categories = [
+    {
+        name: "Fuel",
+        history: vehicle.fuelHistory,
+        fallback: null,
+        field: "amount",
+        dateField: "date",
+        color: "#E74C3C"
+    },
+    {
+        name: "Insurance",
+        history: vehicle.insuranceHistory,
+        fallback: vehicle.insurance,
+        field: "premium",
+        dateField: "startDate",
+        color: "#FFD600"
+    },
+    {
+        name: "Pollution Certificate",
+        history: vehicle.pollutionHistory,
+        fallback: vehicle.pollutionCertificate,
+        field: "amount",
+        dateField: "startDate",
+        color: "#8E44AD"
+    },
+    {
+        name: "Service",
+        history: vehicle.serviceHistory,
+        fallback: vehicle.service,
+        field: "serviceAmount",
+        dateField: "lastServiceDate",
+        color: "#16A085"
+    },
+    {
+        name: "Oil Change",
+        history: vehicle.oilChangeHistory,
+        fallback: vehicle.oilChange,
+        field: "amount",
+        dateField: "lastOilChangeDate",
+        color: "#2980B9"
+    },
+    {
+        name: "Tyre Replacement",
+        history: vehicle.tyreHistory,
+        fallback: null,
+        field: "amount",
+        dateField: "date",
+        color: "#E67E22"
+    },
+    {
+        name: "Wheel Alignment",
+        history: vehicle.alignmentHistory,
+        fallback: vehicle.alignment,
+        field: "amount",
+        dateField: "lastAlignmentDate",
+        color: "#34495E"
+    },
+    {
+        name: "Battery",
+        history: vehicle.batteryHistory,
+        fallback: null,
+        field: "amount",
+        dateField: "date",
+        color: "#E84393"
+    },
+    {
+        name: "Car Wash",
+        history: vehicle.carWashHistory,
+        fallback: null,
+        field: "amount",
+        dateField: "date",
+        color: "#795548"
+    }
 
-{
-    name: "Car Wash",
-    history: vehicle.carWashHistory,
-    fallback: null,
-    field: "amount",
-    dateField: "date"
-}
+
     ];
 
     const formatExpense = amount =>
@@ -534,6 +545,7 @@ if (
     
 
     breakdown.innerHTML = "<h3>Expense Breakdown</h3>";
+const chartTotals = [];
 
     categories.forEach(category => {
         const records =
@@ -572,6 +584,13 @@ const total = filteredRecords.reduce((sum, record) => {
         ? sum + amount
         : sum;
 }, 0);
+
+
+chartTotals.push({
+    name: category.name,
+    amount: total,
+    color: category.color
+});
 
         const row = document.createElement("div");
         row.className = "vehicle-card";
@@ -630,6 +649,125 @@ console.log(
     }, 0);
 
     pageTotal.textContent = formatExpense(filteredGrandTotal);
+    const chart = document.getElementById("expensePieChart");
+    const legend = document.getElementById("expensePieLegend");
+
+    if (chart && legend) {
+        chart.innerHTML = "";
+        legend.innerHTML = "";
+
+        const positiveTotals = chartTotals.filter(
+            item => item.amount > 0
+        );
+
+        const grandTotal = positiveTotals.reduce(
+            (sum, item) => sum + item.amount,
+            0
+        );
+
+        if (grandTotal === 0) {
+            chart.textContent = "No expenses for this period.";
+        } else {
+            const radius = 90;
+            const center = 100;
+            let currentAngle = -Math.PI / 2;
+
+            const slices = positiveTotals.map(item => {
+                const angle =
+                    (item.amount / grandTotal) * Math.PI * 2;
+
+                const startX =
+                    center + radius * Math.cos(currentAngle);
+                const startY =
+                    center + radius * Math.sin(currentAngle);
+
+                const endAngle = currentAngle + angle;
+
+                const endX =
+                    center + radius * Math.cos(endAngle);
+                const endY =
+                    center + radius * Math.sin(endAngle);
+
+                const largeArc = angle >= Math.PI ? 1 : 0;
+
+                const path = angle >= Math.PI * 2 - 0.0001
+    ? [
+        `M ${center} ${center - radius}`,
+        `A ${radius} ${radius} 0 1 1 ${center} ${center + radius}`,
+        `A ${radius} ${radius} 0 1 1 ${center} ${center - radius}`,
+        "Z"
+      ].join(" ")
+    : [
+        `M ${center} ${center}`,
+        `L ${startX} ${startY}`,
+        `A ${radius} ${radius} 0 ${largeArc} 1 ${endX} ${endY}`,
+        "Z"
+      ].join(" ");
+
+                currentAngle = endAngle;
+
+                return {
+                    ...item,
+                    path
+                };
+            });
+
+            const svgNS = "http://www.w3.org/2000/svg";
+
+            const svg = document.createElementNS(svgNS, "svg");
+            svg.setAttribute("viewBox", "0 0 200 200");
+            svg.setAttribute("role", "img");
+            svg.setAttribute(
+                "aria-label",
+                "Vehicle expense pie chart"
+            );
+
+            slices.forEach(item => {
+                const path = document.createElementNS(
+                    svgNS,
+                    "path"
+                );
+
+                path.setAttribute("d", item.path);
+                path.setAttribute("fill", item.color);
+                path.setAttribute(
+                    "stroke",
+                    "#ffffff"
+                );
+                path.setAttribute("stroke-width", "1");
+
+                const title = document.createElementNS(
+                    svgNS,
+                    "title"
+                );
+
+                title.textContent =
+                    `${item.name}: ${formatExpense(item.amount)}`;
+
+                path.appendChild(title);
+                svg.appendChild(path);
+
+                const legendItem = document.createElement("div");
+                legendItem.className = "expense-pie-legend-item";
+
+                const colorBox = document.createElement("span");
+                colorBox.className = "expense-pie-legend-color";
+                colorBox.style.backgroundColor = item.color;
+
+                const label = document.createElement("span");
+                label.className = "expense-pie-legend-label";
+                label.textContent =
+                    `${item.name} — ${formatExpense(item.amount)}`;
+
+                legendItem.appendChild(colorBox);
+                legendItem.appendChild(label);
+                legend.appendChild(legendItem);
+            });
+
+            chart.appendChild(svg);
+        }
+    }
+
 }
 
 

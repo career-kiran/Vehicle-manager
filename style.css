@@ -1705,3 +1705,63 @@ background: transparent;
 }
 
 
+
+
+
+
+/* ==============================
+   EXPENSE PIE CHART
+============================== */
+
+#expensePieChartSection {
+    margin-bottom: 20px;
+    margin-top: 12px;
+}
+
+#expensePieChartSection h3 {
+    margin-bottom: 16px;
+}
+
+#expensePieChart {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#expensePieChart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+}
+
+#expensePieLegend {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.expense-pie-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    font-size: 14px;
+}
+
+.expense-pie-legend-color {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    border-radius: 3px;
+}
+
+.expense-pie-legend-label {
+    overflow-wrap: anywhere;
+}
+
+
+
