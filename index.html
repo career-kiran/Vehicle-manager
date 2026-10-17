@@ -127,6 +127,8 @@
 
 <div class="vehicle-card important-dates-panel">
 
+ <span class="important-dates-arrow" aria-hidden="true">›</span>
+
     <h2>📅 Important Dates</h2>
 
     <p>View upcoming expiry dates and KM targets.</p>
@@ -151,7 +153,7 @@
 
     </div>
 
-    <span class="total-expense-arrow" aria-hidden="true">&gt;</span>
+<span class="total-expense-arrow" aria-hidden="true">›</span>
 
 </div>
 
@@ -262,6 +264,209 @@
 
 </div>
 </section>
+
+
+
+
+
+
+<!-- BATTERY DETAILS PAGE -->
+
+<section id="batteryDetailsPage" class="hidden">
+
+    <button
+
+        type="button"
+
+        id="backToVehicleCareFromBattery"
+
+        class="secondary-button">
+
+        ← Back to Vehicle Care
+
+    </button>
+
+    <div class="vehicle-card care-details-page">
+
+        <div class="insurance-details-header">
+
+            <h2>🔋 Battery Details</h2>
+
+            <button
+
+                type="button"
+
+                id="addBatteryDetails"
+
+                class="edit-icon-btn">
+
+                + Add Battery
+
+            </button>
+
+        </div>
+
+        <div id="batteryDetailsContent"></div>
+
+    </div>
+
+</section>
+
+
+
+
+<!-- BATTERY FORM PAGE -->
+
+<section id="batteryFormPage" class="hidden">
+
+    <div class="vehicle-card">
+
+        <h2>Battery Details</h2>
+
+        <form id="batteryForm">
+
+            <label for="batteryDate">
+
+                Date of Placement
+
+            </label>
+
+            <input
+
+                id="batteryDate"
+
+                type="date"
+
+            >
+
+            <label for="batteryKm">
+
+                KM Reading at Placement
+
+            </label>
+
+            <input
+
+                id="batteryKm"
+
+                type="number"
+
+                min="0"
+
+                placeholder="Enter kilometres"
+
+            >
+
+            <label for="batteryBrand">
+
+                Brand
+
+            </label>
+
+            <input
+
+                id="batteryBrand"
+
+                type="text"
+
+                placeholder="Enter battery brand"
+
+            >
+
+            <label for="batteryAmount">
+
+                Amount Paid (₹)
+
+            </label>
+
+            <input
+
+                id="batteryAmount"
+
+                type="number"
+
+                min="0"
+
+                step="0.01"
+
+                placeholder="Enter amount paid"
+
+            >
+
+            <label for="batteryWarrantyDuration">
+
+                Warranty Duration
+
+            </label>
+
+            <input
+
+                id="batteryWarrantyDuration"
+
+                type="number"
+
+                min="0"
+
+                placeholder="Enter duration"
+
+            >
+
+            <label for="batteryWarrantyUnit">
+
+                Warranty Unit
+
+            </label>
+
+            <select id="batteryWarrantyUnit">
+
+                <option value="months">Months</option>
+
+                <option value="years">Years</option>
+
+            </select>
+
+            <label for="batteryNotes">
+
+                Notes (Optional)
+
+            </label>
+
+            <textarea
+
+                id="batteryNotes"
+
+                placeholder="Enter additional details"
+
+            ></textarea>
+
+            <div class="form-actions">
+
+                <button type="submit">Save</button>
+
+                <button
+
+                    type="button"
+
+                    id="cancelBattery"
+
+                >
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+        </form>
+
+        <p id="batteryWarrantyExpiry"></p>
+
+    </div>
+
+</section>
+
+
+
 
 
 

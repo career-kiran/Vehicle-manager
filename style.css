@@ -1292,12 +1292,41 @@ background: transparent;
 }
 
 
+
+
+
+
 /* IMPORTANT DATES - Separate Records */
 #importantDatesPage .alignment-history-record {
     border-bottom: 1px solid #D9DDE3;
     padding-bottom: 12px;
     margin-bottom: 12px;
 }
+
+
+
+/* IMPORTANT DATES - SOFT LAVENDER BACKGROUND */
+.important-dates-panel {
+    background: #EAF3FF;
+    border: 1px solid #D7C8F5;
+}
+
+
+.important-dates-panel {
+    position: relative;
+}
+
+.important-dates-arrow {
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #9CA3AF;
+    font-weight: 600;
+    line-height: 1;
+}
+
 
 
 
@@ -1423,8 +1452,10 @@ background: transparent;
 
 .total-expense-arrow {
     flex-shrink: 0;
-    font-size: 28px;
+    font-size: 24px;
     color: #9CA3AF;
+    font-weight: 600;
+    line-height: 1;
 }
 
 
@@ -1465,7 +1496,7 @@ background: transparent;
 
 /* TOTAL VEHICLE EXPENSE CARD */
 .total-expense-panel {
-    background: #E5EFFB;
+    background: #FFFCED;
 }
 
 
@@ -1483,3 +1514,81 @@ background: transparent;
     font-size: 24px;
     font-weight: 700;
 }
+
+
+
+
+
+
+/* BATTERY - ADD BUTTON DESIGN */
+#addBatteryDetails {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: 1px solid #2563eb;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+}
+
+#addBatteryDetails:hover {
+    background-color: #1d4ed8;
+}
+
+
+
+/* BATTERY - EDIT AND DELETE BUTTONS */
+#batteryDetailsContent .edit-battery-record,
+#batteryDetailsContent .delete-battery-record {
+    display: inline-block;
+    width: auto;
+    margin: 0 0 0 4px;
+    padding: 6px 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+#batteryDetailsContent .edit-battery-record {
+    color: #2563eb;
+}
+
+#batteryDetailsContent .delete-battery-record {
+    color: #dc2626;
+}
+
+
+
+/* BATTERY - SAVED RECORD BOX */
+#batteryDetailsContent .alignment-history-record {
+    background: #ffffff;
+    border: 1px solid #d1dceb;
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+
+/* BATTERY - ALIGN SAVED RECORD DETAILS */
+#batteryDetailsContent .detail-row {
+    display: grid;
+    grid-template-columns: 200px 12px 1fr;
+    column-gap: 8px;
+    align-items: start;
+}
+
+#batteryDetailsContent .detail-label {
+    width: auto;
+}
+
+#batteryDetailsContent .detail-colon {
+    text-align: center;
+}
+
+

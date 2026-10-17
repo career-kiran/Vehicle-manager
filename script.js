@@ -34,6 +34,7 @@ let editingInsuranceIndex = null;
 let editingOilChangeIndex = null;
 let editingServiceIndex = null;
 let editingPollutionIndex = null;
+let editingBatteryIndex = null;
 
 function showOnlyPage(pageToShow) {
     [
@@ -60,6 +61,8 @@ document.getElementById("fuelMonthlyUsagePage"),
 document.getElementById("savedFuelHistoryPage"),
 document.getElementById("importantDatesPage"),
 document.getElementById("totalVehicleExpensePage"),
+document.getElementById("batteryDetailsPage"),
+document.getElementById("batteryFormPage"),
 
     ].forEach(page => page.classList.add("hidden"));
 
@@ -345,6 +348,12 @@ function updateTotalVehicleExpense() {
         "amount"
     );
 
+addExpenses(
+    vehicle.batteryHistory,
+    null,
+    "amount"
+);
+
     amountDisplay.textContent = new Intl.NumberFormat("en-IN", {
         style: "currency",
         currency: "INR",
@@ -483,12 +492,19 @@ if (
             dateField: "date"
         },
         {
-            name: "Wheel Alignment",
-            history: vehicle.alignmentHistory,
-            fallback: vehicle.alignment,
-            field: "amount",
-            dateField: "lastAlignmentDate"
-        }
+    name: "Wheel Alignment",
+    history: vehicle.alignmentHistory,
+    fallback: vehicle.alignment,
+    field: "amount",
+    dateField: "lastAlignmentDate"
+},
+{
+    name: "Battery",
+    history: vehicle.batteryHistory,
+    fallback: null,
+    field: "amount",
+    dateField: "date"
+}
     ];
 
     const formatExpense = amount =>
@@ -1602,6 +1618,101 @@ function saveOilChange(event) {
 
 
 
+
+
+
+
+function saveBattery(event) {
+    event.preventDefault();
+
+    const vehicle = vehicles.find(
+        item => item.id === activeVehicleId
+    );
+
+    if (!vehicle) return;
+
+    if (!Array.isArray(vehicle.batteryHistory)) {
+        vehicle.batteryHistory = [];
+    }
+
+    const date = document.getElementById("batteryDate").value;
+    const km = document.getElementById("batteryKm").value;
+    const brand = document.getElementById("batteryBrand").value.trim();
+    const amount = document.getElementById("batteryAmount").value;
+    const warrantyDuration =
+        document.getElementById("batteryWarrantyDuration").value;
+    const warrantyUnit =
+        document.getElementById("batteryWarrantyUnit").value;
+    const notes = document.getElementById("batteryNotes").value.trim();
+
+    let warrantyExpiry = "";
+
+    if (date && warrantyDuration !== "") {
+        const duration = Number(warrantyDuration);
+
+        if (!Number.isFinite(duration) || duration < 0) {
+            alert("Please enter a valid warranty duration.");
+            return;
+        }
+
+        const expiry = new Date(date + "T12:00:00");
+
+        if (warrantyUnit === "years") {
+            expiry.setFullYear(expiry.getFullYear() + duration);
+        } else {
+            expiry.setMonth(expiry.getMonth() + duration);
+        }
+
+        warrantyExpiry =
+            expiry.getFullYear() + "-" +
+            String(expiry.getMonth() + 1).padStart(2, "0") + "-" +
+            String(expiry.getDate()).padStart(2, "0");
+    }
+
+    const batteryRecord = {
+        date: date,
+        km: km,
+        brand: brand,
+        amount: amount,
+        warrantyDuration: warrantyDuration,
+        warrantyUnit: warrantyUnit,
+        warranty: warrantyDuration !== ""
+            ? warrantyDuration + " " + warrantyUnit
+            : "",
+        warrantyExpiry: warrantyExpiry,
+        notes: notes
+    };
+
+    if (editingBatteryIndex !== null) {
+        if (!vehicle.batteryHistory[editingBatteryIndex]) {
+            alert("This battery record could not be found.");
+            editingBatteryIndex = null;
+            return;
+        }
+
+        vehicle.batteryHistory[editingBatteryIndex] = batteryRecord;
+        editingBatteryIndex = null;
+    } else {
+        vehicle.batteryHistory.push(batteryRecord);
+    }
+
+    saveVehicles();
+
+    showBatteryDetailsPage();
+
+    updateTotalVehicleExpensePage();
+}
+
+
+
+
+
+
+
+
+
+
+
 function saveAlignment(event) {
     event.preventDefault();
 
@@ -1660,6 +1771,87 @@ function saveAlignment(event) {
     saveVehicles();
     showAlignmentDetailsPage();
 }
+
+
+
+
+
+function saveBattery(event) {
+    event.preventDefault();
+
+    const vehicle = vehicles.find(
+        item => item.id === activeVehicleId
+    );
+
+    if (!vehicle) return;
+
+    if (!Array.isArray(vehicle.batteryHistory)) {
+        vehicle.batteryHistory = [];
+    }
+
+    const date = document.getElementById("batteryDate").value;
+    const warrantyDuration = document.getElementById(
+        "batteryWarrantyDuration"
+    ).value;
+    const warrantyUnit = document.getElementById(
+        "batteryWarrantyUnit"
+    ).value;
+
+    let warrantyExpiry = "";
+
+    if (date && warrantyDuration !== "") {
+        const expiry = new Date(date + "T12:00:00");
+        const duration = Number(warrantyDuration);
+
+        if (warrantyUnit === "years") {
+            expiry.setFullYear(expiry.getFullYear() + duration);
+        } else {
+            expiry.setMonth(expiry.getMonth() + duration);
+        }
+
+        warrantyExpiry =
+            expiry.getFullYear() + "-" +
+            String(expiry.getMonth() + 1).padStart(2, "0") + "-" +
+            String(expiry.getDate()).padStart(2, "0");
+    }
+
+    const batteryRecord = {
+        date: date,
+        km: document.getElementById("batteryKm").value,
+        brand: document.getElementById("batteryBrand").value.trim(),
+        amount: document.getElementById("batteryAmount").value,
+        warranty: warrantyDuration !== ""
+            ? warrantyDuration + " " + warrantyUnit
+            : "",
+        warrantyDuration: warrantyDuration,
+        warrantyUnit: warrantyUnit,
+        warrantyExpiry: warrantyExpiry,
+        notes: document.getElementById("batteryNotes").value.trim()
+    };
+
+    if (editingBatteryIndex !== null) {
+        if (!vehicle.batteryHistory[editingBatteryIndex]) {
+            alert("This battery record could not be found.");
+            editingBatteryIndex = null;
+            return;
+        }
+
+        vehicle.batteryHistory[editingBatteryIndex] = batteryRecord;
+        editingBatteryIndex = null;
+    } else {
+        vehicle.batteryHistory.push(batteryRecord);
+    }
+
+    saveVehicles();
+
+    document.getElementById("batteryForm").reset();
+    document.getElementById("batteryWarrantyExpiry").textContent = "";
+
+    showBatteryDetailsPage();
+}
+
+
+
 
 
 
@@ -1963,6 +2155,252 @@ document.getElementById("oilChangeDetailsContent").addEventListener("click", fun
         showOilChangeDetailsPage();
     }
 });
+
+
+
+
+
+
+
+
+function showBatteryDetailsPage() {
+    const vehicle = vehicles.find(
+        item => item.id === activeVehicleId
+    );
+
+    if (!vehicle) return;
+
+    if (!Array.isArray(vehicle.batteryHistory)) {
+        vehicle.batteryHistory = [];
+    }
+
+    const content = document.getElementById(
+        "batteryDetailsContent"
+    );
+
+    if (!content) return;
+
+    if (vehicle.batteryHistory.length === 0) {
+        content.innerHTML =
+            "<p>No battery records added yet.</p>";
+
+        showOnlyPage(
+            document.getElementById("batteryDetailsPage")
+        );
+
+        return;
+    }
+
+    const history = [...vehicle.batteryHistory].reverse();
+
+    content.innerHTML = history.map((record, displayIndex) => {
+        const rows = [
+            ["Date of Placement", formatDate(record.date)],
+            [
+                "KM Reading at Placement",
+                record.km !== undefined &&
+                record.km !== null &&
+                record.km !== ""
+                    ? record.km + " km"
+                    : ""
+            ],
+            ["Brand", record.brand || ""],
+            [
+                "Amount Paid",
+                record.amount !== undefined &&
+                record.amount !== null &&
+                record.amount !== ""
+                    ? "₹" + record.amount
+                    : ""
+            ],
+            ["Warranty Duration", record.warranty || ""],
+            [
+                "Warranty Expiry",
+                record.warrantyExpiry
+                    ? formatDate(record.warrantyExpiry)
+                    : ""
+            ],
+            ["Notes", record.notes || ""]
+        ];
+
+        const filledRows = rows.filter(
+            ([label, value]) => value
+        );
+
+        return `
+            <div class="alignment-history-record">
+               
+<div class="insurance-details-header">
+    <h3>Battery Record ${displayIndex + 1}</h3>
+
+    <div>
+        <button
+            type="button"
+            class="edit-icon-btn edit-battery-record"
+            data-index="${displayIndex}"
+            title="Edit"
+        >Edit</button>
+
+        <button
+            type="button"
+            class="edit-icon-btn delete-battery-record"
+            data-index="${displayIndex}"
+            title="Delete"
+        >Delete</button>
+    </div>
+</div>
+
+
+                ${filledRows.length
+                    ? filledRows.map(([label, value]) => `
+                        <div class="detail-row">
+                            <span class="detail-label">${label}</span>
+                            <span class="detail-colon">:</span>
+                            <span class="detail-value">${value}</span>
+                        </div>
+                    `).join("")
+                    : "<p>No details available for this record.</p>"
+                }
+            </div>
+        `;
+    }).join("");
+
+    showOnlyPage(
+        document.getElementById("batteryDetailsPage")
+    );
+}
+
+
+
+
+function showBatteryPage() {
+    const vehicle = vehicles.find(
+        item => item.id === activeVehicleId
+    );
+
+    if (!vehicle) return;
+
+    let battery = {};
+
+    if (editingBatteryIndex !== null) {
+        if (!Array.isArray(vehicle.batteryHistory)) return;
+
+        battery = vehicle.batteryHistory[editingBatteryIndex];
+
+        if (!battery) {
+            editingBatteryIndex = null;
+            return;
+        }
+    } else {
+        document.getElementById("batteryForm").reset();
+    }
+
+    document.getElementById("batteryDate").value =
+        battery.date || "";
+
+    document.getElementById("batteryKm").value =
+        battery.km || "";
+
+    document.getElementById("batteryBrand").value =
+        battery.brand || "";
+
+    document.getElementById("batteryAmount").value =
+        battery.amount ?? "";
+
+    document.getElementById("batteryWarrantyDuration").value =
+        battery.warrantyDuration ?? "";
+
+    document.getElementById("batteryWarrantyUnit").value =
+        battery.warrantyUnit || "months";
+
+    document.getElementById("batteryNotes").value =
+        battery.notes || "";
+
+    document.getElementById("batteryWarrantyExpiry").textContent =
+        battery.warrantyExpiry
+            ? "Warranty Expiry: " + formatDate(battery.warrantyExpiry)
+            : "";
+
+    showOnlyPage(
+        document.getElementById("batteryFormPage")
+    );
+}
+
+
+
+document.getElementById("addBatteryDetails").addEventListener("click", function () {
+    editingBatteryIndex = null;
+
+    document.getElementById("batteryForm").reset();
+
+    document.getElementById("batteryWarrantyExpiry").textContent = "";
+
+    showOnlyPage(
+        document.getElementById("batteryFormPage")
+    );
+});
+
+
+
+document.getElementById("cancelBattery").addEventListener("click", function () {
+    editingBatteryIndex = null;
+    showBatteryDetailsPage();
+});
+
+
+document.getElementById("backToVehicleCareFromBattery").addEventListener("click", function () {
+    showVehicleCare();
+
+    showOnlyPage(vehicleDashboard);
+});
+
+
+
+
+
+document.getElementById("batteryDetailsContent").addEventListener("click", function (event) {
+    const editButton = event.target.closest(".edit-battery-record");
+    const deleteButton = event.target.closest(".delete-battery-record");
+
+    if (!editButton && !deleteButton) return;
+
+    const vehicle = vehicles.find(
+        item => item.id === activeVehicleId
+    );
+
+    if (!vehicle || !Array.isArray(vehicle.batteryHistory)) return;
+
+    const displayIndex = Number(
+        (editButton || deleteButton).dataset.index
+    );
+
+    // Convert newest-first display index to saved history index
+    const index = vehicle.batteryHistory.length - 1 - displayIndex;
+
+    if (!vehicle.batteryHistory[index]) return;
+
+    if (editButton) {
+        editingBatteryIndex = index;
+        showBatteryPage();
+        return;
+    }
+
+    if (deleteButton) {
+        if (!confirm("Are you sure you want to delete this battery record?")) {
+            return;
+        }
+
+        vehicle.batteryHistory.splice(index, 1);
+
+        saveVehicles();
+        showBatteryDetailsPage();
+        updateTotalVehicleExpensePage();
+    }
+});
+
+
+
+
 
 
 
@@ -2570,9 +3008,13 @@ vehicleCare.addEventListener("click", function(event) {
     showOilChangeDetailsPage();
 } else if (title === "Wheel Alignment") {
     showAlignmentDetailsPage();
+
 } else if (title === "Tyres") {
     showTyreHistoryPage();
+} else if (title === "Battery") {
+    showBatteryDetailsPage();
 }
+
 });
 
 vehicleCare.addEventListener("keydown", function(event) {
@@ -2946,6 +3388,7 @@ document.getElementById("cancelOilChange")
         showOilChangeDetailsPage();
     });
 
+
 document.getElementById("editOilChangeDetails")
     .addEventListener("click", () => {
         editingOilChangeIndex = null;
@@ -2956,6 +3399,25 @@ document.getElementById("backFromOilChangeDetails")
     .addEventListener("click", () => {
         showDashboard(activeVehicleId);
     });
+
+
+
+// BATTERY BUTTONS AND FORM
+
+const batteryForm = document.getElementById("batteryForm");
+
+batteryForm.addEventListener("keydown", function (event) {
+    if (
+        event.key === "Enter" &&
+        event.target.tagName !== "TEXTAREA"
+    ) {
+        event.preventDefault();
+    }
+});
+
+batteryForm.addEventListener("submit", saveBattery);
+
+
 
 
 
