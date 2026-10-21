@@ -2043,20 +2043,20 @@ background: transparent;
         line-height: 1.6;
     }
 
-    .detail-row,
-    .insurance-details-card .detail-row,
-    #monthlyFuelHistoryContent .detail-row,
-    #savedFuelHistoryContent .detail-row,
-    #insuranceDetailsContent .detail-row,
-    #oilChangeDetailsContent .detail-row {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 3px;
-        margin-bottom: 12px;
-        line-height: 1.5;
-    }
+   .detail-row,
+.insurance-details-card .detail-row,
+#monthlyFuelHistoryContent .detail-row,
+#savedFuelHistoryContent .detail-row,
+#insuranceDetailsContent .detail-row,
+#oilChangeDetailsContent .detail-row {
+    grid-template-columns: minmax(105px, 0.9fr) 8px minmax(0, 1.5fr);
+    gap: 5px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
 
     .detail-colon {
-        display: none;
+        display: inline;
     }
 
     .detail-label {
