@@ -2456,3 +2456,21 @@ background: transparent;
     font-size: 14px;
   }
 }
+
+
+
+
+
+
+
+/* Keep Vehicle Care arrows at the far right on mobile */
+@media (max-width: 600px) {
+  #vehicleCare .care-item {
+    display: flex !important;
+    align-items: center;
+  }
+
+  #vehicleCare .care-item > span:last-child {
+    margin-left: auto !important;
+  }
+}
