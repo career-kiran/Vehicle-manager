@@ -2428,10 +2428,10 @@ background: transparent;
   }
 
   #vehicleCare .care-item .care-icon {
-    width: 48px !important;
-    height: 48px !important;
-    min-width: 48px !important;
-    flex: 0 0 48px !important;
+    width: 45px !important;
+    height: 45px !important;
+    min-width: 45px !important;
+    flex: 0 0 45px !important;
     aspect-ratio: 1 / 1;
   }
 }
