@@ -12,6 +12,9 @@ const pollutionDetailsPage = document.getElementById("pollutionDetailsPage");
 const totalVehicleExpensePage =
     document.getElementById("totalVehicleExpensePage");
 
+const partsReplacedPage =
+    document.getElementById("partsReplacedPage");
+
 const backFromTotalExpense = document.getElementById("backFromTotalExpense");
 
 const fuelHistoryPage = document.getElementById("fuelHistoryPage");
@@ -36,6 +39,8 @@ let editingServiceIndex = null;
 let editingPollutionIndex = null;
 let editingBatteryIndex = null;
 let editingCarWashIndex = null;
+let editingPartsReplacedIndex = null;
+let editingPartsReplacedDate = null;
 
 function showOnlyPage(pageToShow) {
     [
@@ -66,6 +71,7 @@ document.getElementById("batteryDetailsPage"),
 document.getElementById("batteryFormPage"),
 document.getElementById("carWashDetailsPage"),
 document.getElementById("carWashFormPage"),
+document.getElementById("partsReplacedPage"),
 
     ].forEach(page => page.classList.add("hidden"));
 
@@ -363,6 +369,12 @@ addExpenses(
     "amount"
 );
 
+addExpenses(
+    vehicle.partsReplacedHistory,
+    null,
+    "amount"
+);
+
     amountDisplay.textContent = new Intl.NumberFormat("en-IN", {
         style: "currency",
         currency: "INR",
@@ -530,7 +542,16 @@ const categories = [
         field: "amount",
         dateField: "date",
         color: "#795548"
-    }
+    },
+
+{
+    name: "Parts Replaced",
+    history: vehicle.partsReplacedHistory,
+    fallback: null,
+    field: "amount",
+    dateField: "date",
+    color: "#3498DB"
+}
 
 
     ];
@@ -1917,6 +1938,154 @@ function saveCarWash(event) {
 
 
 
+
+function savePartsReplaced(event) {
+    event.preventDefault();
+
+    const vehicle = vehicles.find(
+        item => item.id === activeVehicleId
+    );
+
+    if (!vehicle) return;
+
+    if (!Array.isArray(vehicle.partsReplacedHistory)) {
+        vehicle.partsReplacedHistory = [];
+    }
+
+    const date = document.getElementById(
+        "partsReplacedDate"
+    ).value;
+
+    const mainName = document.getElementById(
+        "partsReplacedName"
+    ).value.trim();
+
+    const mainAmount = document.getElementById(
+        "partsReplacedAmount"
+    ).value;
+
+    const additionalRows = document.querySelectorAll(
+        "#partsReplacedItemsContainer .parts-replaced-item-row"
+    );
+
+    const newParts = [];
+
+    if (mainName || mainAmount !== "") {
+        newParts.push({
+            name: mainName,
+            amount: mainAmount
+        });
+    }
+
+    additionalRows.forEach(row => {
+        newParts.push({
+            name: row.querySelector(".additional-part-name").value.trim(),
+            amount: row.querySelector(".additional-part-amount").value
+        });
+    });
+
+    if (!date || newParts.length === 0) {
+        alert("Please enter a date and at least one part.");
+        return;
+    }
+
+    for (const part of newParts) {
+        const amount = Number(part.amount);
+
+        if (
+            !part.name ||
+            part.amount === "" ||
+            !Number.isFinite(amount) ||
+            amount <= 0
+        ) {
+            alert("Please enter a valid name and amount for every part.");
+            return;
+        }
+
+        part.amount = amount;
+    }
+
+    // EDIT A WHOLE DATE GROUP
+    if (editingPartsReplacedDate !== null) {
+        const originalDate = editingPartsReplacedDate;
+
+        const groupExists = vehicle.partsReplacedHistory.some(
+            part => part.date === originalDate
+        );
+
+        if (!groupExists) {
+            alert("The saved parts group could not be found. Nothing was changed.");
+            return;
+        }
+
+        vehicle.partsReplacedHistory = vehicle.partsReplacedHistory.filter(
+            part => part.date !== originalDate
+        );
+
+        newParts.forEach(part => {
+            vehicle.partsReplacedHistory.push({
+                date: date,
+                name: part.name,
+                amount: part.amount
+            });
+        });
+
+        editingPartsReplacedDate = null;
+        editingPartsReplacedIndex = null;
+
+    // EDIT ONE INDIVIDUAL RECORD
+    } else if (editingPartsReplacedIndex !== null) {
+        const index = editingPartsReplacedIndex;
+
+        if (!vehicle.partsReplacedHistory[index]) {
+            alert("This parts record could not be found. Nothing was changed.");
+            return;
+        }
+
+        vehicle.partsReplacedHistory[index] = {
+            date: date,
+            name: newParts[0].name,
+            amount: newParts[0].amount
+        };
+
+        editingPartsReplacedIndex = null;
+
+    // ADD NEW PARTS
+    } else {
+        newParts.forEach(part => {
+            vehicle.partsReplacedHistory.push({
+                date: date,
+                name: part.name,
+                amount: part.amount
+            });
+        });
+    }
+
+    saveVehicles();
+
+    document.getElementById("partsReplacedForm").reset();
+
+    // Remove extra form rows so they do not carry into the next entry.
+    document.querySelectorAll(
+        "#partsReplacedItemsContainer .parts-replaced-item-row"
+    ).forEach(row => row.remove());
+
+    showPartsReplacedDetailsPage();
+    updateTotalVehicleExpensePage();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 function saveAlignment(event) {
     event.preventDefault();
 
@@ -2469,6 +2638,104 @@ function showCarWashDetailsPage() {
 
 
 
+function showPartsReplacedDetailsPage() {
+    const vehicle = vehicles.find(
+        item => item.id === activeVehicleId
+    );
+
+    if (!vehicle) return;
+
+    const content = document.getElementById(
+        "partsReplacedHistoryContent"
+    );
+
+    const history = vehicle.partsReplacedHistory || [];
+
+const groupedParts = {};
+
+history.forEach((part, index) => {
+    if (!groupedParts[part.date]) {
+        groupedParts[part.date] = [];
+    }
+
+    groupedParts[part.date].push({
+        ...part,
+        originalIndex: index
+    });
+});
+
+const sortedDates = Object.keys(groupedParts).sort(
+    (a, b) => b.localeCompare(a)
+);
+
+content.innerHTML = sortedDates.length
+    ? sortedDates.map((date, index) => {
+        const parts = groupedParts[date];
+
+        const total = parts.reduce(
+            (sum, part) => sum + Number(part.amount || 0),
+            0
+        );
+
+        return `
+            <div class="tyre-history-record">
+              <div class="record-header">
+    <h3>Parts Replaced ${index + 1}</h3>
+    <div>
+        <button type="button"
+            class="edit-parts-replaced-group"
+            data-date="${date}">
+            Edit
+        </button>
+
+        <button type="button"
+            class="delete-parts-replaced-group"
+            data-date="${date}">
+            Delete
+        </button>
+    </div>
+</div>
+
+                <div class="detail-row">
+                    <strong>Date</strong>
+                    <span>:</span>
+                    <span>${formatDate(date)}</span>
+                </div>
+
+                ${parts.map(part => `
+                    <div class="detail-row">
+                        <strong>${part.name}</strong>
+                        <span>:</span>
+                        <span>₹${Number(part.amount).toFixed(2)}</span>
+                    </div>
+                `).join("")}
+
+                <div class="detail-row">
+                    <strong>Total</strong>
+                    <span>:</span>
+                    <strong>₹${total.toFixed(2)}</strong>
+                </div>
+
+          
+
+            </div>
+            <hr>
+        `;
+    }).join("")
+    : "<p>No parts records added yet.</p>";
+document.getElementById("partsReplacedFormSection").hidden = true;
+document.getElementById("partsReplacedHistorySection").hidden = false;
+
+showOnlyPage(
+    document.getElementById("partsReplacedPage")
+);
+
+}
+
+
+
+
+
 
 
 
@@ -2962,6 +3229,73 @@ function showSavedFuelHistoryPage() {
 
 
 
+
+
+
+function showPartsReplacedPage() {
+    const vehicle = vehicles.find(
+        item => item.id === activeVehicleId
+    );
+
+    if (!vehicle) return;
+
+    const parts = [...(vehicle.partsReplacedHistory || [])]
+        .sort((a, b) => b.date.localeCompare(a.date));
+
+    const content = document.getElementById(
+        "partsReplacedContent"
+    );
+
+    if (!content) return;
+
+    content.innerHTML = parts.length
+        ? parts.map((part, index) => `
+            <div class="tyre-history-record">
+                <div class="record-header">
+                    <h3>${part.name}</h3>
+                    <div>
+                        <button type="button"
+                            class="edit-part-record"
+                            data-index="${index}">Edit</button>
+                        <button type="button"
+                            class="delete-part-record"
+                            data-index="${index}">Delete</button>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <strong>Date</strong>
+                    <span>:</span>
+                    <span>${formatDate(part.date)}</span>
+                </div>
+
+                <div class="detail-row">
+                    <strong>Part Name</strong>
+                    <span>:</span>
+                    <span>${part.name}</span>
+                </div>
+
+                <div class="detail-row">
+                    <strong>Amount</strong>
+                    <span>:</span>
+                    <span>₹${Number(part.amount).toFixed(2)}</span>
+                </div>
+            </div>
+            <hr>
+        `).join("")
+        : "<p>No parts replaced yet.</p>";
+
+    showOnlyPage(
+        document.getElementById("partsReplacedPage")
+    );
+}
+
+
+
+
+
+
+
 function savePollution(event) {
     event.preventDefault();
 
@@ -3117,7 +3451,8 @@ function showVehicleCare() {
         { title: "Wheel Alignment", icon: "🛞" },
         { title: "Tyres", icon: "🛞" },
         { title: "Battery", icon: "🔋" },
-       { title: "Car Wash", displayTitle: "Wash", icon: "🚿" }
+        { title: "Car Wash", displayTitle: "Wash", icon: "🚿" },
+        { title: "Parts Replaced", icon: "🔩" }
     ];
 
     vehicleCare.innerHTML = careItems.map(item => `
@@ -3325,6 +3660,11 @@ vehicleCare.addEventListener("click", function(event) {
     showTyreHistoryPage();
 } else if (title === "Battery") {
     showBatteryDetailsPage();
+} else if (title === "Parts Replaced") {
+    showOnlyPage(
+        document.getElementById("partsReplacedPage")
+    );
+    showPartsReplacedDetailsPage();
 }
 
 });
@@ -3711,6 +4051,345 @@ document.getElementById("backFromOilChangeDetails")
     .addEventListener("click", () => {
         showDashboard(activeVehicleId);
     });
+
+
+
+
+
+
+
+
+
+
+
+
+// PARTS REPLACED BUTTONS AND Form
+
+
+document.getElementById("partsReplacedForm")
+    .addEventListener("submit", savePartsReplaced);
+
+
+
+
+
+document.getElementById("addAnotherPartButton")
+    .addEventListener("click", () => {
+        const container = document.getElementById(
+            "partsReplacedItemsContainer"
+        );
+
+        const row = document.createElement("div");
+        row.className = "parts-replaced-item-row";
+
+        row.innerHTML = `
+            <hr>
+
+            <label>Part Name</label>
+            <input type="text"
+                class="additional-part-name"
+                placeholder="e.g. Brake Pad"
+                required>
+
+            <label>Amount (₹)</label>
+            <input type="number"
+                class="additional-part-amount"
+                min="0.01"
+                step="0.01"
+                required>
+
+                      <button type="button" class="remove-part-row">
+                Remove
+            </button>
+        `;
+
+        container.appendChild(row);
+    });
+
+
+
+
+document.getElementById("partsReplacedItemsContainer")
+    .addEventListener("click", event => {
+        const button = event.target.closest(".remove-part-row");
+
+        if (!button) return;
+
+if (!confirm("Are you sure you want to delete this part?")) {
+    return;
+}
+
+        if (button.id === "firstPartRemoveButton") {
+            const rows = document.querySelectorAll(
+                "#partsReplacedItemsContainer .parts-replaced-item-row"
+            );
+
+            if (rows.length > 0) {
+                const firstRow = rows[0];
+
+                document.getElementById("partsReplacedName").value =
+                    firstRow.querySelector(".additional-part-name").value;
+
+                document.getElementById("partsReplacedAmount").value =
+                    firstRow.querySelector(".additional-part-amount").value;
+
+                firstRow.remove();
+            } else {
+                document.getElementById("partsReplacedName").value = "";
+                document.getElementById("partsReplacedAmount").value = "";
+            }
+
+            button.hidden = true;
+            return;
+        }
+
+        const row = button.closest(".parts-replaced-item-row");
+
+        if (row) row.remove();
+    });
+
+
+
+
+document.getElementById("partsReplacedHistoryContent")
+    .addEventListener("click", function(event) {
+        const button = event.target.closest(
+            ".edit-parts-replaced-group, .delete-parts-replaced-group, .edit-parts-replaced-record, .delete-parts-replaced-record"
+        );
+
+        if (!button) return;
+
+        const vehicle = vehicles.find(
+            item => item.id === activeVehicleId
+        );
+
+        if (!vehicle) return;
+
+        if (!Array.isArray(vehicle.partsReplacedHistory)) {
+            vehicle.partsReplacedHistory = [];
+        }
+
+        const history = vehicle.partsReplacedHistory;
+
+        // DELETE ALL PARTS FOR ONE DATE
+        if (button.classList.contains("delete-parts-replaced-group")) {
+            const date = button.dataset.date;
+
+            if (!confirm("Delete all parts recorded on this date?")) {
+                return;
+            }
+
+            vehicle.partsReplacedHistory = history.filter(
+                part => part.date !== date
+            );
+
+            saveVehicles();
+            showPartsReplacedDetailsPage();
+            updateTotalVehicleExpensePage();
+            return;
+        }
+
+        
+        // EDIT ALL PARTS FOR ONE DATE
+        if (button.classList.contains("edit-parts-replaced-group")) {
+            const date = button.dataset.date;
+
+            const partsForDate = history.filter(
+                part => part.date === date
+            );
+
+            if (partsForDate.length === 0) {
+                alert("No parts were found for this date.");
+                return;
+            }
+
+            editingPartsReplacedDate = date;
+            editingPartsReplacedIndex = null;
+
+            const form = document.getElementById("partsReplacedForm");
+            const container = document.getElementById(
+                "partsReplacedItemsContainer"
+            );
+
+            form.reset();
+
+            // Keep the original first Part Name and Amount fields.
+            container.querySelectorAll(".parts-replaced-item-row")
+                .forEach(row => row.remove());
+
+            document.getElementById("partsReplacedDate").value = date;
+            document.getElementById("partsReplacedName").value =
+                partsForDate[0].name;
+            document.getElementById("partsReplacedAmount").value =
+                partsForDate[0].amount;
+
+            // Fill the remaining parts as additional rows.
+            
+            partsForDate.slice(1).forEach(part => {
+                const row = document.createElement("div");
+                row.className = "parts-replaced-item-row";
+
+                row.innerHTML = `
+                    <hr>
+
+                    <label>Part Name</label>
+                    <input type="text"
+                        class="additional-part-name"
+                        placeholder="e.g. Brake Pad"
+                        required>
+
+                    <label>Amount (₹)</label>
+                    <input type="number"
+                        class="additional-part-amount"
+                        min="0.01"
+                        step="0.01"
+                        required>
+
+                    <button type="button" class="remove-part-row">
+                        Remove
+                    </button>
+                `;
+
+                row.querySelector(".additional-part-name").value =
+                    part.name;
+
+                row.querySelector(".additional-part-amount").value =
+                    part.amount;
+
+                container.appendChild(row);
+            });
+
+            // Show Remove for the first part during group editing.
+            let firstPartRemove = document.getElementById(
+                "firstPartRemoveButton"
+            );
+
+            if (!firstPartRemove) {
+                firstPartRemove = document.createElement("button");
+                firstPartRemove.type = "button";
+                firstPartRemove.id = "firstPartRemoveButton";
+                firstPartRemove.textContent = "Remove";
+                firstPartRemove.className = "remove-part-row";
+
+                document.getElementById("partsReplacedAmount")
+                    .insertAdjacentElement("afterend", firstPartRemove);
+            }
+
+            firstPartRemove.hidden = false;
+
+
+            document.getElementById("partsReplacedFormHeading").textContent =
+                "Edit Parts";
+
+            document.getElementById("partsReplacedFormSection").hidden = false;
+            document.getElementById("partsReplacedHistorySection").hidden = true;
+
+            document.getElementById("addAnotherPartButton").hidden = false;
+
+            document.getElementById("partsReplacedDate").scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+            return;
+        }
+
+
+        // EXISTING INDIVIDUAL-RECORD ACTIONS
+        const index = Number(button.dataset.index);
+        const part = history[index];
+
+        if (!part) return;
+
+        if (button.classList.contains("delete-parts-replaced-record")) {
+            if (!confirm("Delete this parts record permanently?")) {
+                return;
+            }
+
+            history.splice(index, 1);
+            saveVehicles();
+            showPartsReplacedDetailsPage();
+            updateTotalVehicleExpensePage();
+            return;
+        }
+
+        if (button.classList.contains("edit-parts-replaced-record")) {
+            editingPartsReplacedIndex = index;
+
+            document.getElementById("partsReplacedDate").value = part.date;
+            document.getElementById("partsReplacedName").value = part.name;
+            document.getElementById("partsReplacedAmount").value = part.amount;
+
+            document.getElementById("partsReplacedFormHeading").textContent =
+                "Edit Part";
+
+            document.getElementById("partsReplacedFormSection").hidden = false;
+
+            document.getElementById("partsReplacedDate").scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        }
+    });
+
+
+
+
+
+document.getElementById("addPartsReplacedDetails")
+    .addEventListener("click", () => {
+        editingPartsReplacedIndex = null;
+
+        document.getElementById("partsReplacedForm").reset();
+
+        document.getElementById("partsReplacedFormHeading").textContent =
+            "Add Part";
+
+        document.getElementById("partsReplacedFormSection").hidden = false;
+
+document.getElementById("partsReplacedHistorySection").hidden = true;
+
+
+
+
+
+});
+
+
+
+
+document.getElementById("cancelPartsReplaced")
+    .addEventListener("click", () => {
+        document.getElementById("partsReplacedFormSection").hidden = true;
+
+document.getElementById("partsReplacedHistorySection").hidden = false;
+
+        document.getElementById("partsReplacedForm").reset();
+
+        document.getElementById("partsReplacedFormHeading").textContent =
+            "Add Part";
+
+        editingPartsReplacedIndex = null;
+    });
+
+
+
+
+document.getElementById("partsReplacedDate").focus();
+
+
+
+document.getElementById("backFromPartsReplaced")
+    .addEventListener("click", () => {
+        showDashboard(activeVehicleId);
+    
+});
+
+
+
+
+
+
 
 
 

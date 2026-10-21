@@ -253,6 +253,117 @@
 
 
 
+
+
+<!-- PARTS REPLACED PAGE -->
+
+<section id="partsReplacedPage" class="hidden">
+
+    <button type="button" id="backFromPartsReplaced"
+
+        class="secondary-button">
+
+        ← Back to Vehicle Care
+
+    </button>
+
+    <div class="vehicle-card care-details-page">
+
+        <div class="insurance-details-header">
+
+            <h2>🔩 Parts Replaced</h2>
+
+        </div>
+
+        <div id="partsReplacedFormSection" hidden>
+
+            <h3 id="partsReplacedFormHeading">Add Part</h3>
+
+            <form id="partsReplacedForm">
+
+                <label for="partsReplacedDate">Date</label>
+
+                <input type="date" id="partsReplacedDate" required>
+
+             <div id="partsReplacedItemsContainer">
+
+    <label for="partsReplacedName">Part Name</label>
+
+    <input type="text" id="partsReplacedName"
+
+        placeholder="e.g. Wiper Blade" required>
+
+    <label for="partsReplacedAmount">Amount (₹)</label>
+
+    <input type="number" id="partsReplacedAmount"
+
+        min="0.01" step="0.01" required>
+
+</div>
+
+<button type="button" id="addAnotherPartButton" hidden>
+
+    + Add Another Part
+
+</button>
+
+<div id="partsReplacedGroupTotal" hidden></div>
+                <div class="form-actions">
+
+                    <button type="submit" id="savePartsReplaced">
+
+                        Save
+
+                    </button>
+
+                    <button type="button" id="cancelPartsReplaced"
+
+                        class="secondary-button">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+      <div id="partsReplacedHistorySection">
+
+    <div class="insurance-details-header">
+
+        <h2>Saved Parts History</h2>
+
+        <button type="button" id="addPartsReplacedDetails"
+
+            class="edit-icon-btn">
+
+            + Add Details
+
+        </button>
+
+    </div>
+
+    <div id="partsReplacedHistoryContent"></div>
+
+</div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
 <!-- INSURANCE DETAILS VIEW -->
 <section id="insuranceDetailsPage" class="hidden">
 
@@ -741,6 +852,20 @@
     </div>
 
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

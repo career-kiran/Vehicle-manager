@@ -1765,3 +1765,87 @@ background: transparent;
 
 
 
+
+
+
+
+/* PARTS REPLACED - EDIT AND DELETE BUTTONS */
+#partsReplacedHistoryContent .record-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#partsReplacedHistoryContent .record-header h3 {
+    margin-right: auto;
+}
+
+#partsReplacedHistoryContent .record-header > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+#partsReplacedHistoryContent .edit-parts-replaced-group,
+#partsReplacedHistoryContent .delete-parts-replaced-group {
+    display: inline-block;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+#partsReplacedHistoryContent .edit-parts-replaced-group {
+    color: #2563eb;
+}
+
+#partsReplacedHistoryContent .delete-parts-replaced-group {
+    color: #dc2626;
+}
+
+#partsReplacedHistoryContent .delete-parts-replaced-group:hover,
+#partsReplacedHistoryContent .delete-parts-replaced-group:focus,
+#partsReplacedHistoryContent .delete-parts-replaced-group:active {
+    color: #dc2626;
+    background: transparent;
+}
+
+
+
+
+
+
+/* PARTS REPLACED - REMOVE BUTTON */
+#partsReplacedForm .remove-part-row,
+#partsReplacedForm #firstPartRemoveButton {
+    display: block;
+    width: auto;
+    padding: 0;
+    margin: 8px 0 12px auto;
+    background: transparent;
+    border: none;
+    color: #dc2626;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#partsReplacedForm .remove-part-row:hover,
+#partsReplacedForm .remove-part-row:focus,
+#partsReplacedForm .remove-part-row:active,
+#partsReplacedForm #firstPartRemoveButton:hover,
+#partsReplacedForm #firstPartRemoveButton:focus,
+#partsReplacedForm #firstPartRemoveButton:active {
+    background: transparent;
+    color: #dc2626;
+}
+
+
+
