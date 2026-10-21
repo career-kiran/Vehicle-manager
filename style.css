@@ -2366,3 +2366,27 @@ background: transparent;
         margin: 0 auto !important;
     }
 }
+
+
+
+
+
+
+/* Match desktop Vehicle Care layout on mobile */
+@media (max-width: 600px) {
+  #vehicleCare {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  #vehicleCare .care-item {
+    min-width: 0;
+    padding: 12px 10px !important;
+    gap: 8px !important;
+  }
+
+  #vehicleCare .care-item span {
+    overflow-wrap: anywhere;
+  }
+}
