@@ -2372,24 +2372,51 @@ background: transparent;
 
 
 
-/* Match desktop Vehicle Care layout on mobile */
+
+/* Responsive Vehicle Care cards on mobile */
 @media (max-width: 600px) {
   #vehicleCare {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 10px !important;
+    gap: clamp(8px, 2.5vw, 12px) !important;
   }
 
   #vehicleCare .care-item {
+    display: flex;
+    align-items: center;
     min-width: 0;
-    padding: 12px 10px !important;
-    gap: 8px !important;
+    gap: clamp(5px, 2vw, 10px) !important;
+    padding: clamp(8px, 2.8vw, 14px) !important;
   }
 
   #vehicleCare .care-item span {
-    overflow-wrap: anywhere;
+    flex: 1;
+    min-width: 0;
+    font-size: clamp(12px, 3.5vw, 15px);
+    line-height: 1.35;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  #vehicleCare .care-item strong {
+    min-width: 0;
+    overflow-wrap: normal;
+    word-break: normal;
   }
 }
+
+@media (max-width: 360px) {
+  #vehicleCare .care-item {
+    gap: 5px !important;
+    padding: 8px !important;
+  }
+
+  #vehicleCare .care-item span {
+    font-size: 12px;
+  }
+}
+
 
 
 
