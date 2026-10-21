@@ -1924,6 +1924,21 @@ background: transparent;
         white-space: normal;
     }
 
+
+
+    #addVehicleBtn {
+        width: auto;
+        min-width: 0;
+        min-height: 40px;
+        padding: 8px 20px;
+        margin: 8px auto;
+        font-size: 14px;
+        display: block;
+    }
+
+
+
+
     input,
     select,
     textarea {
