@@ -2474,3 +2474,30 @@ background: transparent;
     margin-left: auto !important;
   }
 }
+
+
+
+
+
+
+
+
+/* SAVED HISTORY PAGE BACKGROUND */
+#insuranceDetailsPage,
+#pollutionDetailsPage,
+#serviceDetailsPage,
+#oilChangeDetailsPage,
+#alignmentDetailsPage,
+#tyreHistoryPage,
+#savedFuelHistoryPage,
+#fuelMonthlyUsagePage,
+#batteryDetailsPage,
+#carWashDetailsPage,
+#partsReplacedPage,
+#basicDetailsPage {
+    background-color: #C3D2C3;
+    padding: 16px;
+    border-radius: 16px;
+}
+
+
