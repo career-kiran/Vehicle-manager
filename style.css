@@ -2310,10 +2310,17 @@ background: transparent;
         padding: 14px;
     }
 
-    .home-detail-row {
-        grid-template-columns: minmax(78px, 0.8fr) 7px minmax(0, 1.5fr);
-        font-size: 15px;
-    }
+ .home-detail-row {
+    display: grid;
+    grid-template-columns: minmax(105px, 0.9fr) 8px minmax(0, 1.5fr);
+    gap: 5px;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 15px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
 
     #tyrePositions,
     .reminder-options {
