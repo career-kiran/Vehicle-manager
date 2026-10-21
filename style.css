@@ -2061,7 +2061,7 @@ background: transparent;
 
     .detail-label {
         color: var(--muted-color);
-        font-size: 13px;
+        font-size: 15px;
     }
 
     .detail-value {
@@ -2388,5 +2388,23 @@ background: transparent;
 
   #vehicleCare .care-item span {
     overflow-wrap: anywhere;
+  }
+}
+
+
+
+
+
+
+/* Reduce only the Back to Vehicle Care button on mobile */
+@media (max-width: 768px) {
+  .care-details-page > button {
+    width: auto;
+    max-width: 260px;
+    min-height: 38px;
+    padding: 7px 14px;
+    margin: 8px auto 14px;
+    display: block;
+    font-size: 14px;
   }
 }
