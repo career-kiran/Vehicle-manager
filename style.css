@@ -1849,3 +1849,472 @@ background: transparent;
 
 
 
+
+/* =========================================================
+   GAIVO MOBILE-FRIENDLY LAYOUT
+   Appended overrides: desktop styling remains unchanged.
+   ========================================================= */
+
+@media (max-width: 600px) {
+    html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+    body {
+        padding: 10px;
+        overflow-x: hidden;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    h1 {
+        font-size: 24px;
+        line-height: 1.25;
+        margin: 4px 0 16px;
+    }
+
+    h2 {
+        font-size: 19px;
+        line-height: 1.35;
+        margin-bottom: 14px;
+    }
+
+    h3 {
+        line-height: 1.35;
+        overflow-wrap: anywhere;
+    }
+
+    .vehicle-card,
+    .care-details-page,
+    .insurance-details-card {
+        padding: 16px;
+        margin-bottom: 14px;
+        border-radius: 14px;
+    }
+
+    .care-details-page {
+        margin-top: 12px;
+    }
+
+    .home-page {
+        padding: 12px;
+        border-radius: 14px;
+    }
+
+    .home-subtitle {
+        font-size: 14px;
+        margin: 8px 0 18px;
+        line-height: 1.45;
+    }
+
+    /* Touch-friendly controls. More specific special buttons keep their styling. */
+    button {
+        width: 100%;
+        max-width: 100%;
+        min-height: 44px;
+        padding: 10px 14px;
+        margin: 8px 0;
+        font-size: 15px;
+        line-height: 1.3;
+        white-space: normal;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        min-height: 44px;
+        padding: 11px 12px;
+        font-size: 16px;
+    }
+
+    textarea {
+        min-height: 96px;
+        resize: vertical;
+    }
+
+    label {
+        margin: 13px 0 6px;
+        line-height: 1.4;
+        font-size: 14px;
+    }
+
+    .form-actions,
+    .form-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .form-actions button,
+    .form-buttons button {
+        width: 100%;
+        max-width: 100%;
+        min-height: 44px;
+        margin: 4px 0;
+    }
+
+    .form-actions button[type="submit"] {
+        margin-top: 8px;
+    }
+
+    .form-actions button#cancelAdd {
+        margin-top: 0;
+    }
+
+    #backToVehicles {
+        width: auto;
+        max-width: 100%;
+        min-height: 42px;
+        margin: 0 0 12px;
+    }
+
+    .vehicle-card-header,
+    .insurance-details-header,
+    .alignment-history-record .insurance-details-header,
+    .tyre-history-record .insurance-details-header {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .insurance-details-header h2,
+    .alignment-history-record .insurance-details-header h3,
+    .tyre-history-record .insurance-details-header h3 {
+        flex: 1 1 160px;
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .insurance-details-header .edit-icon-btn,
+    .vehicle-card-header .delete-vehicle-btn,
+    .edit-icon-btn,
+    .delete-vehicle-btn {
+        width: auto;
+        min-height: 40px;
+        max-width: 100%;
+        margin: 0;
+        padding: 8px 10px;
+        flex-shrink: 0;
+    }
+
+    .vehicle-summary-header {
+        top: 12px;
+        right: 12px;
+    }
+
+    .vehicle-summary-header .edit-icon-btn {
+        min-height: 36px;
+    }
+
+    .care-title {
+        font-size: 20px;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
+    }
+
+    .care-details {
+        line-height: 1.6;
+    }
+
+    .detail-row,
+    .insurance-details-card .detail-row,
+    #monthlyFuelHistoryContent .detail-row,
+    #savedFuelHistoryContent .detail-row,
+    #insuranceDetailsContent .detail-row,
+    #oilChangeDetailsContent .detail-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 3px;
+        margin-bottom: 12px;
+        line-height: 1.5;
+    }
+
+    .detail-colon {
+        display: none;
+    }
+
+    .detail-label {
+        color: var(--muted-color);
+        font-size: 13px;
+    }
+
+    .detail-value {
+        font-size: 15px;
+        overflow-wrap: anywhere;
+    }
+
+    .home-detail-row {
+        display: grid;
+        grid-template-columns: minmax(88px, 0.8fr) 8px minmax(0, 1.5fr);
+        gap: 5px;
+        align-items: start;
+        font-size: 14px;
+        overflow-wrap: anywhere;
+    }
+
+    #vehicleCare {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    #vehicleCare .care-item {
+        padding: 13px 11px;
+        min-width: 0;
+        border-radius: 12px;
+    }
+
+    #vehicleCare .care-card-title {
+        font-size: 15px;
+        line-height: 1.35;
+        margin-bottom: 8px;
+    }
+
+    #vehicleCare .care-description {
+        font-size: 12px;
+        line-height: 1.45;
+        padding-bottom: 30px;
+        overflow-wrap: anywhere;
+    }
+
+    #vehicleCare .add-details {
+        right: 9px;
+        bottom: 9px;
+        font-size: 12px;
+        padding: 4px 0;
+        min-height: 30px;
+    }
+
+    .fuel-price-row {
+        flex-wrap: wrap;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .fuel-price-row .compact-fuel-price {
+        flex: 1 1 100%;
+        width: 100%;
+        margin: 6px 0;
+        padding: 13px;
+        text-align: left;
+    }
+
+    .fuel-price-row button,
+    .fuel-history-actions button {
+        width: 100%;
+        margin: 4px 0;
+    }
+
+    .fuel-history-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+    }
+
+    .expense-filters,
+    #expensePieChartSection {
+        padding: 13px;
+    }
+
+    #expensePieChart svg {
+        display: block;
+        width: min(100%, 260px);
+        height: auto;
+        margin: 0 auto;
+    }
+
+    #expensePieLegend .expense-pie-legend-item {
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    .expense-pie-legend-label {
+        min-width: 0;
+        overflow-wrap: anywhere;
+        font-size: 13px;
+    }
+
+    #expenseCategoryBreakdown .vehicle-card {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 13px;
+    }
+
+    #expenseCategoryBreakdown .vehicle-card strong,
+    #expenseCategoryBreakdown .vehicle-card span {
+        width: auto;
+        overflow-wrap: anywhere;
+    }
+
+    #monthlyFuelHistoryContent .tyre-history-record,
+    #savedFuelHistoryContent .tyre-history-record,
+    #insuranceDetailsContent .alignment-history-record,
+    #oilChangeDetailsContent .alignment-history-record,
+    #pollutionDetailsContent .pollution-history-record,
+    #partsReplacedHistoryContent .tyre-history-record {
+        padding: 15px;
+        margin: 12px 0;
+        border-radius: 13px;
+        line-height: 1.6;
+    }
+
+    #monthlyFuelHistoryContent .tyre-history-record h3,
+    #savedFuelHistoryContent .record-header h3 {
+        margin-bottom: 12px;
+        overflow-wrap: anywhere;
+    }
+
+    #savedFuelHistoryContent .record-header,
+    #partsReplacedHistoryContent .record-header {
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    #savedFuelHistoryContent .record-header > div,
+    #partsReplacedHistoryContent .record-header > div {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    #tyrePositions,
+    .reminder-options {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    #tyrePositions label,
+    .reminder-options label {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        min-width: 0;
+        margin: 0;
+        padding: 10px;
+        border: 1px solid var(--card-border);
+        border-radius: 9px;
+        font-weight: 500;
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+    }
+
+    #tyrePositions input[type="checkbox"],
+    .reminder-options input[type="checkbox"] {
+        display: inline-block;
+        width: 18px;
+        min-width: 18px;
+        height: 18px;
+        min-height: 18px;
+        margin: 1px 0 0;
+        padding: 0;
+    }
+
+    .important-dates-panel,
+    .total-expense-panel {
+        padding: 15px;
+    }
+
+    .total-expense-text {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .total-expense-text strong {
+        font-size: 15px;
+    }
+
+    .total-expense-text small {
+        display: block;
+        line-height: 1.4;
+        margin: 5px 0;
+    }
+
+    .total-expense-text span {
+        display: block;
+        font-size: 21px;
+        margin-top: 8px;
+    }
+
+    .total-expense-arrow,
+    .important-dates-arrow {
+        flex-shrink: 0;
+    }
+
+    /* Keep compact text-action buttons compact rather than full-width. */
+    .edit-fuel-record,
+    .delete-fuel-record,
+    .delete-tyre-record,
+    .delete-alignment-record,
+    .delete-insurance-record,
+    .delete-oil-change-record,
+    .delete-pollution-record,
+    .edit-parts-replaced-group,
+    .delete-parts-replaced-group,
+    #partsReplacedForm .remove-part-row,
+    #partsReplacedForm #firstPartRemoveButton {
+        width: auto;
+        min-height: 36px;
+        padding: 5px 2px;
+        margin: 0;
+    }
+
+    hr {
+        margin: 16px 0;
+    }
+}
+
+@media (max-width: 380px) {
+    body {
+        padding: 7px;
+    }
+
+    .vehicle-card,
+    .care-details-page,
+    .insurance-details-card {
+        padding: 12px;
+    }
+
+    #vehicleCare {
+        grid-template-columns: 1fr;
+    }
+
+    #vehicleCare .care-item {
+        padding: 14px;
+    }
+
+    .home-detail-row {
+        grid-template-columns: minmax(78px, 0.8fr) 7px minmax(0, 1.5fr);
+        font-size: 13px;
+    }
+
+    #tyrePositions,
+    .reminder-options {
+        grid-template-columns: 1fr;
+    }
+
+    .insurance-details-header h2 {
+        flex-basis: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
