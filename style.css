@@ -2009,17 +2009,20 @@ background: transparent;
         overflow-wrap: anywhere;
     }
 
-    .insurance-details-header .edit-icon-btn,
-    .vehicle-card-header .delete-vehicle-btn,
-    .edit-icon-btn,
-    .delete-vehicle-btn {
-        width: auto;
-        min-height: 40px;
-        max-width: 100%;
-        margin: 0;
-        padding: 8px 10px;
-        flex-shrink: 0;
-    }
+  .insurance-details-header .edit-icon-btn,
+.vehicle-card-header .delete-vehicle-btn,
+.edit-icon-btn,
+.delete-vehicle-btn {
+    width: auto;
+    min-width: 0;
+    min-height: 32px;
+    max-width: 100%;
+    margin: 0;
+    padding: 5px 9px;
+    font-size: 13px;
+    line-height: 1.2;
+    flex-shrink: 0;
+}
 
     .vehicle-summary-header {
         top: 12px;
@@ -2309,7 +2312,7 @@ background: transparent;
 
     .home-detail-row {
         grid-template-columns: minmax(78px, 0.8fr) 7px minmax(0, 1.5fr);
-        font-size: 13px;
+        font-size: 15px;
     }
 
     #tyrePositions,
@@ -2331,4 +2334,10 @@ background: transparent;
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
     }
+}
+
+
+
+#vehicleList .vehicle-card-footer .vehicle-open {
+    font-size: 14px;
 }
