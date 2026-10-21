@@ -2421,6 +2421,27 @@ background: transparent;
 
 
 
+/* Keep Vehicle Care icon backgrounds square on mobile */
+@media (max-width: 600px) {
+  #vehicleCare .care-item {
+    align-items: center;
+  }
+
+  #vehicleCare .care-item .care-icon {
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+    flex: 0 0 56px !important;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+
+
+
+
+
+
 
 
 /* Reduce only the Back to Vehicle Care button on mobile */
