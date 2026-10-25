@@ -54,6 +54,7 @@ h2 {
     margin: 0 0 18px;
     font-size: 20px;
     color: var(--heading-color);
+    
 }
 
 /* CARDS */
@@ -1281,11 +1282,21 @@ background: transparent;
 }
 
 
+#vehicleCare .care-icon-car-wash {
+    background: #59612B;
+}
+
+
+#vehicleCare .care-icon-parts-replaced {
+    background: #7B3F76;
+}
+
+
 
 /* VEHICLE DASHBOARD BACKGROUND */
 .dashboard-background {
     width: 100%;
-    background: #2C4A7C;
+    background: #243653;
     box-sizing: border-box;
     padding: 16px;
     border-radius: 16px;
@@ -1326,6 +1337,10 @@ background: transparent;
     font-weight: 600;
     line-height: 1;
 }
+
+
+
+
 
 
 
@@ -1436,7 +1451,7 @@ background: transparent;
 
 .total-expense-text strong {
     font-size: 20px;
-    color: var(--heading-color);
+    color: #2563eb;
 }
 
 .total-expense-text small {
@@ -1445,9 +1460,15 @@ background: transparent;
 }
 
 #totalVehicleExpenseAmount {
+    display: inline-block;
     font-size: 22px;
     font-weight: 700;
     color: var(--heading-color);
+    padding: 10px 16px;
+    margin-top: 6px;
+    background: #EAF3FF;
+    border: 1px solid #B8D4F5;
+    border-radius: 10px;
 }
 
 .total-expense-arrow {
@@ -1496,7 +1517,7 @@ background: transparent;
 
 /* TOTAL VEHICLE EXPENSE CARD */
 .total-expense-panel {
-    background: #FFFCED;
+    background: #ffffff;
 }
 
 

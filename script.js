@@ -838,6 +838,7 @@ function showDashboard(vehicleId) {
 
     activeVehicleId = vehicleId;
 
+
     showOnlyPage(vehicleDashboard);
 
     vehicleSummary.innerHTML = `
@@ -3732,6 +3733,8 @@ document.getElementById("pollutionForm")
     .addEventListener("submit", savePollution);
 
 
+
+
 document.getElementById("serviceForm")
     .addEventListener("submit", saveService);
 
@@ -5504,6 +5507,46 @@ const totalLitres = records.reduce(
     `
     : "<p>No fuel records found for these dates.</p>";
 }
+
+
+
+
+
+// GLOBAL ENTER KEY: MOVE TO NEXT FIELD IN ALL FORMS
+document.addEventListener("keydown", function(event) {
+    if (event.key !== "Enter") return;
+
+    const field = event.target;
+
+    if (
+        !field.matches("input, select") ||
+        field.tagName === "TEXTAREA" ||
+        ["button", "submit", "reset", "checkbox", "radio", "file"].includes(field.type)
+    ) {
+        return;
+    }
+
+    const form = field.closest("form");
+    if (!form) return;
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    const fields = Array.from(
+        form.querySelectorAll("input, select, textarea")
+    ).filter(el =>
+        !el.disabled &&
+        !el.readOnly &&
+        el.type !== "hidden" &&
+        el.offsetParent !== null
+    );
+
+    const index = fields.indexOf(field);
+
+    if (index >= 0 && index < fields.length - 1) {
+        fields[index + 1].focus();
+    }
+}, true);
 
 
 
