@@ -2501,3 +2501,31 @@ background: transparent;
 }
 
 
+
+
+/* Fix Vehicle Care arrow alignment on mobile */
+@media (max-width: 600px) {
+    #vehicleCare .care-card-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 8px;
+    }
+
+    #vehicleCare .care-card-title .care-icon {
+        flex: 0 0 45px !important;
+    }
+
+    #vehicleCare .care-card-title .care-name {
+        flex: 1 1 auto !important;
+        min-width: 0;
+    }
+
+    #vehicleCare .care-card-title .care-arrow {
+        flex: 0 0 auto !important;
+        margin-left: auto;
+        font-size: 24px;
+    }
+}
+
