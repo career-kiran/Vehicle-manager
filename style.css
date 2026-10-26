@@ -2566,8 +2566,7 @@ h2:has(+ #vehicleCare) {
 
 /* Centre Vehicle Care icons vertically in each card */
 #vehicleCare .care-item {
-    display: flex;
-    align-items: center;
+    display: block;
 }
 
 #vehicleCare .care-card-title {
