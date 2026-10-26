@@ -2469,12 +2469,13 @@ background: transparent;
 @media (max-width: 768px) {
   .care-details-page > button {
     width: auto;
-    max-width: 260px;
+    max-width: 220px;
     min-height: 38px;
     padding: 7px 14px;
     margin: 8px auto 14px;
     display: block;
     font-size: 14px;
+    white-space: normal;
   }
 }
 
