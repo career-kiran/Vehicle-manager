@@ -2478,7 +2478,8 @@ background: transparent;
 @media (max-width: 768px) {
 
     button[id^="backFrom"],
-    #backToVehicleCare {
+#backToVehicleCare,
+#backToVehicleCareFromBattery {
 
         width: 145px !important;
         max-width: 145px !important;
