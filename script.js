@@ -2443,7 +2443,7 @@ function showOilChangeDetailsPage() {
         return `
             <div class="alignment-history-record">
                 <div class="insurance-details-header">
-                   <h3> Oil Change Record ${displayIndex + 1}</h3>
+                   <h3> Oil Change  ${displayIndex + 1}</h3>
 
                    <div>
     <button
@@ -2808,7 +2808,7 @@ function showBatteryDetailsPage() {
             <div class="alignment-history-record">
                
 <div class="insurance-details-header">
-    <h3>Battery Record ${displayIndex + 1}</h3>
+    <h3>Battery ${displayIndex + 1}</h3>
 
     <div>
         <button
@@ -3526,9 +3526,10 @@ function showInsurancePage() {
 
     showOnlyPage(insurancePage);
 
-    document.getElementById(
-        "backFromInsurance"
-    ).style.display = "none";
+document.getElementById(
+    "backFromInsurance"
+).style.display = "none";
+
 }
 
 
