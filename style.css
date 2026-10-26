@@ -2189,16 +2189,22 @@ background: transparent;
         text-align: left;
     }
 
-    .fuel-price-row button,
-    .fuel-history-actions button {
-        width: 100%;
-        margin: 4px 0;
-    }
+   .fuel-price-row button {
+    width: 100%;
+    margin: 4px 0;
+}
+
+.fuel-history-actions button {
+    width: 48%;
+    max-width: 48%;
+    margin: 4px 0;
+}
+
 
     .fuel-history-actions {
         flex-direction: column;
         align-items: stretch;
-        gap: 6px;
+        gap: 10px;
     }
 
     .expense-filters,
@@ -2677,11 +2683,13 @@ h2:has(+ #vehicleCare) {
         border-radius: 9px !important;
     }
 
-    #fuelHistoryPage #saveFuelEntry,
-    #fuelHistoryPage #cancelFuelEdit {
-        display: block;
-        margin: 10px auto !important;
-    }
+  #fuelHistoryPage #saveFuelEntry,
+#fuelHistoryPage #cancelFuelEdit {
+    display: inline-block;
+    width: 48% !important;
+    max-width: 48% !important;
+    margin: 10px 0 !important;
+}
 
     #fuelHistoryPage .fuel-history-actions {
         display: flex;
