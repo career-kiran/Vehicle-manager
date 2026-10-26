@@ -2571,7 +2571,6 @@ h2:has(+ #vehicleCare) {
     display: flex;
     align-items: center;
     width: 100%;
-    flex: 1;
     margin-bottom: 0;
 }
 
