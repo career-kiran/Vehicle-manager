@@ -2633,6 +2633,17 @@ h2:has(+ #vehicleCare) {
 
 
 
+/* Centre Update Fuel Price on mobile */
+@media (max-width: 600px) {
+    #fuelHistoryPage #updateFuelPrice {
+        display: block;
+        margin: 0 auto 20px !important;
+    }
+}
+
+
+
+
 
 
 
