@@ -1296,7 +1296,7 @@ background: transparent;
 /* VEHICLE DASHBOARD BACKGROUND */
 .dashboard-background {
     width: 100%;
-    background: #243653;
+    background: #D1DDD4;
     box-sizing: border-box;
     padding: 16px;
     border-radius: 16px;
@@ -2548,5 +2548,14 @@ background: transparent;
         margin-left: auto;
         font-size: 24px;
     }
+}
+
+
+
+
+
+/* Vehicle Care heading only */
+h2:has(+ #vehicleCare) {
+    color: #;
 }
 
