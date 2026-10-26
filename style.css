@@ -2788,6 +2788,7 @@ h2:has(+ #vehicleCare) {
        and Edit/Delete buttons on the right */
 
     #batteryDetailsContent .alignment-history-record .insurance-details-header,
+#serviceDetailsContent .alignment-history-record .insurance-details-header,
     #alignmentDetailsContent .alignment-history-record .insurance-details-header,
     #tyreHistoryContent .tyre-history-record .insurance-details-header,
     #carWashDetailsContent .alignment-history-record .insurance-details-header,
@@ -2805,6 +2806,7 @@ h2:has(+ #vehicleCare) {
     /* Let long titles use available space */
 
     #batteryDetailsContent .alignment-history-record .insurance-details-header h3,
+#serviceDetailsContent .alignment-history-record .insurance-details-header h3,
     #alignmentDetailsContent .alignment-history-record .insurance-details-header h3,
     #tyreHistoryContent .tyre-history-record .insurance-details-header h3,
     #carWashDetailsContent .alignment-history-record .insurance-details-header h3,
@@ -2820,6 +2822,7 @@ h2:has(+ #vehicleCare) {
     /* Keep grouped Edit/Delete buttons together */
 
     #batteryDetailsContent .alignment-history-record .insurance-details-header > div,
+#serviceDetailsContent .alignment-history-record .insurance-details-header > div,
     #carWashDetailsContent .alignment-history-record .insurance-details-header > div,
     #savedFuelHistoryContent .tyre-history-record .record-header > div,
     #partsReplacedHistoryContent .tyre-history-record .record-header > div {
@@ -2835,6 +2838,7 @@ h2:has(+ #vehicleCare) {
     /* Keep action buttons compact */
 
     #batteryDetailsContent .alignment-history-record .insurance-details-header button,
+#serviceDetailsContent .alignment-history-record .insurance-details-header button,
     #alignmentDetailsContent .alignment-history-record .insurance-details-header button,
     #tyreHistoryContent .tyre-history-record .insurance-details-header button,
     #carWashDetailsContent .alignment-history-record .insurance-details-header button,
