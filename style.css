@@ -1945,20 +1945,6 @@ background: transparent;
         white-space: normal;
     }
 
-
-
- #addVehicleBtn {
-    display: block;
-    width: 160px;
-    max-width: 100%;
-    min-height: 40px;
-    padding: 8px 12px;
-    margin: 8px auto;
-    font-size: 14px;
-}
-
-
-
     input,
     select,
     textarea {
@@ -2013,35 +1999,31 @@ background: transparent;
         margin: 0 0 12px;
     }
 
- .vehicle-card-header,
-.insurance-details-header {
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 10px;
-}
+    /* Vehicle and page headers can wrap when the screen is narrow. */
+    .vehicle-card-header {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
 
-
-
+    /* Page-level heading: title and Add Details button. */
     .insurance-details-header h2 {
-        flex: 1 1 160px;
+        flex: 1 1 auto;
         min-width: 0;
         overflow-wrap: anywhere;
     }
 
-  .insurance-details-header .edit-icon-btn,
-.vehicle-card-header .delete-vehicle-btn,
-.edit-icon-btn,
-.delete-vehicle-btn {
-    width: auto;
-    min-width: 0;
-    min-height: 28px;
-    max-width: 100%;
-    margin: 0;
-    padding: 4px 7px;
-    font-size: 13px;
-    line-height: 1.2;
-    flex-shrink: 0;
-}
+    .insurance-details-header .edit-icon-btn,
+    .vehicle-card-header .delete-vehicle-btn,
+    .edit-icon-btn,
+    .delete-vehicle-btn {
+        width: auto;
+        min-height: 40px;
+        max-width: 100%;
+        margin: 0;
+        padding: 8px 10px;
+        flex-shrink: 0;
+    }
 
     .vehicle-summary-header {
         top: 12px;
@@ -2062,26 +2044,25 @@ background: transparent;
         line-height: 1.6;
     }
 
-   .detail-row,
-.insurance-details-card .detail-row,
-#monthlyFuelHistoryContent .detail-row,
-#savedFuelHistoryContent .detail-row,
-#insuranceDetailsContent .detail-row,
-#oilChangeDetailsContent .detail-row,
-#batteryDetailsContent .detail-row {
-    grid-template-columns: minmax(0, 1fr) 6px minmax(0, 1.15fr);
-    gap: 5px;
-    margin-bottom: 12px;
-    line-height: 1.5;
-}
+    .detail-row,
+    .insurance-details-card .detail-row,
+    #monthlyFuelHistoryContent .detail-row,
+    #savedFuelHistoryContent .detail-row,
+    #insuranceDetailsContent .detail-row,
+    #oilChangeDetailsContent .detail-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 3px;
+        margin-bottom: 12px;
+        line-height: 1.5;
+    }
 
     .detail-colon {
-        display: inline;
+        display: none;
     }
 
     .detail-label {
         color: var(--muted-color);
-        font-size: 15px;
+        font-size: 13px;
     }
 
     .detail-value {
@@ -2108,13 +2089,6 @@ background: transparent;
         min-width: 0;
         border-radius: 12px;
     }
-
-#vehicleCare .care-item {
-    padding: 15px 11px;
-    min-width: 0;
-    min-height: 72px;
-    border-radius: 12px;
-}
 
     #vehicleCare .care-card-title {
         font-size: 15px;
@@ -2218,6 +2192,7 @@ background: transparent;
         overflow-wrap: anywhere;
     }
 
+
     #tyrePositions,
     .reminder-options {
         display: grid;
@@ -2300,6 +2275,132 @@ background: transparent;
         margin: 0;
     }
 
+    /* =====================================================
+       CONSISTENT SAVED-HISTORY CARDS (mobile only)
+       Insurance-style box, spacing and action buttons.
+       ===================================================== */
+    #insuranceDetailsContent .alignment-history-record,
+    #serviceDetailsContent .alignment-history-record,
+    #oilChangeDetailsContent .alignment-history-record,
+    #pollutionDetailsContent .pollution-history-record,
+    #alignmentDetailsContent .alignment-history-record,
+    #tyreHistoryContent .tyre-history-record,
+    #batteryDetailsContent .alignment-history-record,
+    #carWashDetailsContent .alignment-history-record,
+    #savedFuelHistoryContent .tyre-history-record,
+    #partsReplacedHistoryContent .tyre-history-record {
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        padding: 16px;
+        margin: 12px 0;
+        background: #ffffff;
+        border: 1px solid #d1d9e2;
+        border-radius: 16px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        line-height: 1.6;
+    }
+
+    /* Keep each saved-record title and its action buttons on one row. */
+    #insuranceDetailsContent .insurance-details-header,
+    #serviceDetailsContent .insurance-details-header,
+    #oilChangeDetailsContent .insurance-details-header,
+    #pollutionDetailsContent .insurance-details-header,
+    #alignmentDetailsContent .insurance-details-header,
+    #tyreHistoryContent .insurance-details-header,
+    #batteryDetailsContent .insurance-details-header,
+    #carWashDetailsContent .insurance-details-header,
+    #savedFuelHistoryContent .record-header,
+    #partsReplacedHistoryContent .record-header {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        min-width: 0;
+        margin-bottom: 16px;
+    }
+
+    #insuranceDetailsContent .insurance-details-header h3,
+    #serviceDetailsContent .insurance-details-header h3,
+    #oilChangeDetailsContent .insurance-details-header h3,
+    #pollutionDetailsContent .insurance-details-header h3,
+    #alignmentDetailsContent .insurance-details-header h3,
+    #tyreHistoryContent .insurance-details-header h3,
+    #batteryDetailsContent .insurance-details-header h3,
+    #carWashDetailsContent .insurance-details-header h3,
+    #savedFuelHistoryContent .record-header h3,
+    #partsReplacedHistoryContent .record-header h3 {
+        flex: 1 1 auto;
+        min-width: 0;
+        margin: 0 auto 0 0;
+        color: #2563eb;
+        font-size: 16px;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
+    }
+
+    /* Button groups exist only on some record types. */
+    #batteryDetailsContent .insurance-details-header > div,
+    #carWashDetailsContent .insurance-details-header > div,
+    #savedFuelHistoryContent .record-header > div,
+    #partsReplacedHistoryContent .record-header > div {
+        display: flex;
+        flex: 0 0 auto;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 12px;
+        margin-left: auto;
+    }
+
+    /* Same compact Edit/Delete appearance across all saved records. */
+    #insuranceDetailsContent .edit-icon-btn,
+    #serviceDetailsContent .edit-icon-btn,
+    #oilChangeDetailsContent .edit-icon-btn,
+    #pollutionDetailsContent .edit-icon-btn,
+    #alignmentDetailsContent .edit-icon-btn,
+    #tyreHistoryContent .edit-icon-btn,
+    #batteryDetailsContent .edit-icon-btn,
+    #carWashDetailsContent .edit-icon-btn,
+    #savedFuelHistoryContent .edit-fuel-record,
+    #savedFuelHistoryContent .delete-fuel-record,
+    #partsReplacedHistoryContent .edit-parts-replaced-group,
+    #partsReplacedHistoryContent .delete-parts-replaced-group {
+        display: inline-block;
+        flex: 0 0 auto;
+        width: auto;
+        min-width: 0;
+        min-height: 32px;
+        margin: 0;
+        padding: 4px 2px;
+        border: 0;
+        background: transparent;
+        font-size: 13px;
+        line-height: 1.2;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    /* Keep details comfortably spaced, especially in Saved Fuel History. */
+    #savedFuelHistoryContent .detail-row,
+    #partsReplacedHistoryContent .detail-row,
+    #batteryDetailsContent .detail-row,
+    #carWashDetailsContent .detail-row,
+    #alignmentDetailsContent .detail-row,
+    #tyreHistoryContent .detail-row,
+    #insuranceDetailsContent .detail-row,
+    #serviceDetailsContent .detail-row,
+    #oilChangeDetailsContent .detail-row,
+    #pollutionDetailsContent .detail-row {
+        margin-bottom: 14px;
+        line-height: 1.55;
+    }
+
+    #savedFuelHistoryContent .record-header + .detail-row,
+    #partsReplacedHistoryContent .record-header + .detail-row {
+        margin-top: 4px;
+    }
+
     hr {
         margin: 16px 0;
     }
@@ -2324,17 +2425,10 @@ background: transparent;
         padding: 14px;
     }
 
- .home-detail-row {
-    display: grid;
-    grid-template-columns: minmax(105px, 0.9fr) 8px minmax(0, 1.5fr);
-    gap: 5px;
-    align-items: center;
-    margin-bottom: 12px;
-    font-size: 15px;
-    line-height: 1.4;
-    overflow-wrap: anywhere;
-}
-
+    .home-detail-row {
+        grid-template-columns: minmax(78px, 0.8fr) 7px minmax(0, 1.5fr);
+        font-size: 13px;
+    }
 
     #tyrePositions,
     .reminder-options {
@@ -2343,6 +2437,34 @@ background: transparent;
 
     .insurance-details-header h2 {
         flex-basis: 100%;
+    }
+
+    /* Keep saved-record headers in one row even on narrow phones. */
+    #insuranceDetailsContent .insurance-details-header,
+    #serviceDetailsContent .insurance-details-header,
+    #oilChangeDetailsContent .insurance-details-header,
+    #pollutionDetailsContent .insurance-details-header,
+    #alignmentDetailsContent .insurance-details-header,
+    #tyreHistoryContent .insurance-details-header,
+    #batteryDetailsContent .insurance-details-header,
+    #carWashDetailsContent .insurance-details-header,
+    #savedFuelHistoryContent .record-header,
+    #partsReplacedHistoryContent .record-header {
+        flex-wrap: nowrap;
+        gap: 5px;
+    }
+
+    #insuranceDetailsContent .insurance-details-header h3,
+    #serviceDetailsContent .insurance-details-header h3,
+    #oilChangeDetailsContent .insurance-details-header h3,
+    #pollutionDetailsContent .insurance-details-header h3,
+    #alignmentDetailsContent .insurance-details-header h3,
+    #tyreHistoryContent .insurance-details-header h3,
+    #batteryDetailsContent .insurance-details-header h3,
+    #carWashDetailsContent .insurance-details-header h3,
+    #savedFuelHistoryContent .record-header h3,
+    #partsReplacedHistoryContent .record-header h3 {
+        font-size: 14px;
     }
 }
 
@@ -2356,444 +2478,3 @@ background: transparent;
         animation-iteration-count: 1 !important;
     }
 }
-
-
-
-#vehicleList .vehicle-card-footer .vehicle-open {
-    font-size: 14px;
-}
-
-
-
-
-
-/* Mobile: Make Update KM button smaller */
-@media (max-width: 600px) {
-    #updateKmBtn {
-        width: auto !important;
-        min-width: 0;
-        min-height: 0;
-        padding: 5px 12px !important;
-        font-size: 13px !important;
-        line-height: 1.2;
-        display: block;
-        margin: 0 auto !important;
-    }
-}
-
-
-
-
-
-
-
-/* Responsive Vehicle Care cards on mobile */
-@media (max-width: 600px) {
-  #vehicleCare {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: clamp(8px, 2.5vw, 12px) !important;
-  }
-
-  #vehicleCare .care-item {
-    display: flex;
-    align-items: center;
-    min-width: 0;
-    gap: clamp(5px, 2vw, 10px) !important;
-    padding: clamp(8px, 2.8vw, 14px) !important;
-  }
-
-  #vehicleCare .care-item span {
-    flex: 1;
-    min-width: 0;
-    font-size: clamp(12px, 3.5vw, 15px);
-    line-height: 1.35;
-    white-space: normal;
-    overflow-wrap: normal;
-    word-break: normal;
-  }
-
-  #vehicleCare .care-item strong {
-    min-width: 0;
-    overflow-wrap: normal;
-    word-break: normal;
-  }
-}
-
-@media (max-width: 360px) {
-  #vehicleCare .care-item {
-    gap: 5px !important;
-    padding: 8px !important;
-  }
-
-  #vehicleCare .care-item span {
-    font-size: 12px;
-  }
-}
-
-
-
-
-
-/* Keep Vehicle Care icon backgrounds square on mobile */
-@media (max-width: 600px) {
-  #vehicleCare .care-item {
-    align-items: center;
-  }
-
-  #vehicleCare .care-item .care-icon {
-    width: 30px !important;
-    height: 34px !important;
-    min-width: 30px !important;
-    flex: 0 0 30px !important;
-    
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-/* Compact Back buttons on mobile across all pages */
-@media (max-width: 768px) {
-
-    button[id^="backFrom"],
-#backToVehicleCare,
-#backToVehicleCareFromBattery {
-
-        width: 145px !important;
-        max-width: 145px !important;
-        min-height: 0 !important;
-
-        padding: 3px 4px !important;
-        margin: 8px auto 14px !important;
-
-        
-        align-items: center;
-        justify-content: center;
-
-        gap: 2px;
-
-        font-size: 14px !important;
-        line-height: 1.2 !important;
-
-        white-space: normal !important;
-        text-align: center;
-    }
-
-}
-
-
-
-
-/* Battery page: Fix Back to Vehicle Care button on mobile */
-@media (max-width: 768px) {
-    #batteryDetailsPage #backToVehicleCare {
-        width: 145px !important;
-        max-width: 145px !important;
-        min-height: 0 !important;
-        padding: 3px 4px !important;
-        margin: 8px auto 14px !important;
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px !important;
-        line-height: 1.2 !important;
-        white-space: normal !important;
-    }
-}
-
-
-
-
-
-
-
-
-
-/* Keep Vehicle Care arrows at the far right on mobile */
-@media (max-width: 600px) {
-  #vehicleCare .care-item {
-    display: flex !important;
-    align-items: center;
-  }
-
-  #vehicleCare .care-item > span:last-child {
-    margin-left: auto !important;
-  }
-}
-
-
-
-
-
-
-
-
-/* SAVED HISTORY PAGE BACKGROUND */
-#insuranceDetailsPage,
-#pollutionDetailsPage,
-#serviceDetailsPage,
-#oilChangeDetailsPage,
-#alignmentDetailsPage,
-#tyreHistoryPage,
-#savedFuelHistoryPage,
-#fuelMonthlyUsagePage,
-#batteryDetailsPage,
-#carWashDetailsPage,
-#partsReplacedPage,
-#basicDetailsPage {
-    background-color: #C3D2C3;
-    padding: 16px;
-    border-radius: 16px;
-}
-
-
-
-
-/* Fix Vehicle Care arrow alignment on mobile */
-@media (max-width: 600px) {
-    #vehicleCare .care-card-title {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        gap: 8px;
-    }
-
-    #vehicleCare .care-card-title .care-icon {
-        flex: 0 0 34px !important;
-    }
-
-    #vehicleCare .care-card-title .care-name {
-        flex: 1 1 auto !important;
-        min-width: 0;
-    }
-
-    #vehicleCare .care-card-title .care-arrow {
-        flex: 0 0 auto !important;
-        margin-left: auto;
-        font-size: 24px;
-    }
-}
-
-
-
-
-
-/* Vehicle Care heading only */
-h2:has(+ #vehicleCare) {
-    color: #000000;
-}
-
-
-
-
-
-/* Centre Vehicle Care icons vertically in each card */
-
-
-#vehicleCare .care-card-title {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 0;
-}
-
-
-
-
-
-
-/* Compact Fuel History buttons - mobile only */
-@media (max-width: 600px) {
-
-    #fuelHistoryPage #updateFuelPrice,
-    #fuelHistoryPage #saveFuelEntry,
-    #fuelHistoryPage #cancelFuelEdit,
-    #fuelHistoryPage #openSavedFuelHistory,
-    #fuelHistoryPage #openFuelMonthlyUsage {
-        width: auto !important;
-        min-height: 38px !important;
-        padding: 8px 12px !important;
-        font-size: 14px !important;
-        border-radius: 9px !important;
-    }
-
-    #fuelHistoryPage #saveFuelEntry,
-    #fuelHistoryPage #cancelFuelEdit {
-        display: block;
-        margin: 10px auto !important;
-    }
-
-    #fuelHistoryPage .fuel-history-actions {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-    }
-
-    #fuelHistoryPage #openSavedFuelHistory,
-    #fuelHistoryPage #openFuelMonthlyUsage {
-        flex: 1;
-        max-width: 48%;
-        white-space: normal;
-        line-height: 1.3;
-    }
-}
-
-
-
-/* Centre Update Fuel Price on mobile */
-@media (max-width: 600px) {
-    #fuelHistoryPage #updateFuelPrice {
-        display: block;
-        margin: 0 auto 20px !important;
-    }
-}
-
-
-
-
-
-/* Mobile: Keep Add Details buttons on the right */
-@media (max-width: 600px) {
-    .insurance-details-header {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .insurance-details-header h2 {
-        flex-basis: auto;
-        flex: 1 1 auto;
-        min-width: 0;
-    }
-
-    .insurance-details-header .edit-icon-btn {
-        width: auto;
-        flex-shrink: 0;
-        margin: 0 0 0 auto;
-    }
-}
-
-
-
-
-
-/* Mobile: Compact Save and Cancel buttons on Add and Edit forms */
-@media (max-width: 600px) {
-    button[type="submit"],
-    button[id*="save" i],
-    button[id*="cancel" i] {
-        width: 110px !important;
-        min-width: 0 !important;
-        max-width: 110px !important;
-
-        height: 38px !important;
-        min-height: 0 !important;
-
-        /* Reduce empty space inside the button */
-        padding: 4px 2px !important;
-
-        /* Keep buttons centered */
-        margin: 6px auto !important;
-
-        font-size: 14px !important;
-        line-height: 1.2 !important;
-
-        display: block;
-        box-sizing: border-box;
-    }
-}
-
-/* =========================================================
-   MOBILE SAVED-HISTORY HEADERS
-   Title stays on the left; Edit/Delete stay on the right.
-   Applies only to Battery, Fuel, Alignment, Tyre, Wash, and Parts.
-   ========================================================= */
-@media (max-width: 600px) {
-    /* Battery and Wash: buttons are inside a group div. */
-    #batteryDetailsContent .alignment-history-record .insurance-details-header,
-    #carWashDetailsContent .alignment-history-record .insurance-details-header,
-
-    /* Alignment and Tyre: buttons are direct children of the header. */
-    #alignmentDetailsContent .alignment-history-record .insurance-details-header,
-    #tyreHistoryContent .tyre-history-record .insurance-details-header,
-
-    /* Fuel and Parts Replaced: use .record-header. */
-    #savedFuelHistoryContent .record-header,
-    #partsReplacedHistoryContent .record-header {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 6px;
-        min-width: 0;
-        width: 100%;
-    }
-
-    #batteryDetailsContent .alignment-history-record .insurance-details-header h3,
-    #carWashDetailsContent .alignment-history-record .insurance-details-header h3,
-    #alignmentDetailsContent .alignment-history-record .insurance-details-header h3,
-    #tyreHistoryContent .tyre-history-record .insurance-details-header h3,
-    #savedFuelHistoryContent .record-header h3,
-    #partsReplacedHistoryContent .record-header h3 {
-        flex: 1 1 auto;
-        min-width: 0;
-        margin: 0;
-        font-size: 16px;
-        line-height: 1.3;
-        white-space: normal;
-        overflow-wrap: anywhere;
-        word-break: normal;
-    }
-
-    /* Battery, Wash, Fuel, and Parts have a button-group div. */
-    #batteryDetailsContent .alignment-history-record .insurance-details-header > div,
-    #carWashDetailsContent .alignment-history-record .insurance-details-header > div,
-    #savedFuelHistoryContent .record-header > div,
-    #partsReplacedHistoryContent .record-header > div {
-        display: flex;
-        flex: 0 0 auto;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 5px;
-        min-width: 0;
-        margin-left: auto;
-    }
-
-    /* Keep all Edit/Delete buttons compact and on the same row. */
-    #batteryDetailsContent .alignment-history-record .insurance-details-header button,
-    #carWashDetailsContent .alignment-history-record .insurance-details-header button,
-    #alignmentDetailsContent .alignment-history-record .insurance-details-header button,
-    #tyreHistoryContent .tyre-history-record .insurance-details-header button,
-    #savedFuelHistoryContent .record-header button,
-    #partsReplacedHistoryContent .record-header button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        flex: 0 0 auto;
-        width: auto;
-        min-width: 0;
-        max-width: none;
-        min-height: 28px;
-        height: auto;
-        margin: 0;
-        padding: 4px 6px;
-        font-size: 12px;
-        line-height: 1.2;
-        white-space: nowrap;
-    }
-}
-
