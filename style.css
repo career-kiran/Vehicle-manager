@@ -2702,6 +2702,40 @@ h2:has(+ #vehicleCare) {
 
 
 
+/* Mobile: Compact Save and Cancel buttons on Add and Edit forms */
+@media (max-width: 600px) {
+    button[type="submit"],
+    button[id*="save" i],
+    button[id*="cancel" i] {
+        width: 110px !important;
+        min-width: 0 !important;
+        max-width: 110px !important;
+
+        height: 38px !important;
+        min-height: 0 !important;
+
+        /* Reduce empty space inside the button */
+        padding: 4px 2px !important;
+
+        /* Keep buttons centered */
+        margin: 6px auto !important;
+
+        font-size: 14px !important;
+        line-height: 1.2 !important;
+
+        display: block;
+        box-sizing: border-box;
+    }
+}
+
+
+
+
+
+
+
+
+
 
 
 
