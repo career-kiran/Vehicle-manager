@@ -2683,13 +2683,25 @@ h2:has(+ #vehicleCare) {
         border-radius: 9px !important;
     }
 
-  #fuelHistoryPage #saveFuelEntry,
-#fuelHistoryPage #cancelFuelEdit {
-    display: inline-block;
-    width: 48% !important;
-    max-width: 48% !important;
-    margin: 10px 0 !important;
-}
+
+    #fuelHistoryPage .form-actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    #fuelHistoryPage #saveFuelEntry,
+    #fuelHistoryPage #cancelFuelEdit {
+        display: inline-block !important;
+        flex: 1 1 0;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 48% !important;
+        margin: 10px 0 !important;
+    }
 
     #fuelHistoryPage .fuel-history-actions {
         display: flex;
@@ -2698,13 +2710,21 @@ h2:has(+ #vehicleCare) {
         gap: 10px;
     }
 
+  
     #fuelHistoryPage #openSavedFuelHistory,
     #fuelHistoryPage #openFuelMonthlyUsage {
-        flex: 1;
-        max-width: 48%;
+        display: block;
+        flex: 1 1 0;
+        width: 0;
+        min-width: 0;
+        max-width: none;
+        margin: 0;
         white-space: normal;
         line-height: 1.3;
+        text-align: center;
     }
+
+
 }
 
 
@@ -2834,6 +2854,10 @@ h2:has(+ #vehicleCare) {
         flex: 0 0 auto;
         margin-left: auto;
     }
+
+
+
+
 
     /* Keep action buttons compact */
 
