@@ -2703,12 +2703,17 @@ h2:has(+ #vehicleCare) {
         margin: 10px 0 !important;
     }
 
-    #fuelHistoryPage .fuel-history-actions {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-    }
+  
+#fuelHistoryPage .fuel-history-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+}
+
 
   
     #fuelHistoryPage #openSavedFuelHistory,
