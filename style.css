@@ -2472,19 +2472,27 @@ background: transparent;
 
 
 
-/* Reduce only the Back to Vehicle Care button on mobile */
+
+/* Make Back to Vehicle Care button compact on mobile */
 @media (max-width: 768px) {
-  .care-details-page > button {
-    width: auto;
-    max-width: 220px;
-    min-height: 38px;
-    padding: 7px 14px;
-    margin: 8px auto 14px;
-    display: block;
-    font-size: 14px;
-    white-space: normal;
-  }
+    .care-details-page > button {
+        width: 165px !important;
+        max-width: 165px !important;
+        min-height: 0 !important;
+        padding: 6px 8px !important;
+        margin: 8px auto 14px !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-size: 14px !important;
+        line-height: 1.3 !important;
+        white-space: normal !important;
+        text-align: center;
+    }
 }
+
+
 
 
 
