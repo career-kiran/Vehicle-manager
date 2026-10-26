@@ -2069,7 +2069,8 @@ background: transparent;
 #monthlyFuelHistoryContent .detail-row,
 #savedFuelHistoryContent .detail-row,
 #insuranceDetailsContent .detail-row,
-#oilChangeDetailsContent .detail-row {
+#oilChangeDetailsContent .detail-row,
+#batteryDetailsContent .detail-row {
     grid-template-columns: minmax(0, 1fr) 6px minmax(0, 1.15fr);
     gap: 5px;
     margin-bottom: 12px;
