@@ -2110,6 +2110,13 @@ background: transparent;
         border-radius: 12px;
     }
 
+#vehicleCare .care-item {
+    padding: 18px 11px;
+    min-width: 0;
+    min-height: 82px;
+    border-radius: 12px;
+}
+
     #vehicleCare .care-card-title {
         font-size: 15px;
         line-height: 1.35;
