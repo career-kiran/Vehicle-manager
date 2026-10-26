@@ -2023,9 +2023,25 @@ background: transparent;
     gap: 10px;
 }
 
+
 #batteryDetailsContent .insurance-details-header {
     position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 6px;
 }
+
+#batteryDetailsContent .insurance-details-header h3 {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+#batteryDetailsContent .insurance-details-header .edit-icon-btn {
+    flex-shrink: 0;
+}
+
 
 #batteryDetailsContent .insurance-details-header > div {
     margin-left: auto;
