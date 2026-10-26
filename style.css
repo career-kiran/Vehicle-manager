@@ -2594,3 +2594,46 @@ h2:has(+ #vehicleCare) {
 
 
 
+/* Compact Fuel History buttons - mobile only */
+@media (max-width: 600px) {
+
+    #fuelHistoryPage #updateFuelPrice,
+    #fuelHistoryPage #saveFuelEntry,
+    #fuelHistoryPage #cancelFuelEdit,
+    #fuelHistoryPage #openSavedFuelHistory,
+    #fuelHistoryPage #openFuelMonthlyUsage {
+        width: auto !important;
+        min-height: 38px !important;
+        padding: 8px 12px !important;
+        font-size: 14px !important;
+        border-radius: 9px !important;
+    }
+
+    #fuelHistoryPage #saveFuelEntry,
+    #fuelHistoryPage #cancelFuelEdit {
+        display: block;
+        margin: 10px auto !important;
+    }
+
+    #fuelHistoryPage .fuel-history-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #fuelHistoryPage #openSavedFuelHistory,
+    #fuelHistoryPage #openFuelMonthlyUsage {
+        flex: 1;
+        max-width: 48%;
+        white-space: normal;
+        line-height: 1.3;
+    }
+}
+
+
+
+
+
+
+
