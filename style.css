@@ -2563,13 +2563,17 @@ h2:has(+ #vehicleCare) {
 
 
 
-/* Centre Vehicle Care icon squares on all screens */
-#vehicleCare .care-card-title {
-    align-items: center;
+/* Centre Vehicle Care icons vertically in each card */
+#vehicleCare .care-item {
+    display: flex;
+    align-items: stretch;
 }
 
-#vehicleCare .care-icon {
-    align-self: center;
-    flex-shrink: 0;
+#vehicleCare .care-card-title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+    margin-bottom: 0;
 }
 
