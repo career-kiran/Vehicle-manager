@@ -2449,10 +2449,10 @@ background: transparent;
   }
 
   #vehicleCare .care-item .care-icon {
-    width: 40px !important;
-    height: 40px !important;
-    min-width: 40px !important;
-    flex: 0 0 40px !important;
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    flex: 0 0 34px !important;
     aspect-ratio: 1 / 1;
   }
 }
@@ -2576,4 +2576,9 @@ h2:has(+ #vehicleCare) {
     flex: 1;
     margin-bottom: 0;
 }
+
+
+
+
+
 
