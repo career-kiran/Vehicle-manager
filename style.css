@@ -2449,10 +2449,10 @@ background: transparent;
   }
 
   #vehicleCare .care-item .care-icon {
-    width: 45px !important;
-    height: 45px !important;
-    min-width: 45px !important;
-    flex: 0 0 45px !important;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    flex: 0 0 40px !important;
     aspect-ratio: 1 / 1;
   }
 }
@@ -2557,5 +2557,19 @@ background: transparent;
 /* Vehicle Care heading only */
 h2:has(+ #vehicleCare) {
     color: #;
+}
+
+
+
+
+
+/* Centre Vehicle Care icon squares on all screens */
+#vehicleCare .care-card-title {
+    align-items: center;
+}
+
+#vehicleCare .care-icon {
+    align-self: center;
+    flex-shrink: 0;
 }
 
