@@ -2593,7 +2593,7 @@ function showCarWashDetailsPage() {
             <div class="alignment-history-record">
 
                 <div class="insurance-details-header">
-                    <h3>Wash Record ${displayIndex + 1}</h3>
+                    <h3>Wash  ${displayIndex + 1}</h3>
 
                     <div>
                         <button
