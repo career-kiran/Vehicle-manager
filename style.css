@@ -3038,6 +3038,8 @@ h2:has(+ #vehicleCare) {
         min-width: 0 !important;
         max-width: fit-content;
         flex-shrink: 0;
+        min-height: 0 !important;
+        height: auto !important;
     }
 
 
