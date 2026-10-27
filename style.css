@@ -3111,7 +3111,7 @@ h2:has(+ #vehicleCare) {
 @media (max-width: 600px) {
   #tyreHistoryPage button.primary-button.add-tyre-btn.add-details-btn,
 #alignmentDetailsPage button.primary-button.add-tyre-btn.add-details-btn,
-#basicDetailsPage button#editBasicDetails.add-details-btn {
+ {
         font-size: 13px !important;
         padding: 8px 12px !important;
         width: auto !important;
