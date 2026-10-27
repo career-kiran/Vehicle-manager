@@ -665,6 +665,7 @@ box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
 
 #savedFuelHistoryContent .record-header h3 {
     margin-right: auto;
+    color: #2563eb;
 }
 
 #savedFuelHistoryContent .record-header > div {
@@ -1558,6 +1559,30 @@ background: transparent;
 #addBatteryDetails:hover {
     background-color: #1d4ed8;
 }
+
+
+
+
+/* PARTS REPLACED - ADD DETAILS BUTTON */
+#addPartsReplacedDetails {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: 1px solid #2563eb;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+}
+
+#addPartsReplacedDetails:hover {
+    background-color: #1d4ed8;
+}
+
+
+
 
 
 
@@ -2965,6 +2990,24 @@ h2:has(+ #vehicleCare) {
         box-sizing: border-box;
     }
 
+}
+
+
+
+
+/* MOBILE: Parts Replaced heading spacing */
+@media (max-width: 600px) {
+    #partsReplacedHistoryContent .record-header h3 {
+        margin-bottom: 24px !important;
+    }
+}
+
+
+
+
+/* Parts Replaced heading - Blue */
+#partsReplacedHistoryContent .record-header h3 {
+    color: #2563EB;
 }
 
 

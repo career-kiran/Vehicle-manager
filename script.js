@@ -2720,7 +2720,7 @@ content.innerHTML = sortedDates.length
           
 
             </div>
-            <hr>
+            
         `;
     }).join("")
     : "<p>No parts records added yet.</p>";
@@ -3046,7 +3046,7 @@ function showAlignmentDetailsPage() {
                             </div>
                         `).join("")}
                 </div>
-                <hr>
+                
             `;
         }).join("")
         : "<p>No wheel alignment records added yet.</p>";
@@ -3114,7 +3114,7 @@ function showTyreHistoryPage() {
                             </div>
                         `).join("")}
                 </div>
-                <hr>
+                
             `;
         }).join("")
         : "<p>No tyre replacement records added yet.</p>";
@@ -3282,7 +3282,7 @@ function showPartsReplacedPage() {
                     <span>₹${Number(part.amount).toFixed(2)}</span>
                 </div>
             </div>
-            <hr>
+            
         `).join("")
         : "<p>No parts replaced yet.</p>";
 
