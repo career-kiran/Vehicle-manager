@@ -3044,22 +3044,17 @@ h2:has(+ #vehicleCare) {
 }
 
 
-/* FINAL MOBILE FIX - Add Details buttons */
 @media (max-width: 600px) {
     #alignmentDetailsPage #addAlignment,
     #tyreHistoryPage #addTyreReplacement {
-        display: inline-block !important;
-        width: auto !important;
-        min-width: 0 !important;
-        max-width: 100% !important;
+        font-size: 13px !important;
+        padding: 8px 12px !important;
         min-height: 0 !important;
         height: auto !important;
-        padding: 8px 12px !important;
-        margin: 0 0 0 auto !important;
-        font-size: 13px !important;
-        line-height: 1.3 !important;
-        flex-shrink: 0 !important;
-        box-sizing: border-box !important;
+        width: auto !important;
+        max-width: fit-content !important;
+        flex-shrink: 0;
+        align-self: center;
     }
 }
 
