@@ -5328,6 +5328,20 @@ document.getElementById("fuelEntryPrice").textContent =
 
 
 
+const fuelPriceCard = document.getElementById("fuelPriceCard");
+
+fuelPriceCard.addEventListener("click", () => {
+    document.getElementById("updateFuelPrice").click();
+});
+
+fuelPriceCard.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        document.getElementById("updateFuelPrice").click();
+    }
+});
+
+
 document.getElementById("fuelForm")
     .addEventListener("submit", function(event) {
         event.preventDefault();
