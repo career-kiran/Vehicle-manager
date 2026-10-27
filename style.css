@@ -1297,7 +1297,7 @@ background: transparent;
 /* VEHICLE DASHBOARD BACKGROUND */
 .dashboard-background {
     width: 100%;
-    background: #94AA9A;
+    background: #FFFEF9;
     box-sizing: border-box;
     padding: 16px;
     border-radius: 16px;
@@ -2833,16 +2833,6 @@ h2:has(+ #vehicleCare) {
 
 
 
-/* Mobile: Reduce Add Details button size on all pages */
-@media (max-width: 600px) {
-    .edit-icon-btn {
-        font-size: 11px !important;
-        padding: 8px 12px !important;
-        width: auto !important;
-        min-width: 0 !important;
-        max-width: 100% !important;
-    }
-}
 
 
 
