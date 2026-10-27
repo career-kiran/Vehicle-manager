@@ -3034,6 +3034,19 @@ h2:has(+ #vehicleCare) {
 
 
 
+/* Mobile: compact Add Details buttons */
+#addAlignment,
+#addTyreReplacement {
+    font-size: 14px !important;
+    padding: 8px 12px !important;
+    min-height: 0 !important;
+    height: auto !important;
+    width: auto !important;
+    flex-shrink: 0;
+}
+
+
+
 
 
 
