@@ -3029,6 +3029,16 @@ h2:has(+ #vehicleCare) {
         max-width: fit-content;
         flex-shrink: 0;
     }
+
+    /* Basic Details Add Details button - Mobile */
+    #basicDetailsPage button#editBasicDetails {
+        font-size: 13px !important;
+        padding: 8px 12px !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: fit-content;
+        flex-shrink: 0;
+    }
 }
 
 
@@ -3037,7 +3047,7 @@ h2:has(+ #vehicleCare) {
 /* Mobile: compact Add Details buttons */
 #addAlignment,
 #addTyreReplacement {
-    font-size: 14px !important;
+    font-size: 13px !important;
     padding: 8px 12px !important;
     min-height: 0 !important;
     height: auto !important;
@@ -3046,6 +3056,48 @@ h2:has(+ #vehicleCare) {
 }
 
 
+
+
+/* Basic Details Add Details button - Desktop */
+#basicDetailsPage button#editBasicDetails {
+    background-color: #2563eb !important;
+    color: #ffffff !important;
+    font-size: 15px !important;
+    padding: 12px 16px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: fit-content;
+    border: none !important;
+    border-radius: 10px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+
+
+/* Tyre Replacement Add Details button - Desktop */
+#tyreHistoryPage #addTyreReplacement {
+    font-size: 15px !important;
+    padding: 12px 16px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: fit-content;
+    height: auto !important;
+    flex-shrink: 0;
+}
+
+
+
+/* Wheel Alignment Add Details button - Desktop */
+#alignmentDetailsPage #addAlignment {
+    font-size: 15px !important;
+    padding: 12px 16px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: fit-content;
+    height: auto !important;
+    flex-shrink: 0;
+}
 
 
 
