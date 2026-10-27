@@ -3044,6 +3044,8 @@ h2:has(+ #vehicleCare) {
 }
 
 
+/* Mobile: Match Tyre Replacement and Wheel Alignment
+   Add Details buttons to the other pages */
 @media (max-width: 600px) {
     #alignmentDetailsPage #addAlignment,
     #tyreHistoryPage #addTyreReplacement {
@@ -3055,6 +3057,9 @@ h2:has(+ #vehicleCare) {
         max-width: fit-content !important;
         flex-shrink: 0;
         align-self: center;
+        line-height: 1.3;
+        border-radius: 8px;
+        box-sizing: border-box;
     }
 }
 
