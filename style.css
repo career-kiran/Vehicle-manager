@@ -3107,14 +3107,19 @@ h2:has(+ #vehicleCare) {
 
 /* Mobile: Fix Add Details buttons */
 @media (max-width: 600px) {
-    #tyreHistoryPage #addTyreReplacement,
-    #alignmentDetailsPage #addAlignment {
+    #tyreHistoryPage button#addTyreReplacement.add-tyre-btn,
+    #alignmentDetailsPage button#addAlignment.add-tyre-btn {
         font-size: 13px !important;
         padding: 8px 12px !important;
         width: auto !important;
         min-width: 0 !important;
         max-width: fit-content !important;
+        min-height: 0 !important;
         height: auto !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        line-height: 1.3 !important;
+        flex-shrink: 0;
     }
 }
 
