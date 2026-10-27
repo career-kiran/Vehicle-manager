@@ -3039,9 +3039,6 @@ h2:has(+ #vehicleCare) {
         max-width: fit-content;
         flex-shrink: 0;
     }
-}
-
-
 
 
 /* Mobile: compact Add Details buttons */
@@ -3054,6 +3051,13 @@ h2:has(+ #vehicleCare) {
     width: auto !important;
     flex-shrink: 0;
 }
+
+}
+
+
+
+
+
 
 
 
