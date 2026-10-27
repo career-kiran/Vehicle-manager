@@ -3041,6 +3041,12 @@ h2:has(+ #vehicleCare) {
     }
 
 
+}
+
+
+@media (max-width: 600px) {
+
+
 /* Mobile: compact Add Details buttons */
 #addAlignment,
 #addTyreReplacement {
@@ -3053,10 +3059,6 @@ h2:has(+ #vehicleCare) {
 }
 
 }
-
-
-
-
 
 
 
