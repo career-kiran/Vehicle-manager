@@ -3109,9 +3109,8 @@ h2:has(+ #vehicleCare) {
 
 /* Mobile: Fix Add Details buttons */
 @media (max-width: 600px) {
-  #tyreHistoryPage button.primary-button.add-tyre-btn.add-details-btn,
-#alignmentDetailsPage button.primary-button.add-tyre-btn.add-details-btn,
- {
+    #tyreHistoryPage button#addTyreReplacement.add-tyre-btn,
+    #alignmentDetailsPage button#addAlignment.add-tyre-btn {
         font-size: 13px !important;
         padding: 8px 12px !important;
         width: auto !important;
@@ -3125,7 +3124,6 @@ h2:has(+ #vehicleCare) {
         flex-shrink: 0;
     }
 }
-
 
 
 
