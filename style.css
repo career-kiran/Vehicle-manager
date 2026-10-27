@@ -3105,6 +3105,21 @@ h2:has(+ #vehicleCare) {
 
 
 
+/* Mobile: Fix Add Details buttons */
+@media (max-width: 600px) {
+    #tyreHistoryPage #addTyreReplacement,
+    #alignmentDetailsPage #addAlignment {
+        font-size: 13px !important;
+        padding: 8px 12px !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: fit-content !important;
+        height: auto !important;
+    }
+}
+
+
+
 
 
 
