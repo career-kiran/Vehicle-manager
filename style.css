@@ -3019,6 +3019,23 @@ h2:has(+ #vehicleCare) {
 
 
 
+/* Mobile: Reduce Add Details button size only */
+@media (max-width: 600px) {
+    .add-details-btn {
+        font-size: 13px !important;
+        padding: 8px 12px !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: fit-content;
+        flex-shrink: 0;
+    }
+}
+
+
+
+
+
+
 
 
 
