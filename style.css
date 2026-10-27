@@ -2913,6 +2913,62 @@ h2:has(+ #vehicleCare) {
 
 
 
+/* DESKTOP: CONSISTENT SAVED-HISTORY CARD BOXES */
+@media (min-width: 601px) {
+
+    #insuranceDetailsContent .alignment-history-record,
+    #serviceDetailsContent .alignment-history-record,
+    #oilChangeDetailsContent .alignment-history-record,
+    #alignmentDetailsContent .alignment-history-record,
+    #tyreHistoryContent .tyre-history-record,
+    #pollutionDetailsContent .pollution-history-record,
+    #batteryDetailsContent .alignment-history-record,
+    #carWashDetailsContent .alignment-history-record,
+    #partsReplacedHistoryContent .tyre-history-record,
+    #savedFuelHistoryContent .tyre-history-record {
+
+        background: #FFFFFF;
+        padding: 24px;
+        margin: 20px 0;
+        border: 1px solid #D1D9E2;
+        border-radius: 16px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        box-sizing: border-box;
+    }
+
+}
+
+
+
+
+
+/* MOBILE: CONSISTENT SAVED-HISTORY CARD BOXES */
+@media (max-width: 600px) {
+
+    #insuranceDetailsContent .alignment-history-record,
+    #serviceDetailsContent .alignment-history-record,
+    #oilChangeDetailsContent .alignment-history-record,
+    #alignmentDetailsContent .alignment-history-record,
+    #tyreHistoryContent .tyre-history-record,
+    #pollutionDetailsContent .pollution-history-record,
+    #batteryDetailsContent .alignment-history-record,
+    #carWashDetailsContent .alignment-history-record,
+    #partsReplacedHistoryContent .tyre-history-record,
+    #savedFuelHistoryContent .tyre-history-record {
+
+        background: #FFFFFF;
+        padding: 15px;
+        margin: 12px 0;
+        border: 1px solid #D1D9E2;
+        border-radius: 13px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        box-sizing: border-box;
+    }
+
+}
+
+
+
 
 
 
