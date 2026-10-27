@@ -3047,14 +3047,14 @@ h2:has(+ #vehicleCare) {
 @media (max-width: 600px) {
 
 
-/* Mobile: compact Add Details buttons */
-#addAlignment,
-#addTyreReplacement {
+#alignmentDetailsPage #addAlignment,
+#tyreHistoryPage #addTyreReplacement {
     font-size: 13px !important;
     padding: 8px 12px !important;
     min-height: 0 !important;
     height: auto !important;
     width: auto !important;
+    max-width: fit-content !important;
     flex-shrink: 0;
 }
 
