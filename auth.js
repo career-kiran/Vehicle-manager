@@ -109,3 +109,38 @@ vehicleCloud.auth.getSession().then(async ({ data, error }) => {
     }
 
 });
+
+
+// SIGN OUT
+document.getElementById("signOutBtn").addEventListener("click", async () => {
+
+    const confirmed = confirm(
+        "Are you sure you want to sign out? Your saved vehicle data will remain safe."
+    );
+
+    if (!confirmed) return;
+
+    await cloudSaveQueue;
+
+    const { error } = await vehicleCloud.auth.signOut();
+
+    if (error) {
+        alert("Could not sign out. Please try again.");
+        console.error("Sign out error:", error);
+        return;
+    }
+
+    currentUserId = null;
+    vehicles = [];
+    activeVehicleId = null;
+
+    appContainer.style.display = "none";
+    authSection.style.display = "block";
+
+    passwordInput.value = "";
+    authMessage.textContent = "You have been signed out.";
+
+    document.getElementById("welcomePage").style.display = "block";
+});
+
+
