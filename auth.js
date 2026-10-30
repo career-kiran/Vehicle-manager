@@ -109,6 +109,13 @@ signInBtn.addEventListener("click", async () => {
         return;
     }
 
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+if (!emailPattern.test(email)) {
+    authMessage.textContent = "Please enter a valid email address.";
+    return;
+}
+
     authMessage.textContent = "Signing in...";
 
     const { data, error } =
