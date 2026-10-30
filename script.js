@@ -5566,5 +5566,4 @@ document.addEventListener("keydown", function(event) {
 
 
 
-// START THE APP
-initApp();
+// APP WILL START AFTER USER LOGIN
