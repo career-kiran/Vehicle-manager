@@ -82,7 +82,7 @@ document.getElementById("partsReplacedPage"),
 
     pageToShow.classList.remove("hidden");
 
-window.scrollTo(0, 0);
+//window.scrollTo(0, 0);
 
 const welcomePage = document.getElementById("welcomePage");
 
