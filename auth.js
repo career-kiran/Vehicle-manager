@@ -57,8 +57,20 @@ signUpBtn.addEventListener("click", async () => {
     console.error("Account creation error:", error);
 
     if (error.message.toLowerCase().includes("password")) {
-        authMessage.textContent =
-            "Please choose a stronger password. It should contain at least one capital letter (A-Z), one small letter (a-z), one number (0-9), and one special symbol (@, #, $ etc.).";
+        authMessage.innerHTML = `
+    <div class="password-guidance">
+        <strong>Password requirements</strong>
+
+        <p>Your password should contain at least:</p>
+
+        <ul>
+            <li>One capital letter (A–Z)</li>
+            <li>One small letter (a–z)</li>
+            <li>One number (0–9)</li>
+            <li>One special symbol (@, #, $, etc.)</li>
+        </ul>
+    </div>
+`;
     } else {
         authMessage.textContent = error.message;
     }
