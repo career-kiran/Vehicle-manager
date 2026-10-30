@@ -5,6 +5,7 @@
 const vehicleListPage = document.getElementById("vehicleListPage");
 const addVehiclePage = document.getElementById("addVehiclePage");
 const vehicleDashboard = document.getElementById("vehicleDashboard");
+const appHeader = document.querySelector("#appContainer > header");
 const basicDetailsPage = document.getElementById("basicDetailsPage");
 const insurancePage = document.getElementById("insurancePage");
 const pollutionDetailsPage = document.getElementById("pollutionDetailsPage");
@@ -80,6 +81,16 @@ document.getElementById("partsReplacedPage"),
     ].forEach(page => page.classList.add("hidden"));
 
     pageToShow.classList.remove("hidden");
+
+const welcomePage = document.getElementById("welcomePage");
+
+if (appHeader) {
+    if (pageToShow === vehicleListPage && welcomePage.style.display === "none") {
+        appHeader.style.display = "";
+    } else {
+        appHeader.style.display = "none";
+    }
+}
 }
 
 // LOAD VEHICLES AFTER USER LOGIN
@@ -142,9 +153,7 @@ const userIdForSave = currentUserId;
 function renderVehicleList() {
     activeVehicleId = null;
 
-    vehicleListPage.classList.remove("hidden");
-    addVehiclePage.classList.add("hidden");
-    vehicleDashboard.classList.add("hidden");
+    showOnlyPage(vehicleListPage);
 
     vehicleList.innerHTML = "";
 
@@ -231,9 +240,7 @@ card.querySelector(".delete-vehicle-btn")
 function showVehicleForm() {
 
 activeVehicleId = null;
-    vehicleListPage.classList.add("hidden");
-    addVehiclePage.classList.remove("hidden");
-    vehicleDashboard.classList.add("hidden");
+    showOnlyPage(addVehiclePage);
 
     document.getElementById("vehicleForm").reset();
 }
