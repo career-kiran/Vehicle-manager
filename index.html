@@ -11,7 +11,42 @@
 </head>
 
 <body>
-    <div class="container">
+
+
+    <!-- LOGIN / SIGNUP SECTION -->
+
+<section id="authSection" style="max-width:400px;margin:60px auto;padding:25px;background:white;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.1);">
+
+    <h2 style="text-align:center;">Vehicle Manager</h2>
+
+    <p style="text-align:center;">Sign in to access your vehicles</p>
+
+    <input type="email" id="authEmail" placeholder="Email address"
+
+        style="width:100%;padding:12px;margin:10px 0;box-sizing:border-box;">
+
+    <input type="password" id="authPassword" placeholder="Password"
+
+        style="width:100%;padding:12px;margin:10px 0;box-sizing:border-box;">
+
+    <button id="signInBtn" style="width:100%;padding:12px;margin-top:10px;">
+
+        Sign In
+
+    </button>
+
+    <button id="signUpBtn" style="width:100%;padding:12px;margin-top:10px;">
+
+        Create Account
+
+    </button>
+
+    <p id="authMessage" style="text-align:center;"></p>
+
+</section>
+
+<!-- END LOGIN / SIGNUP SECTION -->
+ <div class="container" id="appContainer" style="display:none;">
 
        <header>
     <h1>🚘 My Vehicle</h1>
@@ -1846,5 +1881,8 @@
 <script src="cloud.js"></script>
 
 <script src="script.js"></script>
+    
+<script src="auth.js"></script>
+
 </body>
 </html>
