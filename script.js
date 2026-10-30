@@ -31,6 +31,10 @@ const vehicleCare = document.getElementById("vehicleCare");
 
 let vehicles = [];
 let activeVehicleId = null;
+
+// CLOUD LOGIN AND SAVE STATUS
+let currentUserId = null;
+let cloudSaveQueue = Promise.resolve();
 let editingTyreIndex = null;
 let editingFuelIndex = null;
 let editingInsuranceIndex = null;
@@ -83,6 +87,8 @@ async function initializeVehicleApp(userId) {
 
     const cloudVehicles = await loadVehiclesFromCloud(userId);
 
+currentUserId = userId;
+
     if (cloudVehicles === null) {
         vehicles = [];
     } else if (Array.isArray(cloudVehicles)) {
@@ -101,9 +107,34 @@ async function initializeVehicleApp(userId) {
 }
 
 
-// SAVE VEHICLES
+// SAVE VEHICLES - LOCAL + CLOUD
 function saveVehicles() {
+
+    // Save locally first
     localStorage.setItem("vehicles", JSON.stringify(vehicles));
+
+    // Stop if no user is logged in
+    if (!currentUserId) return;
+
+const userIdForSave = currentUserId;
+
+    // Take a snapshot of the latest data
+    const vehiclesSnapshot = JSON.parse(JSON.stringify(vehicles));
+
+    // Save to Supabase in order
+    cloudSaveQueue = cloudSaveQueue
+        .then(() => {
+         return saveVehiclesToCloud(
+    userIdForSave,
+    vehiclesSnapshot
+);
+        })
+      .catch(error => {
+    console.error("Cloud sync failed:", error);
+
+    alert("Your changes were saved on this device, but cloud sync failed. Please check your internet connection.");
+});
+
 }
 
 // SHOW THE VEHICLE LIST
@@ -1858,6 +1889,9 @@ function saveBattery(event) {
 
     saveVehicles();
 
+document.getElementById("batteryForm").reset();
+document.getElementById("batteryWarrantyExpiry").textContent = "";
+
     showBatteryDetailsPage();
 
     updateTotalVehicleExpensePage();
@@ -2130,82 +2164,6 @@ function saveAlignment(event) {
 }
 
 
-
-
-
-function saveBattery(event) {
-    event.preventDefault();
-
-    const vehicle = vehicles.find(
-        item => item.id === activeVehicleId
-    );
-
-    if (!vehicle) return;
-
-    if (!Array.isArray(vehicle.batteryHistory)) {
-        vehicle.batteryHistory = [];
-    }
-
-    const date = document.getElementById("batteryDate").value;
-    const warrantyDuration = document.getElementById(
-        "batteryWarrantyDuration"
-    ).value;
-    const warrantyUnit = document.getElementById(
-        "batteryWarrantyUnit"
-    ).value;
-
-    let warrantyExpiry = "";
-
-    if (date && warrantyDuration !== "") {
-        const expiry = new Date(date + "T12:00:00");
-        const duration = Number(warrantyDuration);
-
-        if (warrantyUnit === "years") {
-            expiry.setFullYear(expiry.getFullYear() + duration);
-        } else {
-            expiry.setMonth(expiry.getMonth() + duration);
-        }
-
-        warrantyExpiry =
-            expiry.getFullYear() + "-" +
-            String(expiry.getMonth() + 1).padStart(2, "0") + "-" +
-            String(expiry.getDate()).padStart(2, "0");
-    }
-
-    const batteryRecord = {
-        date: date,
-        km: document.getElementById("batteryKm").value,
-        brand: document.getElementById("batteryBrand").value.trim(),
-        amount: document.getElementById("batteryAmount").value,
-        warranty: warrantyDuration !== ""
-            ? warrantyDuration + " " + warrantyUnit
-            : "",
-        warrantyDuration: warrantyDuration,
-        warrantyUnit: warrantyUnit,
-        warrantyExpiry: warrantyExpiry,
-        notes: document.getElementById("batteryNotes").value.trim()
-    };
-
-    if (editingBatteryIndex !== null) {
-        if (!vehicle.batteryHistory[editingBatteryIndex]) {
-            alert("This battery record could not be found.");
-            editingBatteryIndex = null;
-            return;
-        }
-
-        vehicle.batteryHistory[editingBatteryIndex] = batteryRecord;
-        editingBatteryIndex = null;
-    } else {
-        vehicle.batteryHistory.push(batteryRecord);
-    }
-
-    saveVehicles();
-
-    document.getElementById("batteryForm").reset();
-    document.getElementById("batteryWarrantyExpiry").textContent = "";
-
-    showBatteryDetailsPage();
-}
 
 
 
@@ -3325,7 +3283,7 @@ function savePollution(event) {
     vehicle.pollutionCertificate =
         vehicle.pollutionHistory[vehicle.pollutionHistory.length - 1] || null;
 
-    localStorage.setItem("vehicles", JSON.stringify(vehicles));
+    saveVehicles();
 
     editingPollutionIndex = null;
 
@@ -3940,7 +3898,7 @@ document.getElementById("pollutionDetailsContent")
                     vehicle.pollutionHistory.length - 1
                 ] || null;
 
-            localStorage.setItem("vehicles", JSON.stringify(vehicles));
+            saveVehicles();
 
             showPollutionDetailsPage();
             return;
@@ -4782,8 +4740,6 @@ const vehicle = vehicles.find(
 );
 
 if (!vehicle || !vehicle.tyreHistory?.[index]) return;
-
-vehicle.tyreHistory.splice(index, 1);
 
 vehicle.tyreHistory.splice(index, 1);
 
