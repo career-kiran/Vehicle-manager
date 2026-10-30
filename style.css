@@ -3396,3 +3396,36 @@ header h1 {
 
 
 
+
+
+/* EMAIL VALIDATION */
+
+.email-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.email-status {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.email-message {
+    margin: 4px 0 10px;
+    font-size: 13px;
+    text-align: left;
+}
+
+.email-status.valid {
+    color: #16a34a;
+}
+
+.email-status.invalid {
+    color: #dc2626;
+}
+
+
