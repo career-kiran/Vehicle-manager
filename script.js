@@ -103,7 +103,7 @@ currentUserId = userId;
         id: vehicle.id || String(Date.now() + Math.random())
     }));
 
-    renderVehicleList();
+    
 }
 
 
