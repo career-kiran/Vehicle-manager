@@ -54,9 +54,17 @@ signUpBtn.addEventListener("click", async () => {
     });
 
     if (error) {
+    console.error("Account creation error:", error);
+
+    if (error.message.toLowerCase().includes("password")) {
+        authMessage.textContent =
+            "Please choose a stronger password. It should contain at least one capital letter (A-Z), one small letter (a-z), one number (0-9), and one special symbol (@, #, $ etc.).";
+    } else {
         authMessage.textContent = error.message;
-        return;
     }
+
+    return;
+}
 
     if (data.session) {
         await openVehicleApp(data.user);
