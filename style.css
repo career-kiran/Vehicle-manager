@@ -3,7 +3,7 @@
 :root {
     /* Page background */
     --page-bg: #F1F3F5;
-    --home-bg: #2C4A7C;
+    --home-bg: #222222;
 
     /* Cards */
     --card-bg: #FFFFFF;
@@ -3123,6 +3123,147 @@ h2:has(+ #vehicleCare) {
         flex-shrink: 0;
     }
 }
+
+
+
+
+
+
+
+/* ===== MY VEHICLE WELCOME SCREEN ===== */
+
+#welcomePage {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    background: #dcecf8;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+
+#welcomeImage {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+
+#getStartedBtn {
+    position: absolute;
+    left: 35%;
+    top: 82%;
+    width: 30%;
+    height: 12%;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    z-index: 2;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+
+#getStartedBtn:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 3px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+    #getStartedBtn {
+        left: 25%;
+        width: 50%;
+        top: 84%;
+        height: 9%;
+    }
+}
+
+
+
+
+
+/* ===== WELCOME PAGE: MOBILE VERSION ===== */
+
+@media (max-width: 600px) {
+    #welcomePage {
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+    }
+
+    #welcomeImage {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    #getStartedBtn {
+        left: 25%;
+        top: 84%;
+        width: 50%;
+        height: 9%;
+        border-radius: 50px;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+/* ===== WELCOME PAGE: SMALL PHONES ===== */
+
+
+@media (max-width: 600px) {
+    #getStartedBtn {
+        left: 35%;
+        top: 82%;
+        width: 30%;
+        height: 12%;
+    }
+}
+
+
+
+
+
+
+/* Night landscape background */
+body {
+    background-image: url("vehicle-background.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+
+
+
+
+
+
+/* Main page background - Soft Charcoal */
+
+body {
+    background-color: #303640;
+    background-image: none;
+}
+
+/* Welcome heading */
+header h1 {
+    color: #ffffff;
+}
+
 
 
 
