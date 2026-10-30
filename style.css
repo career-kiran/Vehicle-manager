@@ -3269,5 +3269,130 @@ header h1 {
 
 
 
+/* =================================
+   LOGIN / SIGNUP SECTION
+================================= */
+
+.auth-section {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.auth-title {
+    text-align: center;
+    color: #263445;
+    margin-bottom: 20px;
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: #52627a;
+    margin-bottom: 20px;
+}
+
+.auth-input {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: 1px solid #d5d9df;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.auth-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #477bc5;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.auth-button:hover {
+    background: #3569b2;
+}
+
+.auth-message {
+    text-align: center;
+    color: #52627a;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 18px;
+    overflow-wrap: anywhere;
+}
+
+
+
+
+
+
+/* =================================
+   PASSWORD STRENGTH INDICATOR
+================================= */
+
+.password-strength {
+    margin: 5px 0 18px;
+    font-size: 13px;
+    color: #52627a;
+}
+
+.password-strength p {
+    margin: 8px 0;
+    font-weight: 600;
+}
+
+.strength-bar {
+    width: 100%;
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#strengthBarFill {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: #dc2626;
+    border-radius: 10px;
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+.password-rules {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+.password-rules li {
+    margin: 5px 0;
+    color: #dc2626;
+}
+
+.password-rules li.valid {
+    color: #16a34a;
+}
+
+.password-rules li.valid::before {
+    content: "✓ ";
+    font-weight: bold;
+}
+
+.password-rules li:not(.valid)::before {
+    content: "○ ";
+}
+
+
 
 

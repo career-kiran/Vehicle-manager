@@ -15,44 +15,75 @@
 
 <!-- LOGIN / SIGNUP SECTION -->
 
-<section id="authSection" style="max-width:400px;margin:60px auto;padding:25px;background:white;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.1);">
+<section id="authSection" class="auth-section">
 
-    <h2 style="text-align:center;">Vehicle Manager</h2>
+   <h2 class="auth-title">Vehicle Manager</h2>
 
-    <p style="text-align:center;">Sign in to access your vehicles</p>
+  <p class="auth-subtitle">Sign in to access your vehicles</p>
 
-    <input type="email" id="authEmail" placeholder="Email address"
+  <input type="email" id="authEmail" class="auth-input" placeholder="Email address">
 
-        style="width:100%;padding:12px;margin:10px 0;box-sizing:border-box;">
+<input type="password" id="authPassword" class="auth-input" placeholder="Password">
 
-    <input type="password" id="authPassword" placeholder="Password"
+<div id="passwordStrength" class="password-strength" hidden>
 
-        style="width:100%;padding:12px;margin:10px 0;box-sizing:border-box;">
+    <p id="strengthLabel">Password strength: Weak</p>
 
-    <button id="signInBtn" style="width:100%;padding:12px;margin-top:10px;">
+    <div class="strength-bar">
 
-        Sign In
+        <span id="strengthBarFill"></span>
 
-    </button>
+    </div>
 
-    <button id="signUpBtn" style="width:100%;padding:12px;margin-top:10px;">
+    <ul class="password-rules">
 
-        Create Account
+        <li id="ruleUpper">One capital letter (A–Z)</li>
 
-    </button>
+        <li id="ruleLower">One small letter (a–z)</li>
 
-    <p id="authMessage" style="text-align:center;"></p>
+        <li id="ruleNumber">One number (0–9)</li>
 
-</section>
+        <li id="ruleSymbol">One special symbol (@, #, $, etc.)</li>
+
+    </ul>
+
+</div>
+
+
+  <button id="signInBtn" class="auth-button">
+
+    Sign In
+
+</button>
+
+ <button id="signUpBtn" class="auth-button">
+
+    Create Account
+
+</button>
+
+ <p id="authMessage" class="auth-message"></p>
+
+
 
 <!-- END LOGIN / SIGNUP SECTION -->
 
  <div class="container" id="appContainer" style="display:none;">
 
-       <header>
+       
+  <header>
+
     <h1>🚘 My Vehicle</h1>
-   
+
+    <button type="button" id="signOutBtn" class="secondary-button">
+
+        Sign Out
+
+    </button>
+
 </header>
+   
+
 
         <main id="app">
 
