@@ -3429,3 +3429,54 @@ header h1 {
 }
 
 
+
+
+
+/* Small Sign Out button aligned to the right */
+#appContainer > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+#appContainer > header #signOutBtn {
+    width: auto;
+    min-width: 0;
+    padding: 7px 14px;
+    font-size: 14px;
+    margin: 0 0 0 auto;
+}
+
+
+
+
+
+/* Mobile: Small Sign Out button aligned to the right */
+@media (max-width: 600px) {
+
+    #appContainer > header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    #appContainer > header #signOutBtn {
+        width: auto;
+        min-width: 0;
+        max-width: fit-content;
+        min-height: 0;
+        padding: 6px 12px;
+        font-size: 13px;
+        margin: 0 0 0 auto;
+        flex-shrink: 0;
+    }
+
+}
+
+
+
+
+
+
