@@ -197,6 +197,7 @@ passwordInput.addEventListener("input", () => {
     document.getElementById("ruleSymbol").classList.toggle("valid", checks.symbol);
 
     const score = Object.values(checks).filter(Boolean).length;
+const hasMinimumLength = password.length >= 8;
 
     if (score <= 1) {
         strengthLabel.textContent = "Password strength: Weak";
