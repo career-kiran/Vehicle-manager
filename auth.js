@@ -8,6 +8,9 @@ const appContainer = document.getElementById("appContainer");
 
 const emailInput = document.getElementById("authEmail");
 const passwordInput = document.getElementById("authPassword");
+
+const emailStatus = document.getElementById("emailStatus");
+const emailMessage = document.getElementById("emailMessage");
 const authMessage = document.getElementById("authMessage");
 
 const signInBtn = document.getElementById("signInBtn");
@@ -45,6 +48,13 @@ signUpBtn.addEventListener("click", async () => {
             "Please enter email and password.";
         return;
     }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+if (!emailPattern.test(email)) {
+    authMessage.textContent = "Please enter a valid email address.";
+    return;
+}
 
     authMessage.textContent = "Creating account...";
 
@@ -218,6 +228,36 @@ const hasMinimumLength = password.length >= 8;
         strengthBarFill.style.background = "#16a34a";
     }
 
+});
+
+
+
+// EMAIL ADDRESS VALIDATION
+
+emailInput.addEventListener("input", () => {
+    const email = emailInput.value.trim();
+
+    if (email === "") {
+        emailStatus.textContent = "";
+        emailStatus.className = "email-status";
+        emailMessage.textContent = "";
+        return;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const isValid = emailPattern.test(email);
+
+    if (isValid) {
+        emailStatus.textContent = "✓";
+        emailStatus.className = "email-status valid";
+        emailMessage.textContent = "Email format looks correct.";
+        emailMessage.style.color = "#16a34a";
+    } else {
+        emailStatus.textContent = "✕";
+        emailStatus.className = "email-status invalid";
+        emailMessage.textContent = "Please enter a valid email address.";
+        emailMessage.style.color = "#dc2626";
+    }
 });
 
 
