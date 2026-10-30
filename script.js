@@ -78,45 +78,28 @@ document.getElementById("partsReplacedPage"),
     pageToShow.classList.remove("hidden");
 }
 
-// LOAD SAVED VEHICLES
-function initApp() {
-    const savedVehicles = localStorage.getItem("vehicles");
+// LOAD VEHICLES AFTER USER LOGIN
+async function initializeVehicleApp(userId) {
 
-    if (savedVehicles) {
-        try {
-            vehicles = JSON.parse(savedVehicles);
-        } catch {
-            vehicles = [];
-        }
+    const cloudVehicles = await loadVehiclesFromCloud(userId);
+
+    if (cloudVehicles === null) {
+        vehicles = [];
+    } else if (Array.isArray(cloudVehicles)) {
+        vehicles = cloudVehicles;
     } else {
-        // Recover a vehicle saved in the earlier version
-        const oldVehicle = localStorage.getItem("vehicle");
-
-        if (oldVehicle) {
-            try {
-                const vehicle = JSON.parse(oldVehicle);
-
-                vehicles = [{
-                    ...vehicle,
-                    id: String(Date.now())
-                }];
-
-                saveVehicles();
-            } catch {
-                vehicles = [];
-            }
-        }
+        throw new Error("Invalid vehicle data received from cloud.");
     }
 
-    // Give older saved vehicles an ID if needed
+    // Give older vehicles an ID if needed
     vehicles = vehicles.map(vehicle => ({
         ...vehicle,
         id: vehicle.id || String(Date.now() + Math.random())
     }));
 
-    saveVehicles();
     renderVehicleList();
 }
+
 
 // SAVE VEHICLES
 function saveVehicles() {
@@ -5562,6 +5545,19 @@ document.addEventListener("keydown", function(event) {
         fields[index + 1].focus();
     }
 }, true);
+
+
+
+
+
+/* WELCOME PAGE - LET'S GET STARTED BUTTON */
+
+document.getElementById("getStartedBtn")
+    .addEventListener("click", () => {
+        document.getElementById("welcomePage").style.display = "none";
+        renderVehicleList();
+    });
+
 
 
 
