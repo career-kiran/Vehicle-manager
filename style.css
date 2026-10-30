@@ -3157,9 +3157,9 @@ h2:has(+ #vehicleCare) {
 #getStartedBtn {
     position: absolute;
     left: 35%;
-    top: 82%;
+    top: 92%;
     width: 30%;
-    height: 12%;
+    height: 8%;
     padding: 0;
     margin: 0;
     background: transparent;
