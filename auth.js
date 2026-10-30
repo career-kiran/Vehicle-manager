@@ -205,13 +205,13 @@ const hasMinimumLength = password.length >= 8;
         strengthBarFill.style.width = "25%";
         strengthBarFill.style.background = "#dc2626";
 
-    } else if (score <= 3) {
+    } else if (score <= 3 || (score === 4 && !hasMinimumLength)) {
         strengthLabel.textContent = "Password strength: Medium";
         strengthLabel.style.color = "#d97706";
         strengthBarFill.style.width = "60%";
         strengthBarFill.style.background = "#d97706";
 
-    } else {
+} else if (score === 4 && hasMinimumLength) {
         strengthLabel.textContent = "Password strength: Strong";
         strengthLabel.style.color = "#16a34a";
         strengthBarFill.style.width = "100%";
