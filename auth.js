@@ -164,3 +164,59 @@ document.getElementById("signOutBtn").addEventListener("click", async () => {
 });
 
 
+
+// =====================================
+// LIVE PASSWORD STRENGTH CHECKER
+// =====================================
+
+const passwordStrength = document.getElementById("passwordStrength");
+const strengthLabel = document.getElementById("strengthLabel");
+const strengthBarFill = document.getElementById("strengthBarFill");
+
+passwordInput.addEventListener("input", () => {
+
+    const password = passwordInput.value;
+
+    if (password.length === 0) {
+        passwordStrength.hidden = true;
+        return;
+    }
+
+    passwordStrength.hidden = false;
+
+    const checks = {
+        upper: /[A-Z]/.test(password),
+        lower: /[a-z]/.test(password),
+        number: /[0-9]/.test(password),
+        symbol: /[^A-Za-z0-9]/.test(password)
+    };
+
+    document.getElementById("ruleUpper").classList.toggle("valid", checks.upper);
+    document.getElementById("ruleLower").classList.toggle("valid", checks.lower);
+    document.getElementById("ruleNumber").classList.toggle("valid", checks.number);
+    document.getElementById("ruleSymbol").classList.toggle("valid", checks.symbol);
+
+    const score = Object.values(checks).filter(Boolean).length;
+
+    if (score <= 1) {
+        strengthLabel.textContent = "Password strength: Weak";
+        strengthLabel.style.color = "#dc2626";
+        strengthBarFill.style.width = "25%";
+        strengthBarFill.style.background = "#dc2626";
+
+    } else if (score <= 3) {
+        strengthLabel.textContent = "Password strength: Medium";
+        strengthLabel.style.color = "#d97706";
+        strengthBarFill.style.width = "60%";
+        strengthBarFill.style.background = "#d97706";
+
+    } else {
+        strengthLabel.textContent = "Password strength: Strong";
+        strengthLabel.style.color = "#16a34a";
+        strengthBarFill.style.width = "100%";
+        strengthBarFill.style.background = "#16a34a";
+    }
+
+});
+
+
